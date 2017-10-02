@@ -1,0 +1,31 @@
+.search-input {
+  min-width: 100px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-full-width {
+  width: 100%;
+  padding: 5px;
+}
+
+.rooms-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 35vh;
+}
+
+.rooms-container h3 {
+  margin: 5px 5px 5px 5px;
+  width: auto;
+  display: inline-block;
+}
+
+.mat-table {
+  overflow: auto;
+}
+
+.expand-rooms {
+  float: right;
+
+}

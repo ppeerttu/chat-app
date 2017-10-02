@@ -1,0 +1,25 @@
+<md-sidenav-container class="sidenav-container">
+  <md-sidenav #sidenav class="chat-sidenav">
+    <md-grid-list cols="4">
+      <md-grid-tile colspan="3">
+        <p *ngIf="user" style="margin-bottom: 0;">
+          Hello {{user.userName}}
+        </p>
+      </md-grid-tile>
+      <md-grid-tile colspan="1">
+        <button type="button" md-icon-button class="brgr-btn" (click)="sidenav.close()">
+          <i class="material-icons">menu</i>
+        </button>
+      </md-grid-tile>
+    </md-grid-list>
+    <room-table></room-table>
+    <h3>Create a room</h3>
+    <create-room></create-room>
+    <button md-raised-button color="warn" class="logout-btn" (click)="logout()">Logout</button>
+  </md-sidenav>
+  <div class="chat-sidenav-content">
+    <button type="button" md-icon-button (click)="sidenav.open()">
+      <i class="material-icons">menu</i>
+    </button>
+  </div>
+</md-sidenav-container>

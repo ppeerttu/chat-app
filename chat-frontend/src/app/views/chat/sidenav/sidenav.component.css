@@ -1,0 +1,28 @@
+
+
+.sidenav-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.chat-sidenav-content {
+  display: flex;
+}
+
+.chat-sidenav {
+  padding: 10px 20px 20px 20px;
+  width: 25vw;
+}
+
+.brgr-btn {
+  float: right;
+}
+
+.logout-btn {
+  bottom: 20px;
+  position: absolute;
+}
+
+h3 {
+  margin-top: 5px;
+}

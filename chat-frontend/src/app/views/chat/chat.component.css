@@ -1,0 +1,26 @@
+
+/*
+  For sidenav example
+*/
+.example-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+.example-sidenav-content {
+  display: flex;
+}
+
+.example-sidenav {
+  padding: 20px;
+  width: 25vw;
+}
+
+.brgr-btn {
+  float: right;
+}
+
+.logout-btn {
+  bottom: 20px;
+  position: fixed;
+}
