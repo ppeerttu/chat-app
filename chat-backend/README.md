@@ -5,6 +5,7 @@ Author Perttu Kärnä
 
 ## Tech stack
 
+Core technologies used:
     * [Express](https://expressjs.com/) as core REST api
     * [Express-JWT](https://github.com/auth0/express-jwt) for auth management
     * [Sequelize](https://github.com/sequelize/sequelize) as ORM

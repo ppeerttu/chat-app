@@ -5,6 +5,7 @@ Author Perttu Kärnä
 
 ## Tech stack
 
+Core technologies used:
     * [Angular 2 (v4)](https://github.com/angular/angular-cli) (generated with angular-cli)
     * [Redux](https://github.com/angular-redux/store) for state management
     * [Angular Materials](https://material.angular.io) for UI components
