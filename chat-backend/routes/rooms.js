@@ -42,7 +42,7 @@ router.post('/join/:id', (req, res, next) => {
       } else {
         Models.User.findById(data.userId).then(user => {
           user.addJoined(room, { through: { active: true }});
-          res.status(200).json({});
+          res.status(200).json({ roomId: roomId });
         }).catch(err => {
           res.status(400).json({ error: err.message });
         });
@@ -57,18 +57,18 @@ router.post('/join/:id', (req, res, next) => {
 router.post('/leave/:id', (req, res, next) => {
   const data = req.body;
   const roomId = req.params.id;
-  if (!data.id || !roomId || isNaN(parseInt(roomId))) {
+  if (!data.userId || !roomId || isNaN(parseInt(roomId)) || isNaN(parseInt(data.userId))) {
     res.status(400).json({ error: 'Invalid parameters! '});
   } else {
     Models.UserInRoom.find({
       where: {
-        userId: data.id,
+        userId: data.userId,
         roomId: roomId
       }
     }).then(userInRoom => {
       if (userInRoom) {
         userInRoom.deactivate();
-        res.status(200).json({});
+        res.status(200).json({ roomId: roomId});
       } else {
         res.status(400).json({ error: 'Relation not found!' });
       }

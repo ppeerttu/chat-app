@@ -1,5 +1,6 @@
 
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -9,8 +10,6 @@ import { RoomActions } from '../../../actions/room';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
-
-//import * as $ from 'jquery';
 
 import { Room, UsersRoom, User, Message } from '../../../models';
 
@@ -22,34 +21,93 @@ import { Room, UsersRoom, User, Message } from '../../../models';
 })
 export class RoomTableComponent {
   @select() user$: Observable<User>;
+  @select() rooms$: Observable<Room[]>;
+  @select() roomsIn$: Observable<Room[]>;
+
   displayedColumns = ['name', 'locked', 'join'];
   roomDataBase = new RoomDataBase();
   roomDataSource: RoomDataSource | null;
   private roomAction: RoomActions;
   private user: User;
+  private rooms: Room[];
   @ViewChild('filter') filter: ElementRef;
 
-  constructor(roomAction: RoomActions) {
+  constructor(
+    roomAction: RoomActions,
+    public dialog: MdDialog
+  ) {
     this.roomAction = roomAction;
     this.user$.subscribe(user => {
       this.user = user;
     });
+
   }
+
   ngOnInit() {
     this.roomDataSource = new RoomDataSource(this.roomDataBase);
     Observable.fromEvent(this.filter.nativeElement, 'keyup')
-        .debounceTime(150)
-        .distinctUntilChanged()
-        .subscribe(() => {
-          if (!this.roomDataSource) { return; }
-          this.roomDataSource.filter = this.filter.nativeElement.value;
-        });
+      .debounceTime(150)
+      .distinctUntilChanged()
+      .subscribe(() => {
+        if (!this.roomDataSource) { return; }
+        this.roomDataSource.filter = this.filter.nativeElement.value;
+      });
+    this.rooms$.subscribe(rooms => {
+      this.rooms = rooms;
+      if (!this.roomDataSource) { return; }
+      this.roomDataSource.filter = this.filter.nativeElement.value;
+    });
+    this.roomsIn$.subscribe(roomsIn => {
+      if (!this.roomDataSource) { return; }
+      this.roomDataSource.filter = this.filter.nativeElement.value;
+    });
+  }
+
+  openDialog(roomName: string, roomId: number): void {
+    let dialogRef = this.dialog.open(JoinLockedRoomDialog, {
+      data: { name: 'test', password: '', roomName }
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.roomAction.joinRoom(roomId, this.user.id, result);
+      }
+    });
+  }
+
+  getColor(inRoom: boolean) {
+    return inRoom ? 'warn' : 'primary';
   }
 
   joinRoom(id: number) {
-    console.log('About to join into room with id: ' + id);
-    this.roomAction.joinRoom(id, this.user.id, null);
+    const room = this.rooms[this.rooms.findIndex(i => i.id == id)];
+    if (room.password == null) {
+      this.roomAction.joinRoom(id, this.user.id, null);
+    }
+    else {
+      this.openDialog(room.roomName, id);
+    }
   }
+
+  leaveRoom(id: number) {
+    this.roomAction.leaveRoom(id, this.user.id);
+  }
+}
+
+@Component({
+  selector: 'join-locked-room-dialog',
+  templateUrl: 'join-locked-room-dialog.html',
+  styleUrls: ['join-locked-room-dialog.css']
+})
+export class JoinLockedRoomDialog {
+
+  constructor(
+    public dialogRef: MdDialogRef<JoinLockedRoomDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
 
 export class RoomDataBase {
@@ -65,6 +123,7 @@ export class RoomDataBase {
     this.roomsIn$.subscribe(roomsIn => {
       this.roomsIn = roomsIn;
     });
+
   }
 
   get data(): UsersRoom[] {
@@ -100,7 +159,6 @@ export class RoomDataSource extends DataSource<any> {
     return Observable.merge(...displayDataChanges).map(() => {
       return this._roomDataBase.data.slice().filter((room: UsersRoom) => {
         let search = room.roomName.toLowerCase();
-        console.log(room);
         return search.indexOf(this.filter.toLowerCase()) != -1;
       });
     });

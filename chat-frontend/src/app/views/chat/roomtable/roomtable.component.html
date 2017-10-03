@@ -28,8 +28,8 @@
     <ng-container mdColumnDef="join">
       <md-header-cell *mdHeaderCellDef>  </md-header-cell>
       <md-cell *mdCellDef="let element">
-        <button md-icon-button color="primary" (click)="joinRoom(element.id)">
-          <i class="material-icons">{{element.inRoom ? 'add' : 'remove'}}</i>
+        <button md-icon-button [color]="getColor(element.inRoom)" (click)="element.inRoom ? leaveRoom(element.id) : joinRoom(element.id)">
+          <i class="material-icons">{{element.inRoom ? 'remove' : 'add'}}</i>
         </button>
       </md-cell>
     </ng-container>

@@ -22,4 +22,9 @@
       <i class="material-icons">menu</i>
     </button>
   </div>
+  <button type="button" md-raised-button (click)="increment()">Increment</button>
+  <button type="button" md-raised-button color="warn" (click)="decrement()">Decrement</button>
+  <p>
+    Counter: {{ counter }}
+  </p>
 </md-sidenav-container>

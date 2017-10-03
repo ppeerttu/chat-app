@@ -6,7 +6,7 @@ import { ApiCall } from '../models/apicall';
 @Injectable()
 export class RoomActions {
   static CREATE_ROOM_REQUEST = 'CREATE_ROOM_REQUEST';
-  static CREATE_ROOM_SUCCESS = 'CREATER_ROOM_SUCCESS';
+  static CREATE_ROOM_SUCCESS = 'CREATE_ROOM_SUCCESS';
   static CREATE_ROOM_FAILED = 'CREATE_ROOM_FAILED';
 
   static FETCH_ROOMS_REQUEST = 'FETCH_ROOMS_REQUEST';
@@ -20,6 +20,10 @@ export class RoomActions {
   static USERS_ROOMS_REQUEST = 'USERS_ROOMS_REQUEST';
   static USERS_ROOMS_SUCCESS = 'USERS_ROOMS_SUCCESS';
   static USERS_ROOMS_FAILED = 'USERS_ROOMS_FAILED';
+
+  static LEAVE_ROOM_REQUEST = 'LEAVE_ROOM_REQUEST';
+  static LEAVE_ROOM_SUCCESS = 'LEAVE_ROOM_SUCCESS';
+  static LEAVE_ROOM_FAILED = 'LEAVE_ROOM_FAILED';
 
   constructor(private ngRedux: NgRedux<AppState>) {}
 
@@ -40,7 +44,6 @@ export class RoomActions {
       [RoomActions.FETCH_ROOMS_REQUEST, RoomActions.FETCH_ROOMS_SUCCESS, RoomActions.FETCH_ROOMS_FAILED]
     );
     this.ngRedux.dispatch({ type: RoomActions.FETCH_ROOMS_REQUEST, apiCall });
-    console.log(this.ngRedux);
   }
 
   joinRoom(roomId: number, userId: number, password: string) {
@@ -59,6 +62,21 @@ export class RoomActions {
       'rooms/in/' + userId,
       [RoomActions.USERS_ROOMS_REQUEST, RoomActions.USERS_ROOMS_SUCCESS, RoomActions.USERS_ROOMS_FAILED]
     );
-    this.ngRedux.dispatch({ type: RoomActions.USERS_ROOMS_REQUEST, apiCall });
+    function thunk(apiCall) {
+      return function (dispatch) {
+        return dispatch({ type: RoomActions.USERS_ROOMS_REQUEST, apiCall });
+      }
+    }
+    return this.ngRedux.dispatch(thunk(apiCall));
+  }
+
+  leaveRoom(roomId: number, userId: number) {
+    const apiCall = new ApiCall(
+      'post',
+      'rooms/leave/' + roomId,
+      [RoomActions.LEAVE_ROOM_REQUEST, RoomActions.LEAVE_ROOM_SUCCESS, RoomActions.LEAVE_ROOM_FAILED],
+      {userId}
+    );
+    this.ngRedux.dispatch({ type: RoomActions.LEAVE_ROOM_REQUEST, apiCall });
   }
 }

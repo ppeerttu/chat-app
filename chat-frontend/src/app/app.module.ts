@@ -9,7 +9,8 @@ import {
   MdButtonModule,
   MdSidenavModule,
   MdGridListModule,
-  MdTableModule
+  MdTableModule,
+  MdDialogModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmojiModule } from 'angular2-emoji';
@@ -25,7 +26,7 @@ import { ChatComponent } from './views/chat/chat.component';
 import { LoginComponent } from './views/login/login.component';
 import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
-import { RoomTableComponent } from './views/chat/roomtable/roomtable.component';
+import { RoomTableComponent, JoinLockedRoomDialog } from './views/chat/roomtable/roomtable.component';
 
 const appRoutes: Routes = [
   {
@@ -49,7 +50,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SidenavComponent,
     CreateRoomComponent,
-    RoomTableComponent
+    RoomTableComponent,
+    JoinLockedRoomDialog
   ],
   imports: [
     NgReduxModule,
@@ -69,7 +71,11 @@ const appRoutes: Routes = [
     MdButtonModule,
     MdSidenavModule,
     MdGridListModule,
-    MdTableModule
+    MdTableModule,
+    MdDialogModule
+  ],
+  entryComponents: [
+    JoinLockedRoomDialog
   ],
   bootstrap: [AppComponent]
 })

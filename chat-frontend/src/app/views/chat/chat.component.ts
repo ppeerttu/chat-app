@@ -44,10 +44,15 @@ export class ChatComponent implements OnInit {
       } else {
         if (this.user === null) {
           this.userAction.refreshToken().then(action => {
-            this.roomAction.getUsersRooms(action.res.id);
+            this.roomAction.getUsersRooms(action.res.id).then(action => {
+              this.roomAction.fetchAll();
+            });
+          });
+        } else {
+          this.roomAction.getUsersRooms(this.user.id).then(action => {
+            this.roomAction.fetchAll();
           });
         }
-        this.roomAction.fetchAll();
       }
     }
   }
