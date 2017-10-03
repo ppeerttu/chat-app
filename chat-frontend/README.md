@@ -18,12 +18,13 @@ Core technologies used:
 ### Source
 
 The source code can be found under [app](src/app) -folder. The code is structured in following way:
-    * Redux action definitions can be found under [actions](src/app/actions) -folder
-    * HTTP request module and middleware for handling asynchronous actions are under [middleware](src/app/middleware) -folder
-    * Models are defined at [models](src/app/models) -folder
-    * Redux reducers are under [store](src/app/store) -folder
-    * UI components are at [view](src/app/view) -foler
-    * Angular app module declarations and base app component are at [app](src/app) -folder
+
+* Redux action definitions can be found under [actions](src/app/actions) -folder
+* HTTP request module and middleware for handling asynchronous actions are under [middleware](src/app/middleware) -folder
+* Models are defined at [models](src/app/models) -folder
+* Redux reducers are under [store](src/app/store) -folder
+* UI components are at [view](src/app/view) -foler
+* Angular app module declarations and base app component are at [app](src/app) -folder
 
 ### Base principles shortly
 
