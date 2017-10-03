@@ -18,11 +18,15 @@
   float: right;
 }
 
-.logout-btn {
-  bottom: 20px;
-  position: absolute;
+.create-room {
+  margin-bottom: auto;
 }
 
-h3 {
+.logout-btn {
+  position: absolute;
+  bottom: 20px;
+}
+
+h4 {
   margin-top: 5px;
 }

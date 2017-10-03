@@ -1,11 +1,11 @@
-<form class="login-form">
-  <md-form-field class="login-full-width">
+<form class="create-room-form">
+  <md-form-field class="create-room-full-width">
     <input mdInput placeholder="Room name" [formControl]="roomNameFormControl" [(ngModel)]="roomName">
     <md-error *ngIf="roomNameFormControl.hasError('minlength')">
       Room name should be at least 3 characters
     </md-error>
   </md-form-field>
-  <md-form-field class="login-full-width">
+  <md-form-field class="create-room-full-width">
     <input type="password" mdInput placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
   </md-form-field>
   <button md-raised-button color="primary" (click)="createRoom()">Create</button>
