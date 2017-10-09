@@ -17,14 +17,15 @@
     <create-room class="create-room"></create-room>
     <button md-raised-button color="warn" class="logout-btn" (click)="logout()">Logout</button>
   </md-sidenav>
-  <div class="chat-sidenav-content">
-    <button type="button" md-icon-button (click)="sidenav.open()">
-      <i class="material-icons">menu</i>
-    </button>
-  </div>
+  <button type="button" id="open-button" md-icon-button (click)="sidenav.open()">
+    <i class="material-icons">menu</i>
+  </button>
+  <chat-view></chat-view>
+  <!--
   <button type="button" md-raised-button (click)="increment()">Increment</button>
   <button type="button" md-raised-button color="warn" (click)="decrement()">Decrement</button>
   <p>
     Counter: {{ counter }}
   </p>
+  -->
 </md-sidenav-container>

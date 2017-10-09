@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
+import { DatePipe } from '@angular/common';
 import {
   MdFormFieldModule,
   MdInputModule,
@@ -10,7 +11,11 @@ import {
   MdSidenavModule,
   MdGridListModule,
   MdTableModule,
-  MdDialogModule
+  MdDialogModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatIconModule,
+  MdIconModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmojiModule } from 'angular2-emoji';
@@ -27,6 +32,10 @@ import { LoginComponent } from './views/login/login.component';
 import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
 import { RoomTableComponent, JoinLockedRoomDialog } from './views/chat/roomtable/roomtable.component';
+import { ChatViewComponent } from './views/chat/chatview/chatview.component';
+import { InputMessageComponent } from './views/chat/inputmessage/inputmessage.component';
+import { MessageContainerComponent } from './views/chat/messagecontainer/messagecontainer.component';
+import { MyRoomsComponent } from './views/chat/myrooms/myrooms.component';
 
 const appRoutes: Routes = [
   {
@@ -51,7 +60,11 @@ const appRoutes: Routes = [
     SidenavComponent,
     CreateRoomComponent,
     RoomTableComponent,
-    JoinLockedRoomDialog
+    JoinLockedRoomDialog,
+    ChatViewComponent,
+    InputMessageComponent,
+    MessageContainerComponent,
+    MyRoomsComponent
   ],
   imports: [
     NgReduxModule,
@@ -72,7 +85,11 @@ const appRoutes: Routes = [
     MdSidenavModule,
     MdGridListModule,
     MdTableModule,
-    MdDialogModule
+    MdDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MdIconModule
   ],
   entryComponents: [
     JoinLockedRoomDialog

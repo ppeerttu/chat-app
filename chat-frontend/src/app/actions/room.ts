@@ -25,6 +25,8 @@ export class RoomActions {
   static LEAVE_ROOM_SUCCESS = 'LEAVE_ROOM_SUCCESS';
   static LEAVE_ROOM_FAILED = 'LEAVE_ROOM_FAILED';
 
+  static SELECT_ROOM = 'SELECT_ROOM';
+
   constructor(private ngRedux: NgRedux<AppState>) {}
 
   createRoom(roomName: string, password = null, userId: number) {
@@ -78,5 +80,9 @@ export class RoomActions {
       {userId}
     );
     this.ngRedux.dispatch({ type: RoomActions.LEAVE_ROOM_REQUEST, apiCall });
+  }
+
+  selectRoom(roomId: number) {
+    this.ngRedux.dispatch({ type: RoomActions.SELECT_ROOM, id: roomId });
   }
 }

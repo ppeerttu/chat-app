@@ -1,16 +1,11 @@
 
-
 .sidenav-container {
   width: 100vw;
   height: 100vh;
 }
 
-.chat-sidenav-content {
-  display: flex;
-}
-
 .chat-sidenav {
-  padding: 10px 20px 20px 20px;
+  padding: 10px 10px 10px 10px;
   width: 25vw;
 }
 
@@ -18,15 +13,30 @@
   float: right;
 }
 
+chat-view {
+  height: 400px;
+}
 .create-room {
   margin-bottom: auto;
 }
 
 .logout-btn {
   position: absolute;
-  bottom: 20px;
+  bottom: 10px;
+}
+
+#open-button {
+  z-index: 100;
+  position: absolute;
 }
 
 h4 {
   margin-top: 5px;
+}
+
+@media screen and (max-width: 1000px) {
+  .chat-sidenav {
+    padding: 0 20px 20px 20px;
+    width: 300px;
+  }
 }

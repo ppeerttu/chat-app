@@ -8,14 +8,16 @@ export interface AppState {
   user: User,
   rooms: Room[],
   roomsIn: Room[],
-  counter: number
+  counter: number,
+  viewRoom: number
 };
 
 export const INITIAL_STATE: AppState = {
   user: null,
   rooms: [],
   roomsIn: [],
-  counter: 0
+  counter: 0,
+  viewRoom: null
 };
 
 export function rootReducer(state: AppState, action: ChatAction): AppState {
@@ -114,6 +116,15 @@ export function rootReducer(state: AppState, action: ChatAction): AppState {
       base = Object.assign({}, base, {
         counter: base.counter - 1
       });
+      break;
+    case RoomActions.SELECT_ROOM:
+      if (action.id) {
+        base = Object.assign({}, base, {
+          viewRoom: action.id
+        });
+      } else {
+        throw new Error('Action SELECT_ROOM dispatched but no room id given!');
+      }
       break;
     default: break;
   }
