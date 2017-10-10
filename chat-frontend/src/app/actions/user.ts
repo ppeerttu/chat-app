@@ -17,9 +17,6 @@ export class UserActions {
   static TOKEN_REQUEST_SUCCESS = 'TOKEN_REQUEST_SUCCESS';
   static TOKEN_REQUEST_FAILED = 'TOKEN_REQUEST_FAILED';
 
-  static INCREMENT = 'INCREMENT';
-  static DECREMENT = 'DECREMENT';
-
   constructor(private ngRedux: NgRedux<AppState>) {}
 
   login(userName: string, password: string) {
@@ -58,14 +55,6 @@ export class UserActions {
       }
     }
     return this.ngRedux.dispatch(thunk(apiCall));
-  }
-
-  increment() {
-    return this.ngRedux.dispatch({ type: UserActions.INCREMENT });
-  }
-
-  decrement() {
-    return this.ngRedux.dispatch({ type: UserActions.DECREMENT });
   }
 
 }

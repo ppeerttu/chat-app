@@ -45,7 +45,12 @@ export class RoomActions {
       'rooms/all',
       [RoomActions.FETCH_ROOMS_REQUEST, RoomActions.FETCH_ROOMS_SUCCESS, RoomActions.FETCH_ROOMS_FAILED]
     );
-    this.ngRedux.dispatch({ type: RoomActions.FETCH_ROOMS_REQUEST, apiCall });
+    function thunk(apiCall) {
+      return function(dispatch) {
+        return dispatch({ type: RoomActions.FETCH_ROOMS_REQUEST, apiCall })
+      }
+    }
+    return this.ngRedux.dispatch(thunk(apiCall));
   }
 
   joinRoom(roomId: number, userId: number, password: string) {

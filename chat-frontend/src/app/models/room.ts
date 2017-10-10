@@ -1,3 +1,5 @@
+import { Message, User } from '.';
+
 export class Room {
     id: number;
     roomName: string;
@@ -30,4 +32,42 @@ export class UsersRoom extends Room {
     this.inRoom = inRoom;
   }
 
+}
+
+export class RoomInfo extends Room {
+  private messages: Message[] = [];
+  private users: User[] = [];
+
+  addMessage(msg: Message) {
+    this.messages.push(msg);
+  }
+
+  addUser(user: User) {
+    this.users.push(user);
+  }
+
+  removeUser(user: User) {
+    this.users = this.users.reduce((users, x) => {
+      if (x.id !== user.id) {
+        users.push(x);
+      }
+      return users;
+    }, []);
+  }
+
+  getMessages(): Message[] {
+    return this.messages;
+  }
+
+  getUsers(): User[] {
+    return this.users;
+  }
+
+  deleteAllMessages() {
+    this.messages = [];
+  }
+
+  deleteAllUsers() {
+    this.users = [];
+  }
 }

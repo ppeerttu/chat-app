@@ -24,7 +24,8 @@ import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { createLogger } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 import { AlertModule } from 'ng2-bootstrap';
-import { rootReducer, AppState, INITIAL_STATE } from './store/store';
+import { AppState, INITIAL_STATE } from './store/store';
+import reducer from './store/store';
 import ApiMiddleware from './middleware/api';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './views/chat/chat.component';
@@ -36,6 +37,7 @@ import { ChatViewComponent } from './views/chat/chatview/chatview.component';
 import { InputMessageComponent } from './views/chat/inputmessage/inputmessage.component';
 import { MessageContainerComponent } from './views/chat/messagecontainer/messagecontainer.component';
 import { MyRoomsComponent } from './views/chat/myrooms/myrooms.component';
+import { ChatActions } from './actions/chat';
 
 const appRoutes: Routes = [
   {
@@ -94,10 +96,11 @@ const appRoutes: Routes = [
   entryComponents: [
     JoinLockedRoomDialog
   ],
+  providers: [ChatActions],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<AppState>) {
-    ngRedux.configureStore(rootReducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware, createLogger()]);
+    ngRedux.configureStore(reducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware, createLogger()]);
   }
 }

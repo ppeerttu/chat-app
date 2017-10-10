@@ -1,3 +1,5 @@
 <div class="container">
-
+  <p *ngFor="let message of messages">
+    <span>{{ users[message.userId].userName }}</span>: {{ message.content }}
+  </p>
 </div>

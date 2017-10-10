@@ -1,6 +1,6 @@
 <form class="message-form">
   <md-form-field class="message-full-width">
-    <input mdInput placeholder="Insert a message...">
-    <md-icon class="send-button" mdSuffix (click)="test()">send</md-icon>
+    <input mdInput name="message" placeholder="Insert a message..." [(ngModel)]="message">
+    <md-icon class="send-button" mdSuffix (click)="send()">send</md-icon>
   </md-form-field>
 </form>

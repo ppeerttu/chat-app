@@ -36,9 +36,11 @@ export class LoginComponent {
     this.userName = '';
     this.password = '';
     // Subscribe the user in store to check when user is logged in
-    this.user$.subscribe(res => {
-      if (res && res.id > 0) {
+    this.user$.subscribe(user => {
+      console.log(user);
+      if (user && user.id > 0) {
         router.navigateByUrl('/chat');
+        console.log('navigated');
       }
     });
   }

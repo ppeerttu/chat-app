@@ -21,16 +21,20 @@ module.exports = {
       password: 'Sample1234',
       createdAt: now,
       updatedAt: now
+    },
+    {
+      userName: 'JohnDoe',
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'john@doe.tt',
+      password: 'Sample1234',
+      createdAt: now,
+      updatedAt: now
     }], {});
   },
 
   down: function (queryInterface, Sequelize) {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
 
-      Example:
-    */
     return queryInterface.bulkDelete('Users', null, {});
 
   }

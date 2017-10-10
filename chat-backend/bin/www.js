@@ -5,7 +5,7 @@
  */
 
 const app = require('../app');
-const debug = require('debug')('chat-backend:server');
+//const debug = require('debug')('chat-backend:server');
 const http = require('http');
 
 /**
@@ -21,6 +21,8 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
+const io = require('socket.io')(server);
+require('./socketHandler')(io);
 /**
  * Listen on provided port, on all network interfaces.
  */

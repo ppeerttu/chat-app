@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
 import { RoomActions } from '../../../actions/room';
-//import * as $ from 'jquery';
 
 import { Room, User, Message } from '../../../models';
 

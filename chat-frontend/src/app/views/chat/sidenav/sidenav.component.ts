@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
 import { UserActions } from '../../../actions/user';
+import { ChatActions } from '../../../actions/chat';
 
 import { Room, User, Message } from '../../../models';
 
@@ -17,15 +18,18 @@ export class SidenavComponent {
   @select() readonly counter$: Observable<number>;
 
   private router: Router;
-  private action: UserActions;
+  private userAction: UserActions;
+  private chatAction: ChatActions;
   private user: User;
   private counter: number;
 
   constructor(
     router: Router,
-    action: UserActions
+    userAction: UserActions,
+    chatAction: ChatActions
   ) {
-    this.action = action;
+    this.userAction = userAction;
+    this.chatAction = chatAction;
     this.router = router;
     this.user$.subscribe(user => {
       this.user = user;
@@ -33,19 +37,15 @@ export class SidenavComponent {
     this.counter$.subscribe(counter => {
       this.counter = counter;
     });
+    setTimeout(() => {
+      this.chatAction.joinRoom(2, this.user);
+    }, 2000);
   }
 
   logout(): void {
-    this.action.logout().then(() => {
+    this.userAction.logout().then(() => {
+      this.chatAction.closeSocket();
       this.router.navigateByUrl('/login');
     })
-  }
-
-  increment(): void {
-    this.action.increment();
-  }
-
-  decrement(): void {
-    this.action.decrement();
   }
 }
