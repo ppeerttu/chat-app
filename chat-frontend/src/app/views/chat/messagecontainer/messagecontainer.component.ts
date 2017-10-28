@@ -13,22 +13,45 @@ import { RoomInfo, User, Message } from '../../../models';
   styleUrls: [ 'messagecontainer.component.css' ]
 })
 export class MessageContainerComponent {
-  @select() roomsIn$:Observable<RoomInfo[]>;
-  @select() viewRoom$:Observable<number>;
+  @select() roomsIn$: Observable<RoomInfo[]>;
+  @select() viewRoom$: Observable<number>;
+  @select() user$: Observable<User>;
 
   private rooms: RoomInfo[];
   private messages: Message[];
   private roomId: number;
   private users: Object;
+  private user: User;
 
   constructor() {
     this.messages = [];
+    this.user = null;
+    this.roomId = null;
     this.users = {};
   }
 
   ngOnInit() {
+    this.user$.subscribe(user => {
+      this.user = user;
+    });
     this.roomsIn$.subscribe(rooms => {
       this.rooms = rooms;
+      this.rooms.map(room => {
+        if (this.roomId === room.id) {
+          this.messages = room.getMessages();
+          room.getUsers().map(user => {
+            this.users[user.id] = user;
+          });
+        }
+      });
+      console.log('scrolling!');
+      const msgContainer = document.querySelector('.message-container');
+      if (msgContainer) {
+        // BECAUSE IF DONE IMMEDIATELY, NOT WORKING AS EXPECTED (because of angular bindings)
+        setTimeout(() => {
+          msgContainer.scrollTop = msgContainer.scrollHeight;
+        }, 10);
+      }
     });
     this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
@@ -36,7 +59,7 @@ export class MessageContainerComponent {
         if (room.id === roomId) {
           this.messages = room.getMessages();
           room.getUsers().map(user => {
-            this.users[user.id] = user
+            this.users[user.id] = user;
           });
         }
       });

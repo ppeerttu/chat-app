@@ -9,13 +9,9 @@
   display: flex;
   flex-direction: column;
   max-height: 35vh;
+  margin-bottom: 10px;
 }
 
-.rooms-container h3 {
-  margin: 5px 5px 5px 5px;
-  width: auto;
-  display: inline-block;
-}
 
 .mat-table {
   overflow: auto;

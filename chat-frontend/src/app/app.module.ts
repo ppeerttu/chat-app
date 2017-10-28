@@ -15,7 +15,8 @@ import {
   MatFormFieldModule,
   MatInputModule,
   MatIconModule,
-  MdIconModule
+  MdIconModule,
+  MdExpansionModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmojiModule } from 'angular2-emoji';
@@ -30,19 +31,33 @@ import ApiMiddleware from './middleware/api';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './views/chat/chat.component';
 import { LoginComponent } from './views/login/login.component';
+import {
+  RegisterComponent,
+  RegisterSuccessDialog,
+  RegisterFailedDialog
+} from './views/register/register.component';
 import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
-import { RoomTableComponent, JoinLockedRoomDialog } from './views/chat/roomtable/roomtable.component';
+import {
+  RoomTableComponent,
+  JoinLockedRoomDialog
+} from './views/chat/roomtable/roomtable.component';
 import { ChatViewComponent } from './views/chat/chatview/chatview.component';
 import { InputMessageComponent } from './views/chat/inputmessage/inputmessage.component';
 import { MessageContainerComponent } from './views/chat/messagecontainer/messagecontainer.component';
 import { MyRoomsComponent } from './views/chat/myrooms/myrooms.component';
 import { ChatActions } from './actions/chat';
+import { ParticipantsComponent } from './views/chat/participants/participants.component';
+import { SettingsComponent } from './views/chat/settings/settings.component';
 
 const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     path: 'chat',
@@ -59,6 +74,9 @@ const appRoutes: Routes = [
     AppComponent,
     ChatComponent,
     LoginComponent,
+    RegisterComponent,
+    RegisterSuccessDialog,
+    RegisterFailedDialog,
     SidenavComponent,
     CreateRoomComponent,
     RoomTableComponent,
@@ -66,7 +84,9 @@ const appRoutes: Routes = [
     ChatViewComponent,
     InputMessageComponent,
     MessageContainerComponent,
-    MyRoomsComponent
+    MyRoomsComponent,
+    ParticipantsComponent,
+    SettingsComponent
   ],
   imports: [
     NgReduxModule,
@@ -91,10 +111,13 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-    MdIconModule
+    MdIconModule,
+    MdExpansionModule
   ],
   entryComponents: [
-    JoinLockedRoomDialog
+    JoinLockedRoomDialog,
+    RegisterSuccessDialog,
+    RegisterFailedDialog
   ],
   providers: [ChatActions],
   bootstrap: [AppComponent]

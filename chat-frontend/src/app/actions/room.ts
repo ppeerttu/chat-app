@@ -45,12 +45,7 @@ export class RoomActions {
       'rooms/all',
       [RoomActions.FETCH_ROOMS_REQUEST, RoomActions.FETCH_ROOMS_SUCCESS, RoomActions.FETCH_ROOMS_FAILED]
     );
-    function thunk(apiCall) {
-      return function(dispatch) {
-        return dispatch({ type: RoomActions.FETCH_ROOMS_REQUEST, apiCall })
-      }
-    }
-    return this.ngRedux.dispatch(thunk(apiCall));
+    return this.ngRedux.dispatch(this.thunk(RoomActions.FETCH_ROOMS_REQUEST, apiCall));
   }
 
   joinRoom(roomId: number, userId: number, password: string) {
@@ -60,7 +55,7 @@ export class RoomActions {
       [RoomActions.JOIN_ROOM_REQUEST, RoomActions.JOIN_ROOM_SUCCESS, RoomActions.JOIN_ROOM_FAILED],
       {userId, password}
     );
-    this.ngRedux.dispatch({ type: RoomActions.JOIN_ROOM_REQUEST, apiCall });
+    return this.ngRedux.dispatch(this.thunk(RoomActions.JOIN_ROOM_REQUEST, apiCall));
   }
 
   getUsersRooms(userId: number) {
@@ -69,12 +64,7 @@ export class RoomActions {
       'rooms/in/' + userId,
       [RoomActions.USERS_ROOMS_REQUEST, RoomActions.USERS_ROOMS_SUCCESS, RoomActions.USERS_ROOMS_FAILED]
     );
-    function thunk(apiCall) {
-      return function (dispatch) {
-        return dispatch({ type: RoomActions.USERS_ROOMS_REQUEST, apiCall });
-      }
-    }
-    return this.ngRedux.dispatch(thunk(apiCall));
+    return this.ngRedux.dispatch(this.thunk(RoomActions.USERS_ROOMS_REQUEST, apiCall));
   }
 
   leaveRoom(roomId: number, userId: number) {
@@ -84,10 +74,14 @@ export class RoomActions {
       [RoomActions.LEAVE_ROOM_REQUEST, RoomActions.LEAVE_ROOM_SUCCESS, RoomActions.LEAVE_ROOM_FAILED],
       {userId}
     );
-    this.ngRedux.dispatch({ type: RoomActions.LEAVE_ROOM_REQUEST, apiCall });
+    return this.ngRedux.dispatch(this.thunk(RoomActions.LEAVE_ROOM_REQUEST, apiCall));
   }
 
   selectRoom(roomId: number) {
     this.ngRedux.dispatch({ type: RoomActions.SELECT_ROOM, id: roomId });
+  }
+
+  private thunk(type, apiCall: ApiCall): any {
+    return (dispatch) => dispatch({ type, apiCall });
   }
 }

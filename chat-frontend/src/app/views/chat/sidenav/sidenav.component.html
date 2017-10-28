@@ -1,5 +1,7 @@
 <md-sidenav-container class="sidenav-container">
   <md-sidenav #sidenav class="chat-sidenav">
+
+    <!-- greeting and close-sidenav button -->
     <md-grid-list cols="4">
       <md-grid-tile colspan="3">
         <p *ngIf="user" style="margin-bottom: 0;">
@@ -12,20 +14,51 @@
         </button>
       </md-grid-tile>
     </md-grid-list>
-    <room-table></room-table>
-    <h4>Create a room</h4>
-    <create-room class="create-room"></create-room>
+
+
+    <md-accordion>
+
+      <!-- room table -->
+      <md-expansion-panel>
+        <md-expansion-panel-header>
+          <md-panel-title>
+            Join rooms
+          </md-panel-title>
+        </md-expansion-panel-header>
+        <room-table></room-table>
+      </md-expansion-panel>
+
+      <!-- expansion panel for creating a room -->
+      <md-expansion-panel>
+        <md-expansion-panel-header>
+          <md-panel-title>
+            Create a room
+          </md-panel-title>
+        </md-expansion-panel-header>
+        <create-room class="create-room"></create-room>
+      </md-expansion-panel>
+
+      <md-expansion-panel>
+        <md-expansion-panel-header>
+          <md-panel-title>
+            Settings
+          </md-panel-title>
+        </md-expansion-panel-header>
+        <settings></settings>
+      </md-expansion-panel>
+
+    </md-accordion>
+
+    <!-- absolutely positioned logout button -->
     <button md-raised-button color="warn" class="logout-btn" (click)="logout()">Logout</button>
   </md-sidenav>
+
+  <!-- sidenav open button (outside sidenav) -->
   <button type="button" id="open-button" md-icon-button (click)="sidenav.open()">
     <i class="material-icons">menu</i>
   </button>
+
+  <!-- chat view -->
   <chat-view></chat-view>
-  <!--
-  <button type="button" md-raised-button (click)="increment()">Increment</button>
-  <button type="button" md-raised-button color="warn" (click)="decrement()">Decrement</button>
-  <p>
-    Counter: {{ counter }}
-  </p>
-  -->
+
 </md-sidenav-container>

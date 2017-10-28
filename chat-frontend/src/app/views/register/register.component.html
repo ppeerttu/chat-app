@@ -1,0 +1,59 @@
+
+<div class="container">
+  <div class="form-container">
+    <h1>Register to ChatApp</h1>
+    <form class="register-form" name="registerForm">
+      <md-form-field class="register-full-width">
+        <input mdInput placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="userName">
+        <md-error *ngIf="usernameFormControl.hasError('required')">
+          Username is <strong>required</strong>
+        </md-error>
+        <md-error *ngIf="usernameFormControl.hasError('minlength')">
+          Username should be at least 3 characters
+        </md-error>
+      </md-form-field>
+      <md-form-field class="register-full-width">
+        <input mdInput placeholder="First name" [formControl]="firstNameFormControl" [(ngModel)]="firstName">
+        <md-error *ngIf="firstNameFormControl.hasError('required')">
+          First name is <strong>required</strong>
+        </md-error>
+      </md-form-field>
+      <md-form-field class="register-full-width">
+        <input mdInput placeholder="Last name" [formControl]="lastNameFormControl" [(ngModel)]="lastName">
+        <md-error *ngIf="lastNameFormControl.hasError('required')">
+          Last name is <strong>required</strong>
+        </md-error>
+      </md-form-field>
+      <md-form-field class="register-full-width">
+        <input mdInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email">
+        <md-error *ngIf="emailFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </md-error>
+        <md-error *ngIf="emailFormControl.hasError('email')">
+          Please provide proper email address
+        </md-error>
+      </md-form-field>
+      <md-form-field class="register-full-width">
+        <input id="password" (keyup)="passKeyUp()" (focusout)="passKeyUp()" type="password" mdInput name="password" placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
+        <md-error *ngIf="passwordFormControl.hasError('required')">
+          Password is <strong>required</strong>
+        </md-error>
+        <md-error *ngIf="passwordFormControl.hasError('minlength')">
+          Password has to be at least <strong>6 characters</strong> long
+        </md-error>
+      </md-form-field>
+      <md-form-field class="register-full-width">
+        <input (keyup)="passKeyUp()" (focusout)="passKeyUp()" id="confirm" type="password" mdInput name="confirmPassword" placeholder="Confirm password" [formControl]="confirmPasswordFormControl" [(ngModel)]="confirmPassword">
+        <md-error *ngIf="confirmPasswordFormControl.hasError('required')">
+          Confirm password is <strong>required</strong>
+        </md-error>
+        <md-error *ngIf="!passwordsMatch">
+          Passwords do not match!
+        </md-error>
+      </md-form-field>
+      <button md-raised-button color="primary" (click)="register()" [disabled]="!registerForm.valid || !passwordsMatch">Register</button>
+      <button md-raised-button (click)="backToLogin()">Back to login</button>
+    </form>
+
+  </div>
+</div>

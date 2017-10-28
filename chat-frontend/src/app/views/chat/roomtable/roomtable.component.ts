@@ -7,6 +7,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
 import { RoomActions } from '../../../actions/room';
+import { ChatActions } from '../../../actions/chat';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
@@ -16,8 +17,7 @@ import { Room, UsersRoom, User, Message } from '../../../models';
 @Component({
   selector: 'room-table',
   templateUrl: './roomtable.component.html',
-  styleUrls: ['roomtable.component.css'],
-  providers: [RoomActions]
+  styleUrls: ['roomtable.component.css']
 })
 export class RoomTableComponent {
   @select() user$: Observable<User>;
@@ -28,15 +28,18 @@ export class RoomTableComponent {
   roomDataBase = new RoomDataBase();
   roomDataSource: RoomDataSource | null;
   private roomAction: RoomActions;
+  private chatAction: ChatActions;
   private user: User;
   private rooms: Room[];
   @ViewChild('filter') filter: ElementRef;
 
   constructor(
     roomAction: RoomActions,
+    chatAction: ChatActions,
     public dialog: MdDialog
   ) {
     this.roomAction = roomAction;
+    this.chatAction = chatAction;
     this.user$.subscribe(user => {
       this.user = user;
     });
@@ -81,7 +84,9 @@ export class RoomTableComponent {
   joinRoom(id: number) {
     const room = this.rooms[this.rooms.findIndex(i => i.id == id)];
     if (room.password == null) {
-      this.roomAction.joinRoom(id, this.user.id, null);
+      this.roomAction.joinRoom(id, this.user.id, null).then(() => {
+        this.chatAction.joinRoom(id, this.user);
+      });
     }
     else {
       this.openDialog(room.roomName, id);
@@ -89,7 +94,9 @@ export class RoomTableComponent {
   }
 
   leaveRoom(id: number) {
-    this.roomAction.leaveRoom(id, this.user.id);
+    this.roomAction.leaveRoom(id, this.user.id).then(() => {
+      this.chatAction.leaveRoom(id, this.user);
+    });
   }
 }
 

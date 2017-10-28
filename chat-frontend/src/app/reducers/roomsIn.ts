@@ -1,53 +1,52 @@
 import { AppState, INITIAL_STATE } from '../store/store';
 import { ChatAction } from '../actions/action';
-import { RoomInfo, User, Message} from '../models';
+import { RoomInfo, Room, User, Message} from '../models';
 import { chatReducer } from './chat';
 import { RoomActions } from '../actions/room';
 
-export function roomsInReducer(state: RoomInfo[] = [], action: ChatAction): RoomInfo[] {
-  let base = state.map(roomInfo => roomInfo);
+export function roomsInReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
+  let base = Object.assign({}, state);
   switch (action.type) {
     case RoomActions.USERS_ROOMS_SUCCESS:
       if (action.res) {
-        base = action.res.map(room => {
+        const rooms = action.res.map(room => {
           return new RoomInfo(room.roomName, room.id, room.password, room.createdAt, room.updatedAt);
         });
+        base.roomsIn = rooms;
       }
       break;
     case RoomActions.JOIN_ROOM_SUCCESS:
       if (action.res) {
-        const room: RoomInfo = findRoomWithId(action.res.roomId, base);
+        const room: RoomInfo = findRoomWithId(action.res.roomId, base.rooms);
         if (room == null) {
           throw Error(`Couldn't find a room with id ${action.res.roomId}.`)
         } else {
-          base.push(room);
-          base = base.map(room => room);
+          base.roomsIn = base.roomsIn.slice();
+          base.roomsIn.push(room);
         }
       }
       break;
     case RoomActions.LEAVE_ROOM_SUCCESS:
       if (action.res) {
-        const index = base.findIndex(i => i.id == action.res.roomId);
+        const index = base.roomsIn.findIndex(i => i.id == action.res.roomId);
         if (index >= 0) {
-          base.splice(index, 1);
-          base = base.map(room => room);
+          base.roomsIn = base.roomsIn.slice();
+          base.roomsIn.splice(index, 1);
         } else {
           throw Error(`Couldn't find a room with id ${action.res.roomId}.`);
         }
       }
       break;
     default:
-      // Combine chatReducer with roomsInReducer
-      base = chatReducer(base, action);
       break;
   }
-  return base;
+  return Object.assign({}, base);
 }
 
-function findRoomWithId(id: number, rooms: RoomInfo[]): RoomInfo {
+function findRoomWithId(id: number, rooms: Room[]): RoomInfo {
   for (let i = 0; i < rooms.length; i++) {
     if (rooms[i].id == id) {
-      return Object.create(rooms[i]);
+      return rooms[i].createRoomInfo();
     }
   }
   return null;

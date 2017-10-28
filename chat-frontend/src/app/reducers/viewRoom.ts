@@ -2,12 +2,12 @@ import { AppState, INITIAL_STATE } from '../store/store';
 import { ChatAction } from '../actions/action';
 import { RoomActions } from '../actions/room';
 
-export function viewRoomReducer(state: number = null, action: ChatAction): number {
-  let base = state;
+export function viewRoomReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
+  let viewRoom = state.viewRoom;
   switch (action.type) {
     case RoomActions.SELECT_ROOM:
       if (action.id) {
-        base = action.id;
+        viewRoom = action.id;
       } else {
         throw new Error('Action SELECT_ROOM dispatched but no room id given!');
       }
@@ -15,5 +15,7 @@ export function viewRoomReducer(state: number = null, action: ChatAction): numbe
     default:
       break;
   }
-  return base;
+  return Object.assign({}, state, {
+    viewRoom: viewRoom
+  });
 }

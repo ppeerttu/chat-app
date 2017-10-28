@@ -4,8 +4,8 @@ import { Room } from '../models';
 
 import { RoomActions } from '../actions/room';
 
-export function roomReducer(state: Room[] = [], action: ChatAction): Room[] {
-  let base = state.map(room => room);
+export function roomReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
+  let base = state.rooms.slice();
   switch (action.type) {
     case RoomActions.CREATE_ROOM_SUCCESS:
       if (action.res) {
@@ -23,5 +23,7 @@ export function roomReducer(state: Room[] = [], action: ChatAction): Room[] {
     default:
       break;
   }
-  return base;
+  return Object.assign({}, state, {
+    rooms: base
+  });
 }

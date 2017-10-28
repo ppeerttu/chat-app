@@ -22,6 +22,10 @@ export class Room {
     createUsersRoom(inRoom: boolean): UsersRoom {
       return new UsersRoom(inRoom, this.roomName, this.id, this.password, this.createdAt, this.updatedAt);
     }
+
+    createRoomInfo(): RoomInfo {
+      return new RoomInfo(this.roomName, this.id, this.password, this.createdAt, this.updatedAt);
+    }
 }
 
 export class UsersRoom extends Room {

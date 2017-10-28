@@ -46,7 +46,7 @@ export class ChatComponent implements OnInit {
         this.router.navigateByUrl('/login');
       } else {
         this.chatAction.openSocket();
-        if (this.user === null) {
+        if (this.user === null || this.user === undefined) {
           // Get user data and refresh token
           this.userAction.refreshToken().then(action => {
             // Get the rooms user is in
@@ -61,6 +61,7 @@ export class ChatComponent implements OnInit {
             });
           });
         } else {
+          console.log(this.user);
           this.roomAction.getUsersRooms(this.user.id).then(action => {
             this.roomAction.fetchAll().then(() => {
               action.res.map(room => {

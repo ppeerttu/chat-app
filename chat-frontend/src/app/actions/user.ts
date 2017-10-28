@@ -17,6 +17,10 @@ export class UserActions {
   static TOKEN_REQUEST_SUCCESS = 'TOKEN_REQUEST_SUCCESS';
   static TOKEN_REQUEST_FAILED = 'TOKEN_REQUEST_FAILED';
 
+  static REGISTER_REQUEST = 'REGISTER_REQUEST';
+  static REGISTER_SUCCESS = 'REGISTER_SUCCESS';
+  static REGISTER_FAILED = 'REGISTER_FAILED';
+
   constructor(private ngRedux: NgRedux<AppState>) {}
 
   login(userName: string, password: string) {
@@ -35,12 +39,7 @@ export class UserActions {
       'users/logout',
       [UserActions.LOGOUT_REQUEST, UserActions.LOGOUT_SUCCESS, UserActions.LOGOUT_FAILED]
     );
-    function thunk(apiCall) {
-      return function (dispatch) {
-        return dispatch({type: UserActions.LOGOUT_REQUEST, apiCall});
-      }
-    }
-    return this.ngRedux.dispatch(thunk(apiCall));
+    return this.ngRedux.dispatch(this.thunk(UserActions.LOGOUT_REQUEST, apiCall));
   }
 
   refreshToken() {
@@ -49,12 +48,20 @@ export class UserActions {
       'users/token',
       [UserActions.TOKEN_REQUEST, UserActions.TOKEN_REQUEST_SUCCESS, UserActions.TOKEN_REQUEST_FAILED]
     );
-    function thunk(apiCall) {
-      return function (dispatch) {
-        return dispatch({type: UserActions.TOKEN_REQUEST, apiCall})
-      }
-    }
-    return this.ngRedux.dispatch(thunk(apiCall));
+    return this.ngRedux.dispatch(this.thunk(UserActions.TOKEN_REQUEST, apiCall));
+  }
+  register(userName: string, firstName: string, lastName: string, email: string, password: string):any {
+    const apiCall = new ApiCall(
+      'post',
+      'users/register',
+      [UserActions.REGISTER_REQUEST, UserActions.REGISTER_SUCCESS, UserActions.REGISTER_FAILED],
+      {userName, firstName, lastName, email, password}
+    )
+    return this.ngRedux.dispatch(this.thunk(UserActions.REGISTER_REQUEST, apiCall));
+  }
+
+  private thunk(type, apiCall: ApiCall): any {
+    return (dispatch) => dispatch({ type, apiCall });
   }
 
 }

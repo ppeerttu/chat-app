@@ -1,7 +1,29 @@
-.container {
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: white;
-  height: 85%;
+.message-container {
+  overflow-y: scroll;
+  width: 100%;
+  height: calc(100vh - 60px); /* the message input form takes 80px from the bottom */
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+}
+
+.own-message {
+  float: right;
+}
+
+.own-message small {
+  float: right;
+}
+
+.message {
+  width: 100%;
+  clear: both;
+}
+
+.message p {
+  line-height: 85%;
+}
+
+.message p small {
+  font-size: 10px;
 }

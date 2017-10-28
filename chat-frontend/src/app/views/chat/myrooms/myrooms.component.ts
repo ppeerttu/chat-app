@@ -16,7 +16,7 @@ import { RoomInfo, User, Message } from '../../../models';
 export class MyRoomsComponent {
   @select() roomsIn$:Observable<RoomInfo[]>;
   @select() viewRoom$:Observable<number>;
-  private rooms: RoomInfo[];
+  private rooms: RoomInfo[] = [];
   private roomActions: RoomActions;
   private viewRoom: RoomInfo;
 

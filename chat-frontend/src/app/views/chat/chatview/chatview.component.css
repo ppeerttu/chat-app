@@ -1,0 +1,14 @@
+#chat-view-container {
+  height: 100%;
+
+}
+
+.my-rooms-container {
+  padding-top: 40px;
+}
+
+.middle-container {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  height: 100%;
+}

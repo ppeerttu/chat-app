@@ -1,3 +1,4 @@
+import { API_URL } from '../../main';
 
 export class Fetch {
 
@@ -8,13 +9,13 @@ export class Fetch {
     body = null
   ) {
     if (body) {
-      return fetch(`http://localhost:3000/${path}`, {
+      return fetch(`${API_URL}${path}`, {
         method: method.toUpperCase(),
         headers: headers,
         body: JSON.stringify(body)
       });
     }
-    return fetch(`http://localhost:3000/${path}`, {
+    return fetch(`${API_URL}${path}`, {
       method: method.toUpperCase(),
       headers: headers
     });

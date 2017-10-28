@@ -78,9 +78,10 @@ export class ChatActions {
     } else if (roomId === null) {
       throw new Error('Room not selected!');
     } else {
-      const payload = {roomId, userId, message} ;
+      const time = Date.now();
+      const payload = {roomId, userId, message, time};
       this.ngRedux.dispatch({ type: ChatActions.SEND_MESSAGE, payload});
-      this.io.emit('message', {roomId, userId, message});
+      this.io.emit('message', {roomId, userId, message, time});
     }
   }
 

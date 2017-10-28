@@ -60,8 +60,8 @@ router.get('/token', (req, res, next) => {
   }
 });
 
-// POST /users/new
-router.post('/new', (req, res, next) => {
+// POST /users/register
+router.post('/register', (req, res, next) => {
   const data = req.body;
   console.log(data);
   if (!data.userName || !data.email || !data.password) {

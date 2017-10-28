@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import reduceReducers from 'reduce-reducers';
 import { ChatAction } from '../actions/action';
 import { Room, RoomInfo, User, Message} from '../models';
 import { UserActions } from '../actions/user';
@@ -7,6 +8,7 @@ import { userReducer } from '../reducers/user';
 import { roomReducer } from '../reducers/rooms';
 import { roomsInReducer } from '../reducers/roomsIn';
 import { viewRoomReducer } from '../reducers/viewRoom';
+import { chatReducer } from '../reducers/chat';
 
 export interface AppState {
   user: User,
@@ -22,9 +24,4 @@ export const INITIAL_STATE: AppState = {
   viewRoom: null
 };
 
-export default combineReducers<AppState>({
-  user: userReducer,
-  rooms: roomReducer,
-  roomsIn: roomsInReducer,
-  viewRoom: viewRoomReducer
-});
+export default reduceReducers(userReducer, roomsInReducer, chatReducer, viewRoomReducer, roomReducer);

@@ -3,8 +3,8 @@ import { Room, User, Message} from '../models';
 import { UserActions } from '../actions/user';
 import { AppState, INITIAL_STATE } from '../store/store';
 
-export function userReducer(state: User = null, action: ChatAction): User {
-  let base = state;
+export function userReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
+  let base: User = state.user;
   switch (action.type) {
     case UserActions.LOGIN_SUCCESS:
       if (action.res) {
@@ -23,8 +23,10 @@ export function userReducer(state: User = null, action: ChatAction): User {
       }
       break;
     case UserActions.LOGOUT_SUCCESS:
-      return null;
+      return INITIAL_STATE;
     default: break;
   }
-  return base;
+  return Object.assign({}, state, {
+    user: base
+  });
 }

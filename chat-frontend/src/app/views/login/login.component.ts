@@ -37,15 +37,17 @@ export class LoginComponent {
     this.password = '';
     // Subscribe the user in store to check when user is logged in
     this.user$.subscribe(user => {
-      console.log(user);
       if (user && user.id > 0) {
         router.navigateByUrl('/chat');
-        console.log('navigated');
       }
     });
   }
 
   login(): void {
     this.action.login(this.userName, this.password);
+  }
+
+  toRegister(): void {
+    this.router.navigateByUrl('/register');
   }
 }
