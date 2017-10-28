@@ -72,7 +72,7 @@ export class RoomTableComponent {
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.roomAction.joinRoom(roomId, this.user.id, result);
+        this.roomAction.joinRoom(roomId, this.user.getId(), result);
       }
     });
   }
@@ -82,19 +82,19 @@ export class RoomTableComponent {
   }
 
   joinRoom(id: number) {
-    const room = this.rooms[this.rooms.findIndex(i => i.id == id)];
-    if (room.password == null) {
-      this.roomAction.joinRoom(id, this.user.id, null).then(() => {
+    const room = this.rooms[this.rooms.findIndex(i => i.getId() == id)];
+    if (room.getPassword() == null) {
+      this.roomAction.joinRoom(id, this.user.getId(), null).then(() => {
         this.chatAction.joinRoom(id, this.user);
       });
     }
     else {
-      this.openDialog(room.roomName, id);
+      this.openDialog(room.getRoomName(), id);
     }
   }
 
   leaveRoom(id: number) {
-    this.roomAction.leaveRoom(id, this.user.id).then(() => {
+    this.roomAction.leaveRoom(id, this.user.getId()).then(() => {
       this.chatAction.leaveRoom(id, this.user);
     });
   }
@@ -135,11 +135,11 @@ export class RoomDataBase {
 
   get data(): UsersRoom[] {
     const usersRooms: UsersRoom[] = this.dataChange.value.map((room) => {
-      if (this.roomsIn.findIndex(i => i.id === room.id) >= 0) {
-        const usersRoom = room.createUsersRoom(true);
+      if (this.roomsIn.findIndex(i => i.getId() === room.getId()) >= 0) {
+        const usersRoom = UsersRoom.initializeFromRoom(true, room);
         return usersRoom;
       } else {
-        const usersRoom = room.createUsersRoom(false);
+        const usersRoom = UsersRoom.initializeFromRoom(false, room);
         return usersRoom;
       }
     });
@@ -165,7 +165,7 @@ export class RoomDataSource extends DataSource<any> {
     ];
     return Observable.merge(...displayDataChanges).map(() => {
       return this._roomDataBase.data.slice().filter((room: UsersRoom) => {
-        let search = room.roomName.toLowerCase();
+        let search = room.getRoomName().toLowerCase();
         return search.indexOf(this.filter.toLowerCase()) != -1;
       });
     });

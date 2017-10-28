@@ -12,16 +12,9 @@
   float: right;
 }
 
-chat-view {
-  height: 400px;
-}
+
 .create-room {
   margin-bottom: auto;
-}
-
-.logout-btn {
-  position: absolute;
-  bottom: 10px;
 }
 
 #open-button {

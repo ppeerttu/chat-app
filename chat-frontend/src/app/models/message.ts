@@ -1,8 +1,8 @@
 export class Message {
-    userId: number;
-    content: string;
-    roomId: number;
-    time: number;
+    private userId: number;
+    private content: string;
+    private roomId: number;
+    private time: number;
 
     constructor(content: string, userId: number, roomId: number, time: number = Date.now()) {
         this.userId = userId;
@@ -12,15 +12,19 @@ export class Message {
     }
 
     getContent(): string {
-        return this.content;
+      return this.content;
     }
 
     getUser(): number {
-        return this.userId;
+      return this.userId;
     }
 
     getRoom(): number {
-        return this.roomId;
+      return this.roomId;
+    }
+
+    getTime(): number {
+      return this.time;
     }
 
 }

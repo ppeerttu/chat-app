@@ -10,7 +10,6 @@ import { UserActions } from '../../actions/user';
 import { User } from '../../models/user';
 
 @Component({
-    selector: 'app-root',
     templateUrl: './register.component.html',
     styleUrls: [ 'register.component.css' ],
     providers: [UserActions]
@@ -59,7 +58,7 @@ export class RegisterComponent {
     // Subscribe the user in store to check if the user is logged in
     this.user$.subscribe(user => {
       console.log(user);
-      if (user && user.id > 0) {
+      if (user && user.getId() > 0) {
         router.navigateByUrl('/chat');
       }
     });

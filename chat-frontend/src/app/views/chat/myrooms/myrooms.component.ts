@@ -27,7 +27,7 @@ export class MyRoomsComponent {
     });
     this.viewRoom$.subscribe(id => {
       this.rooms.map((room:RoomInfo) => {
-        if (room.id === id) {
+        if (room.getId() === id) {
           this.viewRoom = room;
         }
       });

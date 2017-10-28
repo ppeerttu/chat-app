@@ -28,7 +28,7 @@ export function roomsInReducer(state: AppState = INITIAL_STATE, action: ChatActi
       break;
     case RoomActions.LEAVE_ROOM_SUCCESS:
       if (action.res) {
-        const index = base.roomsIn.findIndex(i => i.id == action.res.roomId);
+        const index = base.roomsIn.findIndex(i => i.getId() == action.res.roomId);
         if (index >= 0) {
           base.roomsIn = base.roomsIn.slice();
           base.roomsIn.splice(index, 1);
@@ -45,8 +45,8 @@ export function roomsInReducer(state: AppState = INITIAL_STATE, action: ChatActi
 
 function findRoomWithId(id: number, rooms: Room[]): RoomInfo {
   for (let i = 0; i < rooms.length; i++) {
-    if (rooms[i].id == id) {
-      return rooms[i].createRoomInfo();
+    if (rooms[i].getId() == id) {
+      return RoomInfo.initializeFromRoom(rooms[i]);
     }
   }
   return null;

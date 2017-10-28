@@ -37,10 +37,10 @@ export class MessageContainerComponent {
     this.roomsIn$.subscribe(rooms => {
       this.rooms = rooms;
       this.rooms.map(room => {
-        if (this.roomId === room.id) {
+        if (this.roomId === room.getId()) {
           this.messages = room.getMessages();
           room.getUsers().map(user => {
-            this.users[user.id] = user;
+            this.users[user.getId()] = user;
           });
         }
       });
@@ -56,10 +56,10 @@ export class MessageContainerComponent {
     this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
       this.rooms.map(room => {
-        if (room.id === roomId) {
+        if (room.getId() === roomId) {
           this.messages = room.getMessages();
           room.getUsers().map(user => {
-            this.users[user.id] = user;
+            this.users[user.getId()] = user;
           });
         }
       });

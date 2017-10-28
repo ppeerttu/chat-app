@@ -5,16 +5,10 @@
     <h1>Chat app</h1>
     <form class="login-form">
       <md-form-field class="login-full-width">
-        <input mdInput placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="userName">
-        <md-error *ngIf="usernameFormControl.hasError('required')">
-          Username is <strong>required</strong>
-        </md-error>
+        <input mdInput placeholder="Username" name="userName" [(ngModel)]="userName">
       </md-form-field>
       <md-form-field class="login-full-width">
-        <input type="password" mdInput placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
-        <md-error *ngIf="passwordFormControl.hasError('required')">
-          Password is <strong>required</strong>
-        </md-error>
+        <input type="password" mdInput placeholder="Password" name="password" [(ngModel)]="password">
       </md-form-field>
       <button md-raised-button color="primary" (click)="login()">Login</button>
       <button md-raised-button (click)="toRegister()">Register</button>
@@ -22,4 +16,9 @@
 
 
   </div>
+  <footer class="footer">
+    <div class="footer-container">
+      <a href="/about">About</a>
+    </div>
+  </footer>
 </div>

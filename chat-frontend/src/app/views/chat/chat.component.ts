@@ -11,7 +11,6 @@ import { User } from '../../models/user';
 import { Message } from '../../models/message';
 
 @Component({
-    selector: 'app-root',
     templateUrl: './chat.component.html',
     styleUrls: [ 'chat.component.css' ],
     providers: [UserActions, RoomActions, ChatActions]
@@ -62,7 +61,7 @@ export class ChatComponent implements OnInit {
           });
         } else {
           console.log(this.user);
-          this.roomAction.getUsersRooms(this.user.id).then(action => {
+          this.roomAction.getUsersRooms(this.user.getId()).then(action => {
             this.roomAction.fetchAll().then(() => {
               action.res.map(room => {
                 this.chatAction.joinRoom(room.id, this.user);

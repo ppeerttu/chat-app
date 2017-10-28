@@ -29,7 +29,7 @@ export class ParticipantsComponent {
       this.rooms = rooms;
       if (this.roomId) {
         this.rooms.map(room => {
-          if (room.id === this.roomId) {
+          if (room.getId() === this.roomId) {
             this.users = room.getUsers();
           }
         });
@@ -38,7 +38,7 @@ export class ParticipantsComponent {
     this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
       this.rooms.map(room => {
-        if (room.id === roomId) {
+        if (room.getId() === roomId) {
           this.users = room.getUsers();
         }
       });

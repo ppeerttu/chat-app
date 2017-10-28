@@ -36,6 +36,7 @@ import {
   RegisterSuccessDialog,
   RegisterFailedDialog
 } from './views/register/register.component';
+import { AboutComponent } from './views/about/about.component';
 import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
 import {
@@ -57,7 +58,11 @@ const appRoutes: Routes = [
   },
   {
     path: 'register',
-    component: RegisterComponent,
+    component: RegisterComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {
     path: 'chat',
@@ -74,6 +79,7 @@ const appRoutes: Routes = [
     AppComponent,
     ChatComponent,
     LoginComponent,
+    AboutComponent,
     RegisterComponent,
     RegisterSuccessDialog,
     RegisterFailedDialog,

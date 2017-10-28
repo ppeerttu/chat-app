@@ -38,13 +38,6 @@ export class SidenavComponent {
     });
   }
 
-  logout(): void {
-    this.userAction.logout().then(() => {
-      this.chatAction.closeSocket();
-      this.router.navigateByUrl('/login');
-    })
-  }
-
   setStep(index: number) {
     this.step = index;
   }

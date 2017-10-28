@@ -48,12 +48,12 @@ export class CreateRoomComponent {
     if (this.roomName.length > 2) {
       let duplicate = false;
       this.rooms.map(room => {
-        if (room.roomName == this.roomName) {
+        if (room.getRoomName() == this.roomName) {
           duplicate = true;
         }
       });
       if (!duplicate) {
-        this.action.createRoom(this.roomName, this.password, this.user.id);
+        this.action.createRoom(this.roomName, this.password, this.user.getId());
       } else {
         throw Error(`Duplicate room name: ${this.roomName}`);
       }

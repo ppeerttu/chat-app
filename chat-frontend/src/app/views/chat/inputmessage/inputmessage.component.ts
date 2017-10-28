@@ -32,7 +32,7 @@ export class InputMessageComponent {
 
   send():void {
     if (this.message.length > 0) {
-      this.chatAction.sendMessage(this.roomId, this.user.id, this.message);
+      this.chatAction.sendMessage(this.roomId, this.user.getId(), this.message);
       this.message = '';
     }
   }

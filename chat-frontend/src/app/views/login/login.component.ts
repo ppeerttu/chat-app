@@ -11,7 +11,6 @@ import { User } from '../../models/user';
 import { AppState } from '../../store/store';
 
 @Component({
-    selector: 'app-root',
     templateUrl: './login.component.html',
     styleUrls: [ 'login.component.css' ],
     providers: [UserActions]
@@ -22,12 +21,6 @@ export class LoginComponent {
   userName: string;
   password: string;
   user: User;
-  usernameFormControl = new FormControl('', [
-    Validators.required
-  ]);
-  passwordFormControl = new FormControl('', [
-    Validators.required
-  ]);
 
   constructor(
     private router: Router,
@@ -37,7 +30,7 @@ export class LoginComponent {
     this.password = '';
     // Subscribe the user in store to check when user is logged in
     this.user$.subscribe(user => {
-      if (user && user.id > 0) {
+      if (user && user.getId() > 0) {
         router.navigateByUrl('/chat');
       }
     });

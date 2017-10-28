@@ -16,7 +16,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
       if (action.payload) {
         const {roomId, userId, message, time} = action.payload;
         const rooms = base.map(room => {
-          if (room.id === roomId) {
+          if (room.getId() === roomId) {
             room.addMessage(new Message(message, userId, roomId, time));
           }
           return room;
@@ -32,7 +32,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
       if (action.payload) {
         const {roomId, user} = action.payload;
         const rooms = base.map(room => {
-          if (room.id === roomId) {
+          if (room.getId() === roomId) {
             room.addUser(user);
           }
           return room;
@@ -46,7 +46,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
       if (action.payload) {
         const {roomId, user} = action.payload;
         const rooms = base.map(room => {
-          if (room.id === roomId) {
+          if (room.getId() === roomId) {
             room.removeUser(user);
           }
           return room;

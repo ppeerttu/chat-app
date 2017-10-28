@@ -1,6 +1,8 @@
 import { ApiCall } from './apicall';
 import { Message } from './message';
-import { Room, UsersRoom, RoomInfo } from './room';
+import { Room } from './room';
+import { UsersRoom } from './usersroom';
+import { RoomInfo } from './roominfo';
 import { User } from './user';
 import { SocketCall, SocketData } from './socketcall';
 

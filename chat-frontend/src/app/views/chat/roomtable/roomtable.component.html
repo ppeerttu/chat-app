@@ -7,7 +7,7 @@
     <!-- Name Column -->
     <ng-container mdColumnDef="name">
       <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.roomName}} </md-cell>
+      <md-cell *mdCellDef="let element"> {{element.getRoomName()}} </md-cell>
     </ng-container>
 
     <!-- Locked Column -->
