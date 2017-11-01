@@ -4,7 +4,6 @@
 }
 
 .chat-sidenav {
-  padding: 10px 10px 10px 10px;
   width: 25vw;
 }
 
@@ -26,9 +25,9 @@ h4 {
   margin-top: 5px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
   .chat-sidenav {
     padding: 0 20px 20px 20px;
-    width: 300px;
+    width: 350px;
   }
 }

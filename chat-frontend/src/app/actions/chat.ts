@@ -72,6 +72,10 @@ export class ChatActions {
     this.io.connect();
   }
 
+  isSocketConnected(): boolean {
+    return this.io.connected;
+  }
+
   sendMessage(roomId: number, userId: number, message: string):void {
     if (this.io === null || !this.io.connected) {
       throw new Error('Socket not connected!');

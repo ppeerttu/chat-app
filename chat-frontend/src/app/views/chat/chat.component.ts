@@ -12,8 +12,7 @@ import { Message } from '../../models/message';
 
 @Component({
     templateUrl: './chat.component.html',
-    styleUrls: [ 'chat.component.css' ],
-    providers: [UserActions, RoomActions, ChatActions]
+    styleUrls: [ 'chat.component.css' ]
 })
 export class ChatComponent implements OnInit {
   @select() user$: Observable<User>;
@@ -44,31 +43,34 @@ export class ChatComponent implements OnInit {
       if (!window.localStorage.getItem('token')) {
         this.router.navigateByUrl('/login');
       } else {
-        this.chatAction.openSocket();
-        if (this.user === null || this.user === undefined) {
-          // Get user data and refresh token
-          this.userAction.refreshToken().then(action => {
-            // Get the rooms user is in
-            this.roomAction.getUsersRooms(action.res.id).then(action => {
-              // Get all available rooms
+        if (!this.chatAction.isSocketConnected()) {
+          this.chatAction.openSocket();
+          if (this.user === null || this.user === undefined) {
+            // Get user data and refresh token
+            this.userAction.refreshToken().then(action => {
+              // Get the rooms user is in
+              this.roomAction.getUsersRooms(action.res.id).then(action => {
+                // Get all available rooms
+                this.roomAction.fetchAll().then(() => {
+                  // Join each socket room user is in
+                  action.res.map(room => {
+                    console.log(room.id);
+                    this.chatAction.joinRoom(room.id, this.user);
+                  });
+                });
+              });
+            });
+          } else {
+            this.roomAction.getUsersRooms(this.user.getId()).then(action => {
               this.roomAction.fetchAll().then(() => {
-                // Join each socket room user is in
                 action.res.map(room => {
                   this.chatAction.joinRoom(room.id, this.user);
                 });
               });
             });
-          });
-        } else {
-          console.log(this.user);
-          this.roomAction.getUsersRooms(this.user.getId()).then(action => {
-            this.roomAction.fetchAll().then(() => {
-              action.res.map(room => {
-                this.chatAction.joinRoom(room.id, this.user);
-              });
-            });
-          });
+          }
         }
+
       }
     }
   }

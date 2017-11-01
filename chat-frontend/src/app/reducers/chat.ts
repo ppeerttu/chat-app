@@ -1,6 +1,6 @@
 import { ChatAction } from '../actions/action';
 import { AppState, INITIAL_STATE } from '../store/store';
-import { RoomInfo, Message } from '../models';
+import { RoomInfo, Message, User } from '../models';
 import { ChatActions } from '../actions/chat';
 
 export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
@@ -33,7 +33,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
         const {roomId, user} = action.payload;
         const rooms = base.map(room => {
           if (room.getId() === roomId) {
-            room.addUser(user);
+            room.addUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
           }
           return room;
         });
@@ -47,7 +47,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
         const {roomId, user} = action.payload;
         const rooms = base.map(room => {
           if (room.getId() === roomId) {
-            room.removeUser(user);
+            room.removeUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
           }
           return room;
         });

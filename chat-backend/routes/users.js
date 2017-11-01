@@ -54,9 +54,11 @@ router.get('/token', (req, res, next) => {
         delete userWithToken.password;
         res.status(200).json(userWithToken);
       } else {
-        status(400).json({ error: 'User not found!' });
+        res.status(400).json({ error: 'User not found!' });
       }
     });
+  } else {
+    res.send(400);
   }
 });
 
