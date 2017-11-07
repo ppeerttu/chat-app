@@ -82,9 +82,9 @@ export default () => next => action => {
       let type;
       if (res.status >= 400) {
         type = errorType;
-        return res.text().then(jsonData => {
+        return res.text().then(textData => {
           return next(actionWith(filterToken({
-            res: jsonData,
+            res: textData,
             type: type
           })));
         });
@@ -97,5 +97,11 @@ export default () => next => action => {
           })));
         });
       }
-    });
+    }).catch(err => {
+      console.error(err);
+      return next(actionWith(filterToken({
+        res: 'Not able to connect to the service',
+        type: errorType
+      })));
+    })
 };

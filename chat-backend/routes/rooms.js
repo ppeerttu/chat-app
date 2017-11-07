@@ -21,7 +21,6 @@ router.post('/new', (req, res, next) => {
       data.password = null;
     }
     Models.Room.create(data).then(room => {
-      delete room.dataValues.password;
       res.send(room);
     }).catch(err => {
       res.status(400).json({ error: err.message });

@@ -69,13 +69,55 @@ router.post('/register', (req, res, next) => {
   if (!data.userName || !data.email || !data.password) {
     res.status(400).json({ error: 'Invalid parameters!'});
   } else {
-    Models.User.create(data).then(user => {
-      delete user.dataValues.password;  // user is a promise object
-      res.send(user);
-    }).catch(err => {
-      res.status(400).json({ error: err.message });
+    Models.User.find({
+      where: {
+        userName: data.userName
+      }
+    }).then(user => {
+      if (!user) {
+        Models.User.create(data).then(user => {
+          delete user.dataValues.password;  // user is a promise object
+          res.send(user);
+        }).catch(err => {
+          res.status(400).json({ error: err.message });
+        });
+      } else {
+        res.status(400).json({ error: 'Username already in use!' });
+      }
     });
   }
+});
+
+// put /users/update
+router.put('/update', (req, res, next) => {
+  const data = req.body;
+  if (data.password === null || data.password === '') {
+    delete data.password;
+  }
+  Models.User.find({
+    where: {
+      userName: data.userName
+    }
+  }).then(user => {
+    if (!user || user.id === data.id) {
+      Models.User.update(data, {
+        where: {
+          id: data.id
+        },
+        returning: true
+      }).then(updated => {
+        if (updated[0] > 0) {
+          let updatedUser = updated[1][0];
+          delete updatedUser.dataValues.password;
+          res.status(200).json(updatedUser);
+        } else {
+          res.status(400).json({ error: 'Requested user for update was not found!' });
+        }
+      });
+    } else {
+      res.status(400).json({ error: 'Username already in use!'});
+    }
+  });
 });
 
 // POST /users/logout

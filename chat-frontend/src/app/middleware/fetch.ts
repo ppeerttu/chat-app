@@ -19,5 +19,6 @@ export class Fetch {
       method: method.toUpperCase(),
       headers: headers
     });
-  }
+
+}
 }

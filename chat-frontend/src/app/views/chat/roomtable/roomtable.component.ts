@@ -1,6 +1,6 @@
 
 import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -36,7 +36,9 @@ export class RoomTableComponent {
   constructor(
     roomAction: RoomActions,
     chatAction: ChatActions,
-    public dialog: MdDialog
+    public joinRoomDialog: MdDialog,
+    public joinRoomFailed: MdDialog,
+    public snackBar: MdSnackBar
   ) {
     this.roomAction = roomAction;
     this.chatAction = chatAction;
@@ -67,13 +69,19 @@ export class RoomTableComponent {
   }
 
   openDialog(roomName: string, roomId: number): void {
-    let dialogRef = this.dialog.open(JoinLockedRoomDialog, {
+    let dialogRef = this.joinRoomDialog.open(JoinLockedRoomDialog, {
       data: { name: 'test', password: '', roomName }
     });
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.roomAction.joinRoom(roomId, this.user.getId(), result);
+        this.joinRoom(roomId, result);
       }
+    });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 4000
     });
   }
 
@@ -81,11 +89,39 @@ export class RoomTableComponent {
     return inRoom ? 'warn' : 'primary';
   }
 
-  joinRoom(id: number) {
+  joinRoom(id: number, password: string = null) {
     const room = this.rooms[this.rooms.findIndex(i => i.getId() == id)];
-    if (room.getPassword() == null) {
-      this.roomAction.joinRoom(id, this.user.getId(), null).then(() => {
-        this.chatAction.joinRoom(id, this.user);
+    if (room.getPassword() === null || password !== null) {
+      this.roomAction.joinRoom(id, this.user.getId(), password).then(res => {
+        if (res.type === RoomActions.JOIN_ROOM_SUCCESS) {
+          if (res.res && !isNaN(res.res.roomId)) {
+            let roomName = '';
+            const index = this.rooms.findIndex(room => room.getId() == res.res.roomId);
+            if (index > -1) {
+              roomName = this.rooms[index].getRoomName();
+            }
+            this.openSnackBar(`Joined room ${roomName} successfully`, 'Okay');
+            this.chatAction.joinRoom(res.res.roomId, this.user);
+          } else {
+            throw Error('Expected to get a roomId as a property' +
+            ' in the room join request response, but got either no roomId or it was not a number');
+          }
+        } else {
+          let roomName = '';
+          const index = this.rooms.findIndex(room => room.getId() == id);
+          if (index > -1) {
+            roomName = this.rooms[index].getRoomName();
+          }
+          let reason = '';
+          if (res.res === "Forbidden") {
+            reason = 'Wrong password.';
+          } else if (res.res) {
+            reason = res.res;
+          }
+          let dialogRef = this.joinRoomFailed.open(RoomJoinFailedDialog, {
+            data: { roomName: roomName, reason: reason }
+          });
+        }
       });
     }
     else {
@@ -94,9 +130,32 @@ export class RoomTableComponent {
   }
 
   leaveRoom(id: number) {
-    this.roomAction.leaveRoom(id, this.user.getId()).then(() => {
-      this.chatAction.leaveRoom(id, this.user);
+    this.roomAction.leaveRoom(id, this.user.getId()).then((res) => {
+      console.log(res);
+      if (res.type === RoomActions.LEAVE_ROOM_SUCCESS) {
+        let roomName = '';
+        const index = this.rooms.findIndex(room => room.getId() == id);
+        if (index > -1) {
+          roomName = this.rooms[index].getRoomName();
+        }
+        this.openSnackBar(`Left room ${roomName} successfully`, 'Okay');
+        this.chatAction.leaveRoom(id, this.user);
+      }
     });
+  }
+}
+
+@Component({
+  templateUrl: 'leave-room-failed-dialog.html',
+  styleUrls: ['leave-room-failed-dialog.css']
+})
+export class LeaveRoomFailedDialog {
+  constructor(
+    public dialogRef: MdDialogRef<LeaveRoomFailedDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }
 
@@ -115,6 +174,20 @@ export class JoinLockedRoomDialog {
     this.dialogRef.close();
   }
 
+}
+
+@Component({
+  templateUrl: 'room-join-failed-dialog.html',
+  styleUrls: ['room-join-failed-dialog.html']
+})
+export class RoomJoinFailedDialog {
+  constructor(
+    public dialogRef: MdDialogRef<RoomJoinFailedDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 }
 
 export class RoomDataBase {

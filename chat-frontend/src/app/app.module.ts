@@ -16,7 +16,8 @@ import {
   MatInputModule,
   MatIconModule,
   MdIconModule,
-  MdExpansionModule
+  MdExpansionModule,
+  MdSnackBarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmojiModule } from 'angular2-emoji';
@@ -41,7 +42,9 @@ import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
 import {
   RoomTableComponent,
-  JoinLockedRoomDialog
+  JoinLockedRoomDialog,
+  RoomJoinFailedDialog,
+  LeaveRoomFailedDialog
 } from './views/chat/roomtable/roomtable.component';
 import { ChatViewComponent } from './views/chat/chatview/chatview.component';
 import { InputMessageComponent } from './views/chat/inputmessage/inputmessage.component';
@@ -49,7 +52,11 @@ import { MessageContainerComponent } from './views/chat/messagecontainer/message
 import { MyRoomsComponent } from './views/chat/myrooms/myrooms.component';
 import { ChatActions } from './actions/chat';
 import { ParticipantsComponent } from './views/chat/participants/participants.component';
-import { SettingsComponent } from './views/chat/settings/settings.component';
+import {
+  SettingsComponent,
+  UserProfileUpdateFailed
+} from './views/chat/settings/settings.component';
+import { ProfileModalComponent } from './views/chat/profilemodal/profilemodal.component';
 
 const appRoutes: Routes = [
   {
@@ -87,12 +94,16 @@ const appRoutes: Routes = [
     CreateRoomComponent,
     RoomTableComponent,
     JoinLockedRoomDialog,
+    RoomJoinFailedDialog,
+    LeaveRoomFailedDialog,
     ChatViewComponent,
     InputMessageComponent,
     MessageContainerComponent,
     MyRoomsComponent,
     ParticipantsComponent,
-    SettingsComponent
+    SettingsComponent,
+    UserProfileUpdateFailed,
+    ProfileModalComponent
   ],
   imports: [
     NgReduxModule,
@@ -118,12 +129,17 @@ const appRoutes: Routes = [
     MatInputModule,
     MatIconModule,
     MdIconModule,
-    MdExpansionModule
+    MdExpansionModule,
+    MdSnackBarModule
   ],
   entryComponents: [
     JoinLockedRoomDialog,
     RegisterSuccessDialog,
-    RegisterFailedDialog
+    RegisterFailedDialog,
+    ProfileModalComponent,
+    RoomJoinFailedDialog,
+    LeaveRoomFailedDialog,
+    UserProfileUpdateFailed
   ],
   providers: [ChatActions],
   bootstrap: [AppComponent]
