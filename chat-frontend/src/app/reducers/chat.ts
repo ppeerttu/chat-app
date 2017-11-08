@@ -9,7 +9,6 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
   let base = baseState.roomsIn.slice();
   switch (action.type) {
     case ChatActions.SOCKET_CONNECTED:
-      // Keep up the connection state at the redux store?
       break;
     case ChatActions.SEND_MESSAGE:
     case ChatActions.RECEIVE_MESSAGE:
@@ -31,8 +30,11 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
     case ChatActions.RECEIVE_USER_INFO:
       if (action.payload) {
         const {roomId, user} = action.payload;
+        console.log(user);
         const rooms = base.map(room => {
-          if (room.getId() === roomId) {
+          console.log(room.getId());
+          if (room.getId() == roomId) {
+            console.log('adding user...');
             room.addUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
           }
           return room;

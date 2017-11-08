@@ -10,7 +10,7 @@ import { RoomInfo, User, Message } from '../../../models';
 @Component({
   selector: 'my-rooms',
   templateUrl: './myrooms.component.html',
-  styleUrls: [ 'myrooms.component.css' ],
+  styleUrls: [ 'myrooms.component.scss' ],
   providers: [RoomActions]
 })
 export class MyRoomsComponent {

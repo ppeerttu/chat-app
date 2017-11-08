@@ -2,11 +2,9 @@
   <md-sidenav #sidenav class="chat-sidenav">
 
     <!-- greeting and close-sidenav button -->
-    <md-grid-list cols="4">
+    <md-grid-list cols="4" class="sidenav-header">
       <md-grid-tile colspan="3">
-        <p *ngIf="user" style="margin-bottom: 0;">
-          Hello {{user.userName}}
-        </p>
+        <h1>ChatApp</h1>
       </md-grid-tile>
       <md-grid-tile colspan="1">
         <button type="button" md-icon-button class="brgr-btn" (click)="sidenav.close()">
@@ -19,17 +17,20 @@
     <md-accordion>
 
       <!-- room table -->
-      <md-expansion-panel>
+      <md-expansion-panel class="sidenav-items">
         <md-expansion-panel-header>
           <md-panel-title>
             Join rooms
           </md-panel-title>
         </md-expansion-panel-header>
         <room-table></room-table>
+        <button md-mini-fab color="accent" class="expand-room-table">
+          <i class="material-icons">add</i>
+        </button>
       </md-expansion-panel>
 
       <!-- expansion panel for creating a room -->
-      <md-expansion-panel>
+      <md-expansion-panel class="sidenav-items">
         <md-expansion-panel-header>
           <md-panel-title>
             Create a room
@@ -38,7 +39,7 @@
         <create-room class="create-room"></create-room>
       </md-expansion-panel>
 
-      <md-expansion-panel>
+      <md-expansion-panel class="sidenav-items">
         <md-expansion-panel-header>
           <md-panel-title>
             Settings

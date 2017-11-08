@@ -1,24 +1,25 @@
-
+const Logger = require('../lib/logger'),
+  logger = new Logger();
 
 module.exports = (io) => {
   io.on('connection', socket => {
 
-    console.log('socket connected with id: ' + socket.id);
+    logger.add('info', 'socket connected with id: ' + socket.id);
 
     /**
      * { roomId: <int>, userId: <int>, message: <string>, time: <int> }
      */
     socket.on('message', data => {
-      console.log('roomId: ' + data.roomId +', userId: ' + data.userId + ', message: ' + data.message);
+      logger.add('info', 'roomId: ' + data.roomId +', userId: ' + data.userId + ', message: ' + data.message);
       socket.to(data.roomId).emit('message', data);
-      console.log(Object.keys(socket.rooms));
+      logger.add('info', Object.keys(socket.rooms));
     });
 
     /**
      * { roomId: <int>, user: <User> }
      */
     socket.on('join', data => {
-      console.log('Received join request from client: ' + data.user.userName);
+      logger.add('info', 'Received join request from client: ' + data.user.userName);
       socket.join(data.roomId, () => {
         socket.to(data.roomId).emit('userJoin', {
           socketId: socket.id,
@@ -39,8 +40,8 @@ module.exports = (io) => {
      * { roomId: <int>, user: <User> }
      */
     socket.on('leave', data => {
-      console.log('Received leave request from client: ');
-      console.log(data);
+      logger.add('info', 'Received leave request from client: ');
+      logger.add('info', data);
       socket.to(data.roomId).emit('userLeave', data);
       socket.leave(data.roomId);
     });
@@ -48,10 +49,10 @@ module.exports = (io) => {
     socket.on('disconnecting', data => {
       const rooms = Object.keys(socket.rooms);
       const id = socket.id;
-      console.log('Socket connection closing: ' + data);
-      console.log(rooms);
+      logger.add('info', 'Socket connection closing: ' + data);
+      logger.add('info', rooms);
       rooms.forEach(room => {
-        console.log(room);
+        logger.add('info', room);
         if (room !== id) {
           //socket.to(room).emit('userLeave', { roomId: room, user: null });
         }

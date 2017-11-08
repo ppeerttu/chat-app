@@ -1,4 +1,8 @@
 
+<div class="img-container">
+
+</div>
+
 <div class="container">
   <div class="form-container">
     <h1>Register to ChatApp</h1>
@@ -52,7 +56,7 @@
         </md-error>
       </md-form-field>
       <button md-raised-button color="primary" (click)="register()" [disabled]="!registerForm.valid || !passwordsMatch">Register</button>
-      <button md-raised-button (click)="backToLogin()">Back to login</button>
+      <button md-raised-button class="back-button" (click)="backToLogin()">Back to login</button>
     </form>
   </div>
   <footer class="footer">

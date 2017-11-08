@@ -52,7 +52,7 @@
     </md-form-field>
   </form>
 </md-dialog-content>
-<md-dialog-actions>
+<md-dialog-actions id="button-container" >
   <button md-button color="primary" [md-dialog-close]="data" [disabled]="!profileForm.valid || !passwordsMatch">Save</button>
-  <button md-button color="warn" md-dialog-close>Cancel</button>
+  <button md-button class="cancel-button" color="warn" md-dialog-close>Cancel</button>
 </md-dialog-actions>

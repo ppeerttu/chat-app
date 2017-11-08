@@ -11,7 +11,7 @@ import { Room, User, Message } from '../../../models';
 @Component({
   selector: 'sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: [ 'sidenav.component.css' ]
+  styleUrls: [ 'sidenav.component.scss' ]
 })
 export class SidenavComponent {
   @select() user$: Observable<User>;

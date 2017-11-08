@@ -1,0 +1,23 @@
+@import '../../../../styles.scss';
+
+#chat-view-container {
+  height: 100%;
+  /*background-color: #f5f5f5;*/
+}
+
+.my-rooms-container {
+  background-color: #f5f5f5;
+  padding-right: 0 !important;
+  opacity: 0.7;
+}
+
+.middle-container {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  height: 100%;
+}
+
+.participant-container {
+  background-color: #f5f5f5;
+  opacity: 0.7;
+}

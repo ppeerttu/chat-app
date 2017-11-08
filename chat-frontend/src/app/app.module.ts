@@ -31,7 +31,10 @@ import reducer from './store/store';
 import ApiMiddleware from './middleware/api';
 import { AppComponent } from './app.component';
 import { ChatComponent } from './views/chat/chat.component';
-import { LoginComponent } from './views/login/login.component';
+import {
+  LoginComponent,
+  LoginFailedDialog
+} from './views/login/login.component';
 import {
   RegisterComponent,
   RegisterSuccessDialog,
@@ -86,6 +89,7 @@ const appRoutes: Routes = [
     AppComponent,
     ChatComponent,
     LoginComponent,
+    LoginFailedDialog,
     AboutComponent,
     RegisterComponent,
     RegisterSuccessDialog,
@@ -139,7 +143,8 @@ const appRoutes: Routes = [
     ProfileModalComponent,
     RoomJoinFailedDialog,
     LeaveRoomFailedDialog,
-    UserProfileUpdateFailed
+    UserProfileUpdateFailed,
+    LoginFailedDialog
   ],
   providers: [ChatActions],
   bootstrap: [AppComponent]

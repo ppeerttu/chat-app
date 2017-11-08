@@ -1,0 +1,23 @@
+@import '../../../../styles.scss';
+
+.room-button {
+  width: 100%;
+  background-color: mat-color($chat-app-primary);
+}
+
+.room-info {
+  padding: 40px 20px 20px 20px;
+  background-color: mat-color($chat-app-primary, 800);
+  width: 100%;
+}
+
+.my-rooms {
+  width: 100%;
+  padding: 0 0 !important;
+}
+
+.my-rooms-header {
+  background-color: mat-color($chat-app-primary, 700);
+  width: 100%;
+  padding: 5px 20px;
+}

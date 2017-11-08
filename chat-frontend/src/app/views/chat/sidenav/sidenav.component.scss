@@ -1,0 +1,56 @@
+@import '../../../../styles.scss';
+
+
+.sidenav-container {
+  height: 100vh;
+  background: none;
+}
+
+.chat-sidenav {
+  width: 25vw;
+  /*background-color: #f5f5f5;*/
+}
+
+.sidenav-header {
+  background-color: mat-color($chat-app-primary, 700);
+  font-family: 'Etna';
+}
+
+.sidenav-items {
+    background-color: mat-color($chat-app-primary, 100);
+    position: relative;
+}
+
+.brgr-btn {
+  float: right;
+}
+
+.expand-room-table {
+  z-index: 1000;
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%)
+}
+
+.create-room {
+  margin-bottom: auto;
+}
+
+#open-button {
+  z-index: 100;
+  position: absolute;
+  color: mat-color($chat-app-accent);
+}
+
+h4 {
+  margin-top: 5px;
+}
+
+@media screen and (max-width: 1200px) {
+  .chat-sidenav {
+    padding: 0 20px 20px 20px;
+    width: 350px;
+  }
+}

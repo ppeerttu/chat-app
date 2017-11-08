@@ -13,10 +13,35 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  z-index: 900;
+  font-family: 'Etna';
+}
+
+.container h1 {
+  font-size: 72px;
+}
+
+.register-button {
+  float: right;
+}
+
+.img-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom,
+    transparent, transparent),
+    url("../../assets/back-ground-small.jpeg") no-repeat center center;
+  background-size: cover;
+  filter: blur(2px);
+  z-index: 0;
 }
 
 .form-container {
   align-self: center;
+  filter: blur(0);
 }
 
 #button-container {
@@ -41,4 +66,12 @@
 
 .footer-container a {
   margin-right: 10px;
+}
+
+@media screen and (min-height: 1200px) {
+  .img-container {
+    background: linear-gradient(to bottom,
+      transparent, transparent),
+      url("../../assets/back-ground-large.jpeg") no-repeat center center;
+  }
 }

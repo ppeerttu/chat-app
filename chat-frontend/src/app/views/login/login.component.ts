@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
@@ -24,7 +25,8 @@ export class LoginComponent {
 
   constructor(
     private router: Router,
-    private action: UserActions
+    private action: UserActions,
+    public dialog: MdDialog
   ) {
     this.userName = '';
     this.password = '';
@@ -37,10 +39,31 @@ export class LoginComponent {
   }
 
   login(): void {
-    this.action.login(this.userName, this.password);
+    this.action.login(this.userName, this.password).then(res => {
+      if (res.type === UserActions.LOGIN_FAILED) {
+        let dialogRef = this.dialog.open(LoginFailedDialog, {
+
+        });
+      }
+    });
   }
 
   toRegister(): void {
     this.router.navigateByUrl('/register');
+  }
+}
+
+@Component({
+  templateUrl: 'login-failed-dialog.html',
+  styleUrls: ['login-failed-dialog.html']
+})
+export class LoginFailedDialog {
+
+  constructor(
+    public dialogRef: MdDialogRef<LoginFailedDialog>,
+    @Inject(MD_DIALOG_DATA) public data: any) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 }

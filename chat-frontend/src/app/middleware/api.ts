@@ -47,7 +47,7 @@ export default () => next => action => {
                     [requestType, successType, errorType].`);
   }
 
-  // Transform base apiCall action, to normal action handled by reducers
+  // Transform base apiCall action to normal action handled by reducers
   function actionWith(data) {
     const finalAction = Object.assign({}, action, data);
     delete finalAction.apiCall;

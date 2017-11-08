@@ -7,7 +7,9 @@
 const app = require('../app');
 //const debug = require('debug')('chat-backend:server');
 const http = require('http');
-
+const Logger = require('../lib/logger');
+const logger = new Logger();
+logger.init();
 /**
  * Get port from environment and store in Express.
  */
@@ -88,5 +90,5 @@ function onListening() {
   const bind = typeof addr === 'string'
     ? 'pipe ' + addr
     : 'port ' + addr.port;
-  console.log('Listening on ' + bind);
+  logger.add('info', 'Listening on ' + bind);
 }

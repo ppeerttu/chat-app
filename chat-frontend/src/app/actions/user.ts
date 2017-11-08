@@ -34,7 +34,7 @@ export class UserActions {
       [UserActions.LOGIN_REQUEST, UserActions.LOGIN_SUCCESS, UserActions.LOGIN_FAILED],
       {userName, password}
     );
-    this.ngRedux.dispatch({ type: UserActions.LOGIN_REQUEST, apiCall});
+    return this.ngRedux.dispatch(this.thunk(UserActions.LOGIN_REQUEST, apiCall));
   }
 
   logout(): any {

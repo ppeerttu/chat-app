@@ -13,6 +13,26 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  z-index: 900;
+  font-family: 'Etna';
+}
+
+.img-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom,
+    transparent, transparent),
+    url("../../assets/back-ground-small.jpeg") no-repeat center center;
+  background-size: cover;
+  filter: blur(2px);
+  z-index: 0;
+}
+
+.back-button {
+  float: right;
 }
 
 .form-container {
