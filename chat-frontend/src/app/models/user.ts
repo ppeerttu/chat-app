@@ -14,7 +14,7 @@ export class User {
         this.lastName = lastName;
     }
 
-    getuserName(): string {
+    getUserName(): string {
         return this.userName;
     }
 
@@ -34,7 +34,7 @@ export class User {
       return this.lastName;
     }
 
-    setuserName(userName: string): void {
+    setUserName(userName: string): void {
       this.userName = userName;
     }
 

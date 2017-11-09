@@ -1,3 +1,5 @@
+@import '../../../../styles.scss';
+
 .message-container {
   overflow-y: scroll;
   width: 100%;
@@ -27,4 +29,9 @@
 
 .message p small {
   font-size: 10px;
+}
+
+.system-message {
+  color: mat-color($chat-app-accent);
+  opacity: 0.8;
 }

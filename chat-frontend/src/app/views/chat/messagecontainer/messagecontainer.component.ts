@@ -10,7 +10,7 @@ import { RoomInfo, User, Message } from '../../../models';
 @Component({
   selector: 'message-container',
   templateUrl: './messagecontainer.component.html',
-  styleUrls: [ 'messagecontainer.component.css' ]
+  styleUrls: [ 'messagecontainer.component.scss' ]
 })
 export class MessageContainerComponent {
   @select() roomsIn$: Observable<RoomInfo[]>;

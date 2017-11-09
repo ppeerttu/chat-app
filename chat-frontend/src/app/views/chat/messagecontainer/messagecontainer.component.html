@@ -1,7 +1,7 @@
 <div class="message-container">
   <div *ngFor="let message of messages" class="message">
-    <p [ngClass]="{'own-message': (user !== null && user.id === message.userId)}">
-      <strong *ngIf="user !== null && user.id !== message.userId">{{ users[message.userId].userName }}   </strong>{{ message.content }}<br />
+    <p [ngClass]="{'own-message': (user !== null && user.getId() === message.userId), 'system-message': (message.userId < 0)}">
+      <strong *ngIf="user !== null && user.getId() !== message.userId && message.userId > 0">{{ message.userName }}   </strong>{{ message.content }}<br />
       <small>{{ message.time | date:'shortTime' }}</small>
     </p>
   </div>

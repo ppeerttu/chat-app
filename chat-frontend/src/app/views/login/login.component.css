@@ -25,6 +25,10 @@
   float: right;
 }
 
+@keyframes blur-effect {
+  from {filter: blur(0);}
+  to {filter: blur(2px);}
+}
 .img-container {
   position: fixed;
   left: 0;
@@ -35,8 +39,10 @@
     transparent, transparent),
     url("../../assets/back-ground-small.jpeg") no-repeat center center;
   background-size: cover;
-  filter: blur(2px);
   z-index: 0;
+  filter:  blur(2px);
+  animation: blur-effect;
+  animation-duration: 4s;
 }
 
 .form-container {

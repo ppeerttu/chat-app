@@ -13,12 +13,12 @@
     <div class="my-rooms-header">
       <h3>My rooms</h3>
     </div>
-    <p *ngIf="rooms.length === 0">
+    <p *ngIf="rooms.length === 0" style="padding: 10px 20px;">
       You're not in any rooms! Browse and join rooms by opening the left nav bar (<i class="material-icons">menu</i>).
     </p>
     <md-list>
       <md-list-item *ngFor="let room of rooms">
-        <button class="room-button" md-button (click)="selectRoom(room.getId())">{{ room.getRoomName() }}</button>
+        <button id="{{room.getId()}}" class="room-button" md-button (click)="selectRoom(room.getId())">{{ room.getRoomName() }}</button>
       </md-list-item>
     </md-list>
   </div>

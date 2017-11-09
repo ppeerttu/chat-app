@@ -10,7 +10,7 @@ import { RoomInfo, User, Message } from '../../../models';
 @Component({
   selector: 'participant-container',
   templateUrl: './participants.component.html',
-  styleUrls: [ 'participants.component.css' ]
+  styleUrls: [ 'participants.component.scss' ]
 })
 export class ParticipantsComponent {
   @select() roomsIn$:Observable<RoomInfo[]>;

@@ -27,9 +27,9 @@ app.use(expressJWT({ secret: 'testy secret 5' }).unless({ path: ['/users/login',
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', index);
-app.use('/users', users);
-app.use('/rooms', rooms);
+app.use('/api/', index);
+app.use('/api/users', users);
+app.use('/api/rooms', rooms);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

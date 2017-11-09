@@ -41,6 +41,7 @@ import {
   RegisterFailedDialog
 } from './views/register/register.component';
 import { AboutComponent } from './views/about/about.component';
+import { HelpComponent } from './views/help/help.component';
 import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
 import {
@@ -79,6 +80,10 @@ const appRoutes: Routes = [
     component: ChatComponent
   },
   {
+    path: 'help',
+    component: HelpComponent
+  },
+  {
     path: '**',
     redirectTo: 'login'
   }
@@ -91,6 +96,7 @@ const appRoutes: Routes = [
     LoginComponent,
     LoginFailedDialog,
     AboutComponent,
+    HelpComponent,
     RegisterComponent,
     RegisterSuccessDialog,
     RegisterFailedDialog,

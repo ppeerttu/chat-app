@@ -13,10 +13,10 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
     case ChatActions.SEND_MESSAGE:
     case ChatActions.RECEIVE_MESSAGE:
       if (action.payload) {
-        const {roomId, userId, message, time} = action.payload;
+        const {roomId, userId, message, time, userName} = action.payload;
         const rooms = base.map(room => {
           if (room.getId() === roomId) {
-            room.addMessage(new Message(message, userId, roomId, time));
+            room.addMessage(new Message(message, userId, userName, roomId, time));
           }
           return room;
         });
@@ -36,6 +36,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
           if (room.getId() == roomId) {
             console.log('adding user...');
             room.addUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
+            room.addMessage(new Message(`User ${user.userName} has joined the room`, -1, roomId, Date.now()));
           }
           return room;
         });
@@ -50,6 +51,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
         const rooms = base.map(room => {
           if (room.getId() === roomId) {
             room.removeUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
+            room.addMessage(new Message(`User ${user.userName} has left the room`, -1, roomId, Date.now()));
           }
           return room;
         });

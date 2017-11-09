@@ -76,16 +76,16 @@ export class ChatActions {
     return this.io.connected;
   }
 
-  sendMessage(roomId: number, userId: number, message: string):void {
+  sendMessage(roomId: number, userId: number, userName: string, message: string):void {
     if (this.io === null || !this.io.connected) {
       throw new Error('Socket not connected!');
     } else if (roomId === null) {
       throw new Error('Room not selected!');
     } else {
       const time = Date.now();
-      const payload = {roomId, userId, message, time};
+      const payload = {roomId, userId, userName, message, time};
       this.ngRedux.dispatch({ type: ChatActions.SEND_MESSAGE, payload});
-      this.io.emit('message', {roomId, userId, message, time});
+      this.io.emit('message', {roomId, userId, message, userName, time});
     }
   }
 

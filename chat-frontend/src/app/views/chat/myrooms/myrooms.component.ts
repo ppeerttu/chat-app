@@ -34,8 +34,26 @@ export class MyRoomsComponent {
     });
   }
 
-  selectRoom(id: number):void {
+  selectRoom(id: number): void {
     this.roomActions.selectRoom(id);
+    this.toggleClass(id);
+  }
+
+  private toggleClass(id: number): void {
+    let btn = document.getElementById(id.toString());
+    if (btn.classList.contains('active')) {
+      btn.classList.remove('active');
+    } else {
+      btn.classList.add('active');
+    }
+    this.rooms.map(room => {
+      if (room.getId() !== id) {
+        let elem = document.getElementById(room.getId().toString());
+        if (elem.classList.contains('active')) {
+          elem.classList.remove('active');
+        }
+      }
+    });
   }
 
 }

@@ -35,6 +35,10 @@ export class SettingsComponent {
     this.router.navigateByUrl('/about');
   }
 
+  goToHelp(): void {
+    this.router.navigateByUrl('/help');
+  }
+
   logout(): void {
     this.userAction.logout().then(() => {
       this.chatAction.closeSocket();
