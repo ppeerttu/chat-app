@@ -1,3 +1,4 @@
+import { production } from '../main';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -157,6 +158,10 @@ const appRoutes: Routes = [
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<AppState>) {
-    ngRedux.configureStore(reducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware, createLogger()]);
+    if (production) {
+      ngRedux.configureStore(reducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware]);
+    } else {
+      ngRedux.configureStore(reducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware, createLogger()]);
+    }
   }
 }

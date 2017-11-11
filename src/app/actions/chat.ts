@@ -5,6 +5,8 @@ import { AppState } from '../store/store';
 import { ApiCall } from '../models/apicall';
 import { User } from '../models/user';
 import * as io from 'socket.io-client';
+import { API_URL } from '../../main';
+
 
 @Injectable()
 export class ChatActions {
@@ -33,35 +35,9 @@ export class ChatActions {
   RECEIVE: message, userJoin, userInfo, leave
   */
   constructor(private ngRedux: NgRedux<AppState>) {
-    this.io = io('http://localhost:3000', {
-      path: '/api/socket.io',
+    this.io = io(API_URL, {
+      path: '/api/socket',
       autoConnect: false
-    });
-    this.io.on('connect', () => {
-      this.received(ChatActions.SOCKET_CONNECTED, {});
-    });
-    this.io.on('userInfo', payload => {
-      this.received(ChatActions.RECEIVE_USER_INFO, payload);
-    });
-    this.io.on('message', payload => {
-      this.received(ChatActions.RECEIVE_MESSAGE, payload);
-    });
-    this.io.on('userJoin', payload => {
-      this.received(ChatActions.RECEIVE_ROOM_JOIN, payload);
-      payload = Object.assign({}, payload, {
-        user: this.user
-      });
-      if (payload.socketId && payload.roomId) {
-        this.sendUserInfo(payload.socketId, this.user, payload.roomId);
-      } else {
-        throw new Error('userJoin received but payload did not contain socketId or roomId!');
-      }
-    });
-    this.io.on('userLeave', payload => {
-      this.received(ChatActions.ROOM_LEAVE_RECEIVED, payload);
-    });
-    this.io.on('disconnect', reason => {
-      this.received(ChatActions.SOCKET_DISCONNECTED, reason);
     });
 
     this.user$.subscribe(user => {
@@ -70,7 +46,40 @@ export class ChatActions {
   }
 
   openSocket() {
-    this.io.connect();
+    return new Promise((resolve, reject) => {
+      this.io.connect();
+      this.io.on('connect', () => {
+        this.received(ChatActions.SOCKET_CONNECTED, {});
+        resolve();
+      });
+      this.io.on('userInfo', payload => {
+        this.received(ChatActions.RECEIVE_USER_INFO, payload);
+      });
+      this.io.on('message', payload => {
+        this.received(ChatActions.RECEIVE_MESSAGE, payload);
+      });
+      this.io.on('userJoin', payload => {
+        this.received(ChatActions.RECEIVE_ROOM_JOIN, payload);
+        payload = Object.assign({}, payload, {
+          user: this.user
+        });
+        if (payload.socketId && payload.roomId) {
+          this.sendUserInfo(payload.socketId, this.user, payload.roomId);
+        } else {
+          throw new Error('userJoin received but payload did not contain socketId or roomId!');
+        }
+      });
+      this.io.on('userLeave', payload => {
+        this.received(ChatActions.ROOM_LEAVE_RECEIVED, payload);
+      });
+      this.io.on('disconnect', reason => {
+        this.received(ChatActions.SOCKET_DISCONNECTED, reason);
+        reject();
+      });
+      this.io.on('error', err => {
+        reject(err);
+      });
+    });
   }
 
   isSocketConnected(): boolean {

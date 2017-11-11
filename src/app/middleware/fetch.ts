@@ -9,13 +9,13 @@ export class Fetch {
     body = null
   ) {
     if (body) {
-      return fetch(`${API_URL}${path}`, {
+      return fetch(`${API_URL}/api/${path}`, {
         method: method.toUpperCase(),
         headers: headers,
         body: JSON.stringify(body)
       });
     }
-    return fetch(`${API_URL}${path}`, {
+    return fetch(`${API_URL}/api/${path}`, {
       method: method.toUpperCase(),
       headers: headers
     });

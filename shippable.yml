@@ -1,0 +1,41 @@
+# Language setting
+language: node_js
+
+# Version number
+node_js:
+  - 7.4.0
+
+branches:
+  only:
+    - master
+
+env:
+  global:
+    - NODE_ENV=production
+    # Docker hub repo
+    - secure: ohLFURJH3jxk9ZFOg+UJB0c1gOvebylWChHJsTwMl6vGd7vFWDS7RYjy5PWUNZJ32IYk1ARYpr9bFn61hoNS2dMZz0CcfNcneuqbw5GUuWe3rvwl8VdalQdpfSxWeHPikXedU9YJrAwltKwffg74NChXGyUBMNrdUQY0HkFc4O75BiTPRynk2b7JHpoAFpaBdy5AIN/oa/Z37Ai+XokJ0VOI0Ysf7QE5mFL9WUswsOh7AMIHsPBNsJxT2vXfDn+4FiwtSW44IQfb33IRcKcaRK5KPwi4I04rVxnDCJ9MfrI6HLEI29x8yqImfzcQQ8N6tvaUigQ29ar09796r/N0dw==
+    # API url
+    - secure: P1tVRLsJi8msb1uO5FEZXjWtCZ1zxMn68reP+ABaqcQDHC7eQ/AsUzI7KE49GH7j/Rs5mm0WVeDADnAlZ/3FMDxQHxOVizoJJRAFe9JsXKvEKMojLRqd9Co7PkzbFnYBYyVObc9L1dOGNO0XhsqnHF+ZJHHuY1XbYQeKcRG5XITclraZu6k1L0FpXfbea8zfzRC/oKeIyYkDkmJ/GVMO8bm58urgOzWxzE7kVXvlfruO3bHAwpuL8uxJVtoLtqCJ7uIq6Gaqw5jNuXn1kZtQZhCn05xQbqD/DTP4i6gGLz8kOSzjxU02xSwDi1TISvC6d3UMWQK8RCXoUJZv+hovxQ==
+build:
+  ci:
+    # Specific version is used to avoid issues due to version differencies
+    - npm install npm@5.3.0 -g
+    - npm -v
+    - npm install
+    - ng build --env=prod
+
+  on_success:
+    - docker build -f Dockerfile -t $DOCKER_HUB_REPO:$BUILD_NUMBER .
+    - docker push $DOCKER_HUB_REPO:$BUILD_NUMBER
+
+integrations:
+  hub:
+    - integrationName: DockerRegistryIntegration
+      type: dockerRegistryLogin
+
+  notifications:
+    - integrationName: email
+      type: email
+      on_success: never
+      on_failure: never
+      on_pull_request: never
