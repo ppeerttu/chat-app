@@ -22,7 +22,7 @@ build:
     - npm install npm@5.3.0 -g
     - npm -v
     - npm install
-    - ng build --env=prod
+    - npm run build
 
   on_success:
     - docker build -f Dockerfile -t $DOCKER_HUB_REPO:$BUILD_NUMBER .
