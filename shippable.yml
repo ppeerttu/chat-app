@@ -11,7 +11,6 @@ branches:
 
 env:
   global:
-    - NODE_ENV=production
     # Docker hub repo
     - secure: ohLFURJH3jxk9ZFOg+UJB0c1gOvebylWChHJsTwMl6vGd7vFWDS7RYjy5PWUNZJ32IYk1ARYpr9bFn61hoNS2dMZz0CcfNcneuqbw5GUuWe3rvwl8VdalQdpfSxWeHPikXedU9YJrAwltKwffg74NChXGyUBMNrdUQY0HkFc4O75BiTPRynk2b7JHpoAFpaBdy5AIN/oa/Z37Ai+XokJ0VOI0Ysf7QE5mFL9WUswsOh7AMIHsPBNsJxT2vXfDn+4FiwtSW44IQfb33IRcKcaRK5KPwi4I04rVxnDCJ9MfrI6HLEI29x8yqImfzcQQ8N6tvaUigQ29ar09796r/N0dw==
     # API url
