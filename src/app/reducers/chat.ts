@@ -49,7 +49,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
       if (action.payload) {
         const {roomId, user} = action.payload;
         const rooms = base.map(room => {
-          if (room.getId() === roomId) {
+          if (room.getId() == roomId) {
             room.removeUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
             room.addMessage(new Message(`User ${user.userName} has left the room`, -1, roomId, Date.now()));
           }

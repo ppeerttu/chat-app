@@ -34,6 +34,7 @@ export class ChatActions {
   */
   constructor(private ngRedux: NgRedux<AppState>) {
     this.io = io('http://localhost:3000', {
+      path: '/api/socket.io',
       autoConnect: false
     });
     this.io.on('connect', () => {
