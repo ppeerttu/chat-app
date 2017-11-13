@@ -17,7 +17,8 @@ import { Room, UsersRoom, User, Message } from '../../../models';
 @Component({
   selector: 'room-table',
   templateUrl: './roomtable.component.html',
-  styleUrls: ['roomtable.component.scss']
+  styleUrls: ['roomtable.component.scss'],
+  providers: [RoomActions, ChatActions]
 })
 export class RoomTableComponent {
   @select() user$: Observable<User>;

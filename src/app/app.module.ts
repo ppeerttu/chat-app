@@ -18,7 +18,8 @@ import {
   MatIconModule,
   MdIconModule,
   MdExpansionModule,
-  MdSnackBarModule
+  MdSnackBarModule,
+  MdTooltipModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmojiModule } from 'angular2-emoji';
@@ -43,7 +44,10 @@ import {
 } from './views/register/register.component';
 import { AboutComponent } from './views/about/about.component';
 import { HelpComponent } from './views/help/help.component';
-import { SidenavComponent } from './views/chat/sidenav/sidenav.component';
+import {
+  SidenavComponent,
+  RoomModal
+} from './views/chat/sidenav/sidenav.component';
 import { CreateRoomComponent } from './views/chat/createroom/createroom.component';
 import {
   RoomTableComponent,
@@ -102,6 +106,7 @@ const appRoutes: Routes = [
     RegisterSuccessDialog,
     RegisterFailedDialog,
     SidenavComponent,
+    RoomModal,
     CreateRoomComponent,
     RoomTableComponent,
     JoinLockedRoomDialog,
@@ -141,7 +146,8 @@ const appRoutes: Routes = [
     MatIconModule,
     MdIconModule,
     MdExpansionModule,
-    MdSnackBarModule
+    MdSnackBarModule,
+    MdTooltipModule
   ],
   entryComponents: [
     JoinLockedRoomDialog,
@@ -151,7 +157,8 @@ const appRoutes: Routes = [
     RoomJoinFailedDialog,
     LeaveRoomFailedDialog,
     UserProfileUpdateFailed,
-    LoginFailedDialog
+    LoginFailedDialog,
+    RoomModal
   ],
   providers: [ChatActions],
   bootstrap: [AppComponent]

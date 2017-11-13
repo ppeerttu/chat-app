@@ -24,7 +24,10 @@
           </md-panel-title>
         </md-expansion-panel-header>
         <room-table></room-table>
-        <button md-mini-fab color="accent" class="expand-room-table">
+        <button mdTooltip="Refresh rooms" md-mini-fab color="primary" class="refresh-rooms" (click)="refreshRooms()">
+          <i class="material-icons">refresh</i>
+        </button>
+        <button mdTooltip="Expand table" md-mini-fab color="accent" class="expand-room-table" (click)="openRoomModal()">
           <i class="material-icons">add</i>
         </button>
       </md-expansion-panel>

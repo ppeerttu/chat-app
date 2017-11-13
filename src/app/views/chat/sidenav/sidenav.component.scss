@@ -6,6 +6,7 @@
   background: none;
 }
 
+
 .chat-sidenav {
   width: 25vw;
   /*background-color: #f5f5f5;*/
@@ -28,10 +29,19 @@
 .expand-room-table {
   z-index: 1000;
   position: absolute;
-  bottom: -20px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-  transform: translateX(-50%)
+  bottom: -18px;
+  left: 70%;
+  -webkit-transform: translateX(-70%);
+  transform: translateX(-70%)
+}
+
+.refresh-rooms {
+  z-index: 1000;
+  position: absolute;
+  bottom: -18px;
+  left: 30%;
+  -webkit-transform: translateX(-30%);
+  transform: translateX(-30%)
 }
 
 .create-room {
@@ -50,7 +60,7 @@ h4 {
 
 @media screen and (max-width: 1200px) {
   .chat-sidenav {
-    padding: 0 20px 20px 20px;
     width: 350px;
   }
+
 }
