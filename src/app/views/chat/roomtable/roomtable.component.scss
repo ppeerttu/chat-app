@@ -6,18 +6,10 @@
   padding: 0 5px;
 }
 
-.rooms-container {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
-  height: 35vh;
-  min-height: 300px;
-}
-
 
 .mat-table {
-  overflow: auto;
-  background-color: mat-color($chat-app-primary, 100);
+  /*overflow: auto;*/
+  background-color: inherit;/*mat-color($chat-app-primary, 100);*/
 }
 
 .expand-rooms {

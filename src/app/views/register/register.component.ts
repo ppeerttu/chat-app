@@ -11,8 +11,7 @@ import { User } from '../../models/user';
 
 @Component({
     templateUrl: './register.component.html',
-    styleUrls: [ 'register.component.css' ],
-    providers: [UserActions]
+    styleUrls: [ 'register.component.css' ]
 })
 export class RegisterComponent {
   @select() readonly user$: Observable<User>;
@@ -57,7 +56,6 @@ export class RegisterComponent {
   ) {
     // Subscribe the user in store to check if the user is logged in
     this.user$.subscribe(user => {
-      console.log(user);
       if (user && user.getId() > 0) {
         router.navigateByUrl('/chat');
       }

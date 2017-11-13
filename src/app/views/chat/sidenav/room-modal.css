@@ -1,1 +1,14 @@
+.rooms-container {
+  margin-bottom: 10px;
+  height: 60vh;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
 
+.close-button {
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%)
+}

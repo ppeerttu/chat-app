@@ -6,9 +6,9 @@ import { Router } from '@angular/router';
 import { MdSnackBar, MdDialog } from '@angular/material';
 import {
   UserActions,
-  RoomActions
+  RoomActions,
+  ChatActions
 } from '../../../actions';
-
 
 import { Room, User, Message } from '../../../models';
 
@@ -19,19 +19,17 @@ import { Room, User, Message } from '../../../models';
 })
 export class SidenavComponent {
   @select() user$: Observable<User>;
-
   private user: User;
-  step = 0;
 
   constructor(
     private router: Router,
     private userAction: UserActions,
     private roomAction: RoomActions,
+    private chatAction: ChatActions,
     private snackBar: MdSnackBar,
     public roomModal: MdDialog
   ) {
     this.userAction = userAction;
-    this.router = router;
     this.user$.subscribe(user => {
       this.user = user;
     });
@@ -65,21 +63,14 @@ export class SidenavComponent {
     });
   }
 
-  setStep(index: number) {
-    this.step = index;
-  }
-
-  nextStep() {
-    this.step++;
-  }
-
-  prevStep() {
-    this.step--;
-  }
 }
 
 @Component({
   templateUrl: 'room-modal.html',
   styleUrls: ['room-modal.css']
 })
-export class RoomModal {}
+export class RoomModal {
+  constructor(
+    private chatAction: ChatActions
+  ) {}
+}

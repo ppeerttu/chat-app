@@ -13,8 +13,7 @@ import { AppState } from '../../store/store';
 
 @Component({
     templateUrl: './login.component.html',
-    styleUrls: [ 'login.component.css' ],
-    providers: [UserActions]
+    styleUrls: [ 'login.component.css' ]
 })
 
 export class LoginComponent {

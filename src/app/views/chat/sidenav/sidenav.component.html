@@ -23,7 +23,9 @@
             Join rooms
           </md-panel-title>
         </md-expansion-panel-header>
-        <room-table></room-table>
+        <div class="rooms-container">
+          <room-table></room-table>
+        </div>
         <button mdTooltip="Refresh rooms" md-mini-fab color="primary" class="refresh-rooms" (click)="refreshRooms()">
           <i class="material-icons">refresh</i>
         </button>

@@ -22,6 +22,15 @@
     position: relative;
 }
 
+.rooms-container {
+  margin-bottom: 10px;
+  height: 35vh;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+}
+
 .brgr-btn {
   float: right;
 }

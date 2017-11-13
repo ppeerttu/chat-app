@@ -10,8 +10,7 @@ import { RoomInfo, User, Message } from '../../../models';
 @Component({
   selector: 'my-rooms',
   templateUrl: './myrooms.component.html',
-  styleUrls: [ 'myrooms.component.scss' ],
-  providers: [RoomActions]
+  styleUrls: [ 'myrooms.component.scss' ]
 })
 export class MyRoomsComponent {
   @select() roomsIn$:Observable<RoomInfo[]>;
