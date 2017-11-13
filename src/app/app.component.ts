@@ -5,8 +5,7 @@ import { UserActions, RoomActions, ChatActions } from './actions';
   selector: 'app-root',
   template: `
     <router-outlet></router-outlet>
-  `,
-  providers: [UserActions, RoomActions, ChatActions]
+  `
 })
 export class AppComponent {
 

@@ -14,6 +14,7 @@ export class ChatActions {
 
   private user: User;
   private io: any;
+  private id: number;
 
   static SOCKET_CONNECTED = 'SOCKET_CONNECTED';
   static SOCKET_DISCONNECTED = 'SOCKET_DISCONNECTED';
@@ -43,6 +44,7 @@ export class ChatActions {
     this.user$.subscribe(user => {
       this.user = user;
     });
+    this.id = Math.round(Math.random() * 320);
   }
 
   openSocket() {
@@ -100,6 +102,7 @@ export class ChatActions {
   }
 
   joinRoom(roomId: number, user: User): void {
+    console.log('This id: ' + this.id);
     const payload = {roomId, user};
     if (this.io === null || !this.io.connected) {
       throw new Error('Socket not connected!');

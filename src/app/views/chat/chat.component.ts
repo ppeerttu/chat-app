@@ -54,7 +54,6 @@ export class ChatComponent implements OnInit {
                   this.roomAction.fetchAll().then(() => {
                     // Join each socket room user is in
                     action.res.map(room => {
-                      console.log(room.id);
                       this.chatAction.joinRoom(room.id, this.user);
                     });
                   });

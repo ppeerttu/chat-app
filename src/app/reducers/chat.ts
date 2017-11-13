@@ -30,11 +30,8 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
     case ChatActions.RECEIVE_USER_INFO:
       if (action.payload) {
         const {roomId, user} = action.payload;
-        console.log(user);
         const rooms = base.map(room => {
-          console.log(room.getId());
           if (room.getId() == roomId) {
-            console.log('adding user...');
             room.addUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
             room.addMessage(new Message(`User ${user.userName} has joined the room`, -1, roomId, Date.now()));
           }

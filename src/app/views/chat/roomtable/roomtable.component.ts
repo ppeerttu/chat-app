@@ -1,13 +1,12 @@
 
-import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, Input, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
-import { RoomActions } from '../../../actions/room';
-import { ChatActions } from '../../../actions/chat';
+import { RoomActions, ChatActions } from '../../../actions';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
@@ -17,32 +16,26 @@ import { Room, UsersRoom, User, Message } from '../../../models';
 @Component({
   selector: 'room-table',
   templateUrl: './roomtable.component.html',
-  styleUrls: ['roomtable.component.scss'],
-  providers: [RoomActions, ChatActions]
+  styleUrls: ['roomtable.component.scss']
 })
 export class RoomTableComponent {
   @select() user$: Observable<User>;
   @select() rooms$: Observable<Room[]>;
   @select() roomsIn$: Observable<Room[]>;
-
   displayedColumns = ['name', 'locked', 'join'];
   roomDataBase = new RoomDataBase();
   roomDataSource: RoomDataSource | null;
-  private roomAction: RoomActions;
-  private chatAction: ChatActions;
   private user: User;
   private rooms: Room[];
   @ViewChild('filter') filter: ElementRef;
 
   constructor(
-    roomAction: RoomActions,
-    chatAction: ChatActions,
+    private roomAction: RoomActions,
     public joinRoomDialog: MdDialog,
     public joinRoomFailed: MdDialog,
-    public snackBar: MdSnackBar
+    public snackBar: MdSnackBar,
+    private chatAction: ChatActions,
   ) {
-    this.roomAction = roomAction;
-    this.chatAction = chatAction;
     this.user$.subscribe(user => {
       this.user = user;
     });
@@ -132,7 +125,6 @@ export class RoomTableComponent {
 
   leaveRoom(id: number) {
     this.roomAction.leaveRoom(id, this.user.getId()).then((res) => {
-      console.log(res);
       if (res.type === RoomActions.LEAVE_ROOM_SUCCESS) {
         let roomName = '';
         const index = this.rooms.findIndex(room => room.getId() == id);

@@ -59,7 +59,11 @@ import { ChatViewComponent } from './views/chat/chatview/chatview.component';
 import { InputMessageComponent } from './views/chat/inputmessage/inputmessage.component';
 import { MessageContainerComponent } from './views/chat/messagecontainer/messagecontainer.component';
 import { MyRoomsComponent } from './views/chat/myrooms/myrooms.component';
-import { ChatActions } from './actions/chat';
+import {
+  ChatActions,
+  RoomActions,
+  UserActions
+} from './actions';
 import { ParticipantsComponent } from './views/chat/participants/participants.component';
 import {
   SettingsComponent,
@@ -160,7 +164,7 @@ const appRoutes: Routes = [
     LoginFailedDialog,
     RoomModal
   ],
-  providers: [ChatActions],
+  providers: [ChatActions, RoomActions, UserActions],
   bootstrap: [AppComponent]
 })
 export class AppModule {

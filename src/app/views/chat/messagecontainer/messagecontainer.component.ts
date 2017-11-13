@@ -44,7 +44,6 @@ export class MessageContainerComponent {
           });
         }
       });
-      console.log('scrolling!');
       const msgContainer = document.querySelector('.message-container');
       if (msgContainer) {
         // BECAUSE IF DONE IMMEDIATELY, NOT WORKING AS EXPECTED (because of angular bindings)
