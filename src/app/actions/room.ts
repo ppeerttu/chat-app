@@ -36,7 +36,7 @@ export class RoomActions {
       [RoomActions.CREATE_ROOM_REQUEST, RoomActions.CREATE_ROOM_SUCCESS, RoomActions.CREATE_ROOM_FAILED],
       {roomName, password, userId}
     );
-    this.ngRedux.dispatch({ type: RoomActions.CREATE_ROOM_REQUEST, apiCall });
+    return this.ngRedux.dispatch(this.thunk(RoomActions.CREATE_ROOM_REQUEST, apiCall));
   }
 
   fetchAll() {

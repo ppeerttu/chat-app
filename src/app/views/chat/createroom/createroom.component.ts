@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
@@ -11,7 +12,6 @@ import { Room, User, Message } from '../../../models';
   selector: 'create-room',
   templateUrl: './createroom.component.html',
   styleUrls: ['createroom.component.css'],
-  providers: [RoomActions]
 })
 export class CreateRoomComponent {
   @select() rooms$: Observable<Room[]>;
@@ -29,7 +29,10 @@ export class CreateRoomComponent {
   ]);
   passwordFormControl = new FormControl('');
 
-  constructor(action: RoomActions) {
+  constructor(
+    action: RoomActions,
+    public snackBar: MdSnackBar
+) {
     this.action = action;
     this.roomName = '';
     this.password = '';
@@ -53,10 +56,44 @@ export class CreateRoomComponent {
         }
       });
       if (!duplicate) {
-        this.action.createRoom(this.roomName, this.password, this.user.getId());
+        this.action.createRoom(this.roomName, this.password, this.user.getId())
+          .then(response => {
+            if (response.type === RoomActions.CREATE_ROOM_SUCCESS) {
+              const roomInfo = response.res;
+              this.openSnackBar(`Room ${roomInfo.roomName} created successfully!`, 'Okay', 4000);
+              this.roomName = '';
+            } else {
+              let error;
+              try {
+                error = JSON.parse(response.res);
+                this.openSnackBar(`${error.error}`, 'Okay', 8000);
+              } catch (e) {
+                console.error('Received non-JSON formatted response for failed room creation request!');
+                this.openSnackBar(
+                  'Unfortunately something went wrong. Please try to refresh the browser.',
+                  'Okay',
+                  8000
+                );
+              }
+            }
+          }).catch(err => {
+            console.error(err);
+            this.openSnackBar(
+              'Unfortunately something went wrong. Please try to refresh the browser.',
+              'Okay',
+              8000
+            );
+          });
       } else {
-        throw Error(`Duplicate room name: ${this.roomName}`);
+        console.error(`Duplicate room name: ${this.roomName}`);
+        this.openSnackBar('Unfortunately this roomName has been taken', 'Okay', 8000);
       }
     }
+  }
+
+  openSnackBar(message: string, action: string, duration: number) {
+    this.snackBar.open(message, action, {
+      duration: duration
+    });
   }
 }
