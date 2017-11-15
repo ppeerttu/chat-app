@@ -12,7 +12,7 @@ import { Message } from '../../models/message';
 
 @Component({
     templateUrl: './chat.component.html',
-    styleUrls: [ 'chat.component.css' ]
+    styleUrls: [ 'chat.component.scss' ]
 })
 export class ChatComponent implements OnInit {
   @select() user$: Observable<User>;

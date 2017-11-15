@@ -40,9 +40,7 @@ export class MyRoomsComponent {
 
   private toggleClass(id: number): void {
     let btn = document.getElementById(id.toString());
-    if (btn.classList.contains('active')) {
-      btn.classList.remove('active');
-    } else {
+    if (!btn.classList.contains('active')) {
       btn.classList.add('active');
     }
     this.rooms.map(room => {

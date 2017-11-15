@@ -8,7 +8,7 @@
     transparent, transparent),
     url("../../assets/back-ground-small.jpeg") no-repeat center center;
   background-size: cover;
-  filter: blur(2px);
+  filter: blur(5px);
   z-index: 0;
 }
 
@@ -40,4 +40,13 @@
   height: calc(100vh - 200px); /* the header takes 100px from the top */
   width: 100vw;
   padding: 10px 100px;
+}
+
+
+@media screen and (min-height: 1200px) {
+  .img-container {
+    background: linear-gradient(to bottom,
+      transparent, transparent),
+      url("../../assets/back-ground-large.jpeg") no-repeat center center;
+  }
 }

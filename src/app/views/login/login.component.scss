@@ -1,10 +1,12 @@
-.register-form {
+@import '../../../styles.scss';
+
+.login-form {
   min-width: 150px;
   max-width: 300px;
   width: 100%;
 }
 
-.register-full-width {
+.login-full-width {
   width: 100%;
 }
 
@@ -17,6 +19,24 @@
   font-family: 'Etna';
 }
 
+.container h1 {
+  font-size: 72px;
+}
+
+.register-button {
+  float: right;
+}
+
+@keyframes blur-effect {
+  from {
+    filter: blur(0);
+  }
+
+  to {
+    filter: blur(5px);
+  }
+}
+
 .img-container {
   position: fixed;
   left: 0;
@@ -24,19 +44,18 @@
   width: 100vw;
   height: 100vh;
   background: linear-gradient(to bottom,
-    transparent, transparent),
+    transparentize(mat-color($chat-app-accent), 0.6), transparentize(mat-color($chat-app-primary), 0.6)),
     url("../../assets/back-ground-small.jpeg") no-repeat center center;
   background-size: cover;
-  filter: blur(2px);
   z-index: 0;
-}
-
-.back-button {
-  float: right;
+  filter:  blur(5px);
+  animation: blur-effect;
+  animation-duration: 6s;
 }
 
 .form-container {
   align-self: center;
+  filter: blur(0);
 }
 
 #button-container {
@@ -44,6 +63,7 @@
   width: 100%;
   justify-content: center;
 }
+
 
 .footer {
   position: absolute;
@@ -60,4 +80,12 @@
 
 .footer-container a {
   margin-right: 10px;
+}
+
+@media screen and (min-height: 1200px) {
+  .img-container {
+    background: linear-gradient(to bottom,
+      transparent, transparent),
+      url("../../assets/back-ground-large.jpeg") no-repeat center center;
+  }
 }

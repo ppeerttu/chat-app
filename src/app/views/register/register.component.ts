@@ -11,7 +11,7 @@ import { User } from '../../models/user';
 
 @Component({
     templateUrl: './register.component.html',
-    styleUrls: [ 'register.component.css' ]
+    styleUrls: [ 'register.component.scss' ]
 })
 export class RegisterComponent {
   @select() readonly user$: Observable<User>;

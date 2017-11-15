@@ -24,8 +24,7 @@
 
 .rooms-container {
   margin-bottom: 10px;
-  height: 35vh;
-  min-height: 300px;
+  max-height: 35vh;
   display: flex;
   flex-direction: column;
   overflow-y: scroll;
