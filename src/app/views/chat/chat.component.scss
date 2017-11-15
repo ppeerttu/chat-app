@@ -1,3 +1,5 @@
+@import '../../../styles.scss';
+
 .img-container {
   position: fixed;
   left: 0;
@@ -5,41 +7,17 @@
   width: 100vw;
   height: 100vh;
   background: linear-gradient(to bottom,
-    transparent, transparent),
+    transparentize(mat-color($chat-app-accent), 0.6), transparentize(mat-color($chat-app-primary), 0.6)),
     url("../../assets/back-ground-small.jpeg") no-repeat center center;
   background-size: cover;
   filter: blur(5px);
   z-index: 0;
 }
 
-.header {
-  font-family: 'Etna';
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 200px;
-  position: relative;
-}
-
-.header h1 {
-  font-size: 72px;
-}
-
-.back-icon {
-  font-size: 70px;
-  position: absolute;
-  left: 0;
-}
-
-.back-icon:hover {
-  cursor: pointer;
-}
-
-.help-container {
-  background-color: #F5F5F5;
-  height: calc(100vh - 200px); /* the header takes 100px from the top */
-  width: 100vw;
-  padding: 10px 100px;
+.container-fluid {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  z-index: 900;
 }
 
 

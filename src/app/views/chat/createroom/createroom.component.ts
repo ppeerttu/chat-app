@@ -62,6 +62,7 @@ export class CreateRoomComponent {
               const roomInfo = response.res;
               this.openSnackBar(`Room ${roomInfo.roomName} created successfully!`, 'Okay', 4000);
               this.roomName = '';
+              this.password = '';
             } else {
               let error;
               try {

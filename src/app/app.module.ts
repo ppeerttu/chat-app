@@ -135,7 +135,7 @@ const appRoutes: Routes = [
     EmojiModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }
+      { enableTracing: !production }
     ),
     BrowserAnimationsModule,
     MdFormFieldModule,

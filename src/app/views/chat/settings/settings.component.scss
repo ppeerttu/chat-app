@@ -1,26 +1,32 @@
+@import '../../../../styles.scss';
 
 ul {
   list-style: none;
-  width: 100%;
+
+  padding-left: 0;
 }
 
-li {
+a {
   display: flex;
-  width: 100%;
   height: 40px;
   align-items: center;
   justify-content: center;
   vertical-align: middle;
-  border-top: solid grey 1px;
+  color: inherit;
 }
 
 .bottom {
   border-bottom: solid grey 1px;
 }
 
-li:hover {
+a:hover {
   background-color: grey;
   cursor: pointer;
+  text-decoration: none;
+  background: darken(mat-color($chat-app-primary, 100), 40%);
+}
+.logout:hover {
+  background: mat-color($chat-app-warn);
 }
 
 .nav-item {

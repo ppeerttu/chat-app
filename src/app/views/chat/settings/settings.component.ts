@@ -12,7 +12,7 @@ import { User } from '../../../models';
 @Component({
   selector: 'settings',
   templateUrl: './settings.component.html',
-  styleUrls: [ 'settings.component.css' ]
+  styleUrls: [ 'settings.component.scss' ]
 })
 export class SettingsComponent {
   @select() user$: Observable<User>;
