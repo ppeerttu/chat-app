@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
 import { AppState } from '../store/store';
-import { ApiCall } from '../models/apicall';
 import { User } from '../models/user';
 import * as io from 'socket.io-client';
 import { API_URL } from '../../main';
@@ -44,8 +43,9 @@ export class ChatActions {
     this.user$.subscribe(user => {
       this.user = user;
     });
-    this.id = Math.round(Math.random() * 320);
+
   }
+
 
   openSocket() {
     return new Promise((resolve, reject) => {
@@ -85,11 +85,11 @@ export class ChatActions {
   }
 
   isSocketConnected(): boolean {
-    return this.io.connected;
+    return this.io && this.io.connected;
   }
 
   sendMessage(roomId: number, userId: number, userName: string, message: string):void {
-    if (this.io === null || !this.io.connected) {
+    if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else if (roomId === null) {
       throw new Error('Room not selected!');
@@ -102,9 +102,8 @@ export class ChatActions {
   }
 
   joinRoom(roomId: number, user: User): void {
-    console.log('This id: ' + this.id);
     const payload = {roomId, user};
-    if (this.io === null || !this.io.connected) {
+    if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else {
       this.ngRedux.dispatch({ type: ChatActions.REQUEST_ROOM_JOIN, payload });
@@ -114,7 +113,7 @@ export class ChatActions {
 
   sendUserInfo(socketId: string, user: User, roomId: number) {
     const payload = {socketId, user, roomId};
-    if (this.io === null || !this.io.connected) {
+    if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else {
       this.ngRedux.dispatch({ type: ChatActions.SEND_USER_INFO, payload });
@@ -124,7 +123,7 @@ export class ChatActions {
 
   leaveRoom(roomId: number, user: User) {
     const payload = {roomId, user};
-    if (this.io === null || !this.io.connected) {
+    if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else {
       this.ngRedux.dispatch({ type: ChatActions.ROOM_LEAVE_REQUEST, payload });
@@ -137,7 +136,7 @@ export class ChatActions {
   }
 
   closeSocket(): void {
-    if (this.io && this.io.connected) {
+    if (this.isSocketConnected()) {
       this.io.close(true);
       this.ngRedux.dispatch({ type: ChatActions.SOCKET_DISCONNECTED });
     } else {

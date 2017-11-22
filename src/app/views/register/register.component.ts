@@ -72,8 +72,7 @@ export class RegisterComponent {
 
   // Validation function for password confirmation
   passKeyUp(): void {
-    // See if both fields are touched
-    if (this.passwordFormControl.touched && this.confirmPasswordFormControl.touched) {
+    if (this.passwordFormControl.touched) {
       // compare values (if both are empty, 'required' -validator will throw an error at user)
       if (this.passwordFormControl.value !== this.confirmPasswordFormControl.value) {
         this.passwordsMatch = false;
