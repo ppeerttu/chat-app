@@ -73,9 +73,9 @@ export class RoomTableComponent {
     });
   }
 
-  openSnackBar(message: string, action: string) {
+  openSnackBar(message: string, action: string, duration: number = 4000) {
     this.snackBar.open(message, action, {
-      duration: 4000
+      duration: duration
     });
   }
 
@@ -110,7 +110,15 @@ export class RoomTableComponent {
           if (res.res === "Forbidden") {
             reason = 'Wrong password.';
           } else if (res.res) {
-            reason = res.res;
+            let error = '';
+            try {
+              error = JSON.parse(res.res).error;
+            } catch(err) {
+              console.error(err);
+              error = 'Unknown system error';
+            } finally {
+              reason = error;
+            }
           }
           let dialogRef = this.joinRoomFailed.open(RoomJoinFailedDialog, {
             data: { roomName: roomName, reason: reason }
@@ -125,14 +133,23 @@ export class RoomTableComponent {
 
   leaveRoom(id: number) {
     this.roomAction.leaveRoom(id, this.user.getId()).then((res) => {
+      let roomName = '';
+      const index = this.rooms.findIndex(room => room.getId() == id);
+      if (index > -1) {
+        roomName = this.rooms[index].getRoomName();
+      }
       if (res.type === RoomActions.LEAVE_ROOM_SUCCESS) {
-        let roomName = '';
-        const index = this.rooms.findIndex(room => room.getId() == id);
-        if (index > -1) {
-          roomName = this.rooms[index].getRoomName();
-        }
         this.openSnackBar(`Left room ${roomName} successfully`, 'Okay');
         this.chatAction.leaveRoom(id, this.user);
+      } else {
+        let error;
+        try {
+          error = JSON.parse(res.res).error;
+        } catch(error) {
+          console.error('Received non-JSON error message from API.');
+          error = 'Back end service error.';
+        }
+        this.openSnackBar(`Failed to leave the room ${roomName}: ${error}. Please refresh the browser.`, 'Okay', 8000);
       }
     });
   }

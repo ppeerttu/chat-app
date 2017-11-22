@@ -1,5 +1,5 @@
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
@@ -27,7 +27,8 @@ export class SidenavComponent {
     private roomAction: RoomActions,
     private chatAction: ChatActions,
     private snackBar: MdSnackBar,
-    public roomModal: MdDialog
+    public roomModal: MdDialog,
+    private viewContainerRef: ViewContainerRef
   ) {
     this.userAction = userAction;
     this.user$.subscribe(user => {
@@ -59,7 +60,8 @@ export class SidenavComponent {
   openRoomModal() {
     const modalRef = this.roomModal.open(RoomModal, {
       width: '400px',
-      height: '500px'
+      height: '500px',
+      viewContainerRef: this.viewContainerRef
     });
   }
 
