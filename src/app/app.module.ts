@@ -19,7 +19,8 @@ import {
   MdIconModule,
   MdExpansionModule,
   MdSnackBarModule,
-  MdTooltipModule
+  MdTooltipModule,
+  MdProgressBarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EmojiModule } from 'angular2-emoji';
@@ -70,6 +71,7 @@ import {
   UserProfileUpdateFailed
 } from './views/chat/settings/settings.component';
 import { ProfileModalComponent } from './views/chat/profilemodal/profilemodal.component';
+import { LoaderComponent } from './loader.component';
 
 const appRoutes: Routes = [
   {
@@ -123,7 +125,8 @@ const appRoutes: Routes = [
     ParticipantsComponent,
     SettingsComponent,
     UserProfileUpdateFailed,
-    ProfileModalComponent
+    ProfileModalComponent,
+    LoaderComponent
   ],
   imports: [
     NgReduxModule,
@@ -151,7 +154,8 @@ const appRoutes: Routes = [
     MdIconModule,
     MdExpansionModule,
     MdSnackBarModule,
-    MdTooltipModule
+    MdTooltipModule,
+    MdProgressBarModule
   ],
   entryComponents: [
     JoinLockedRoomDialog,
@@ -164,7 +168,11 @@ const appRoutes: Routes = [
     LoginFailedDialog,
     RoomModal
   ],
-  providers: [ChatActions, RoomActions, UserActions],
+  providers: [
+    ChatActions,
+    RoomActions,
+    UserActions
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

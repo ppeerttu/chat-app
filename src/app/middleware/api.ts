@@ -76,7 +76,6 @@ export default () => next => action => {
   const [requestType, successType, errorType] = types;
   // Forwards requestType action down the middleware stack
   next(actionWith({type: requestType, data: data}));
-
   return request(method, path, data).then(
     res => {
       let type;
