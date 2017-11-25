@@ -37,11 +37,15 @@ export class ParticipantsComponent {
     });
     this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
-      this.rooms.map(room => {
-        if (room.getId() === roomId) {
-          this.users = room.getUsers();
-        }
-      });
+      if (!roomId) {
+        this.users = [];
+      } else {
+        this.rooms.map(room => {
+          if (room.getId() === roomId) {
+            this.users = room.getUsers();
+          }
+        });
+      }
     });
   }
 }

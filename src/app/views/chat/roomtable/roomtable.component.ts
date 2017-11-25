@@ -141,6 +141,7 @@ export class RoomTableComponent {
       if (res.type === RoomActions.LEAVE_ROOM_SUCCESS) {
         this.openSnackBar(`Left room ${roomName} successfully`, 'Okay');
         this.chatAction.leaveRoom(id, this.user);
+        this.roomAction.selectRoom(null);
       } else {
         let error;
         try {
