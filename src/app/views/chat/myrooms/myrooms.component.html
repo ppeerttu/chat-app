@@ -1,9 +1,10 @@
 <div class="my-rooms-container">
   <div class="room-info">
-    <h4 *ngIf="viewRoom">{{ viewRoom.getRoomName() }}</h4>
-    <h4 *ngIf="!viewRoom">No room selected</h4>
+    <h4>Room Info</h4>
+    <h5 *ngIf="viewRoom">{{ viewRoom.getRoomName() }}</h5>
+    <h5 *ngIf="!viewRoom">No room selected</h5>
     <p *ngIf="viewRoom">
-      Created: {{ viewRoom.createdAt | date:'medium' }}
+      Created: {{ viewRoom.createdAt | date:'longDate' }}
     </p>
     <p *ngIf="!viewRoom">
       No room selected! Select a room from My rooms to chat with people and view room's info.

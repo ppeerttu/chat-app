@@ -39,18 +39,15 @@ export class MyRoomsComponent {
   }
 
   private toggleClass(id: number): void {
-    let btn = document.getElementById(id.toString());
-    if (!btn.classList.contains('active')) {
-      btn.classList.add('active');
-    }
-    this.rooms.map(room => {
-      if (room.getId() !== id) {
-        let elem = document.getElementById(room.getId().toString());
-        if (elem.classList.contains('active')) {
-          elem.classList.remove('active');
-        }
+    const elems = document.querySelectorAll('.room-button');
+    for (let i = 0; i < elems.length; i++) {
+      const elem = elems.item(i);
+      if (elem.id === id.toString() && !elem.classList.contains('active')) {
+        elem.classList.add('active');
+      } else if (elem.id !== id.toString() && elem.classList.contains('active')) {
+        elem.classList.remove('active');
       }
-    });
+    }
   }
 
 }

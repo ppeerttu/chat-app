@@ -1,5 +1,5 @@
 <md-sidenav-container class="sidenav-container">
-  <md-sidenav #sidenav class="chat-sidenav">
+  <md-sidenav #sidenav class="chat-sidenav" mode="over">
 
     <!-- greeting and close-sidenav button -->
     <md-grid-list cols="4" class="sidenav-header">
@@ -63,5 +63,23 @@
 
   <!-- chat view -->
   <chat-view></chat-view>
+
+  <!-- top bar and right sidenav for mobile views -->
+  <div class="top-bar">
+    <div *ngIf="viewRoom">
+      {{viewRoom.getRoomName()}}
+    </div>
+  <button type="button" md-icon-button (click)="partSidenav.open()">
+    <i class="material-icons">supervisor_account</i>
+  </button>
+  </div>
+  <md-sidenav #partSidenav class="participants-sidenav" position="end">
+    <my-rooms></my-rooms>
+    <participant-container></participant-container>
+
+    <button type="button" class="close-button" md-button-mini (click)="partSidenav.close()">
+      <i class="material-icons">close</i>
+    </button>
+  </md-sidenav>
 
 </md-sidenav-container>

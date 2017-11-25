@@ -7,9 +7,15 @@
 }
 
 .room-info {
-  padding: 40px 20px 20px 20px;
+  padding: 5px 20px 20px 20px;
   background-color: mat-color($chat-app-primary, 800);
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  -webkit-align-items: center;
+  align-items: center;
+  -webkit-justify-content: center;
+  justify-content: center;
 }
 
 .my-rooms {
