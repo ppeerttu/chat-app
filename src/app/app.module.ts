@@ -123,7 +123,7 @@ const appRoutes: Routes = [
     ParticipantsComponent,
     SettingsComponent,
     UserProfileUpdateFailed,
-    ProfileModalComponent§
+    ProfileModalComponent
   ],
   imports: [
     NgReduxModule,
