@@ -9,19 +9,22 @@ import { roomReducer } from '../reducers/rooms';
 import { roomsInReducer } from '../reducers/roomsIn';
 import { viewRoomReducer } from '../reducers/viewRoom';
 import { chatReducer } from '../reducers/chat';
+import { apiReducer } from '../reducers/api';
 
 export interface AppState {
   user: User,
   rooms: Room[],
   roomsIn: RoomInfo[],
-  viewRoom: number
+  viewRoom: number,
+  waiting: boolean
 };
 
 export const INITIAL_STATE: AppState = {
   user: null,
   rooms: [],
   roomsIn: [],
-  viewRoom: null
+  viewRoom: null,
+  waiting: false
 };
 
-export default reduceReducers(userReducer, roomsInReducer, chatReducer, viewRoomReducer, roomReducer);
+export default reduceReducers(apiReducer, userReducer, roomsInReducer, chatReducer, viewRoomReducer, roomReducer);

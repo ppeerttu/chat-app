@@ -21,14 +21,14 @@ export class ChatActions {
   static SEND_MESSAGE = 'SEND_MESSAGE';
   static RECEIVE_MESSAGE = 'RECEIVE_MESSAGE';
 
-  static REQUEST_ROOM_JOIN = 'REQUEST_ROOM_JOIN';
+  static PUBLISH_ROOM_JOIN = 'PUBLISH_ROOM_JOIN';
   static RECEIVE_ROOM_JOIN = 'RECEIVE_ROOM_JOIN';
 
   static RECEIVE_USER_INFO = 'RECEIVE_USER_INFO';
-  static SEND_USER_INFO = 'SEND_USER_INFO';
+  static PUBLISH_USER_INFO = 'PUBLISH_USER_INFO';
 
-  static ROOM_LEAVE_REQUEST = 'ROOM_LEAVE_REQUEST';
-  static ROOM_LEAVE_RECEIVED = 'ROOM_LEAVE_RECEIVED';
+  static PUBLISH_ROOM_LEAVE = 'PUBLISH_ROOM_LEAVE';
+  static RECEIVE_ROOM_LEAVE = 'RECEIVE_ROOM_LEAVE';
 
   /*
   EMIT: message, join, leave, userInfo
@@ -72,7 +72,7 @@ export class ChatActions {
         }
       });
       this.io.on('userLeave', payload => {
-        this.received(ChatActions.ROOM_LEAVE_RECEIVED, payload);
+        this.received(ChatActions.RECEIVE_ROOM_LEAVE, payload);
       });
       this.io.on('disconnect', reason => {
         this.received(ChatActions.SOCKET_DISCONNECTED, reason);
@@ -106,7 +106,7 @@ export class ChatActions {
     if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else {
-      this.ngRedux.dispatch({ type: ChatActions.REQUEST_ROOM_JOIN, payload });
+      this.ngRedux.dispatch({ type: ChatActions.PUBLISH_ROOM_JOIN, payload });
       this.io.emit('join', { roomId, user });
     }
   }
@@ -116,7 +116,7 @@ export class ChatActions {
     if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else {
-      this.ngRedux.dispatch({ type: ChatActions.SEND_USER_INFO, payload });
+      this.ngRedux.dispatch({ type: ChatActions.PUBLISH_USER_INFO, payload });
       this.io.emit('userInfo', { socketId, user, roomId });
     }
   }
@@ -126,7 +126,7 @@ export class ChatActions {
     if (!this.isSocketConnected()) {
       throw new Error('Socket not connected!');
     } else {
-      this.ngRedux.dispatch({ type: ChatActions.ROOM_LEAVE_REQUEST, payload });
+      this.ngRedux.dispatch({ type: ChatActions.PUBLISH_ROOM_LEAVE, payload });
       this.io.emit('leave', {roomId, user});
     }
   }

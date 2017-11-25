@@ -6,7 +6,7 @@ export function viewRoomReducer(state: AppState = INITIAL_STATE, action: ChatAct
   let viewRoom = state.viewRoom;
   switch (action.type) {
     case RoomActions.SELECT_ROOM:
-      if (action.id) {
+      if (typeof action.id !== 'undefined') {
         viewRoom = action.id;
       } else {
         throw new Error('Action SELECT_ROOM dispatched but no room id given!');

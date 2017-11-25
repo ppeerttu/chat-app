@@ -54,14 +54,20 @@ export class MessageContainerComponent {
     });
     this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
-      this.rooms.map(room => {
-        if (room.getId() === roomId) {
-          this.messages = room.getMessages();
-          room.getUsers().map(user => {
-            this.users[user.getId()] = user;
-          });
-        }
-      });
+      if (!roomId) {
+        this.users = {};
+        this.messages = [];
+      } else {
+        this.rooms.map(room => {
+          if (room.getId() === roomId) {
+            this.messages = room.getMessages();
+            room.getUsers().map(user => {
+              this.users[user.getId()] = user;
+            });
+          }
+        });
+      }
+
     });
   }
 }

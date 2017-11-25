@@ -25,11 +25,15 @@ export class MyRoomsComponent {
       this.rooms = rooms;
     });
     this.viewRoom$.subscribe(id => {
-      this.rooms.map((room:RoomInfo) => {
-        if (room.getId() === id) {
-          this.viewRoom = room;
-        }
-      });
+      if (!id) {
+        this.viewRoom = null;
+      } else {
+        this.rooms.map((room:RoomInfo) => {
+          if (room.getId() === id) {
+            this.viewRoom = room;
+          }
+        });
+      }
     });
   }
 

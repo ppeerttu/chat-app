@@ -25,7 +25,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
         throw new Error(`Action ${action.type} dispatched but no proper payload provided!`);
       }
       break;
-    case ChatActions.REQUEST_ROOM_JOIN:
+    case ChatActions.PUBLISH_ROOM_JOIN:
     case ChatActions.RECEIVE_ROOM_JOIN:
     case ChatActions.RECEIVE_USER_INFO:
       if (action.payload) {
@@ -42,7 +42,7 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
         throw new Error(`Action ${action.type} dispatched but no proper payload provided!`);
       }
       break;
-    case ChatActions.ROOM_LEAVE_RECEIVED:
+    case ChatActions.RECEIVE_ROOM_LEAVE:
       if (action.payload) {
         const {roomId, user} = action.payload;
         const rooms = base.map(room => {
