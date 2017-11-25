@@ -1,9 +1,17 @@
 <div class="input-container">
   <form class="message-form">
+    <div class="input-group">
+      <input type="text" class="form-control" name="message" [(ngModel)]="message" placeholder="Insert a message..." [disabled]="roomId == null">
+      <span class="input-group-btn">
+        <button class="btn btn-secondary" type="submit" [disabled]="roomId == null" (click)="send()"><i class="material-icons">send</i></button>
+      </span>
+    </div>
+    <!--
     <md-form-field class="message-full-width">
       <input mdInput name="message" placeholder="Insert a message..." [(ngModel)]="message" [disabled]="roomId == null">
       <md-icon class="send-button" mdSuffix (click)="send()">send</md-icon>
       <input type="submit" style="position: absolute; left: -9999px" (click)="send()" />
     </md-form-field>
+    -->
   </form>
 </div>

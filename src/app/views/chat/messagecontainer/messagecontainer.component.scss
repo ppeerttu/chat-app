@@ -3,15 +3,14 @@
 .message-container {
   overflow-y: scroll;
   width: 100%;
-  height: calc(100vh - 60px); /* the message input form takes 80px from the bottom */
-  padding-left: 10px;
-  padding-right: 10px;
+  height: calc(100vh - 47px); /* the message input form takes 47px from the bottom */
   padding-top: 5px;
   background: none;
 }
 
 .own-message {
   float: right;
+  margin-right: 10px;
 }
 
 .own-message small {
@@ -20,6 +19,7 @@
 
 .message {
   clear: both;
+  margin-left: 10px;
 }
 
 .message p {
@@ -33,4 +33,11 @@
 .system-message {
   font-weight: bold;
   opacity: 0.7;
+}
+
+@media screen and (max-width: 767px) {
+  .message-container {
+    /* leave the space for top bar component */
+    padding-top: 45px;
+  }
 }

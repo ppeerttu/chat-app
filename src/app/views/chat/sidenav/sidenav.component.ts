@@ -10,7 +10,12 @@ import {
   ChatActions
 } from '../../../actions';
 
-import { Room, User, Message } from '../../../models';
+import {
+  Room,
+  RoomInfo,
+  User,
+  Message
+} from '../../../models';
 
 @Component({
   selector: 'sidenav',
@@ -19,7 +24,14 @@ import { Room, User, Message } from '../../../models';
 })
 export class SidenavComponent {
   @select() user$: Observable<User>;
+  @select() roomsIn$: Observable<RoomInfo[]>;
+  @select() viewRoom$: Observable<number>;
+  private viewRoom: RoomInfo = null;
+  private rooms: RoomInfo[] = null;
   private user: User;
+  private viewRoomSub;
+  private roomSub;
+  private userSub;
 
   constructor(
     private router: Router,
@@ -31,10 +43,27 @@ export class SidenavComponent {
     private viewContainerRef: ViewContainerRef
   ) {
     this.userAction = userAction;
-    this.user$.subscribe(user => {
+    this.userSub = this.user$.subscribe(user => {
       this.user = user;
     });
+    this.roomSub = this.roomsIn$.subscribe(rooms => {
+      this.rooms = rooms;
+    });
+    this.viewRoomSub = this.viewRoom$.subscribe(viewRoom => {
+      if (this.rooms) {
+        this.rooms.map(room => {
+          if (room.getId() === viewRoom) {
+            this.viewRoom = room;
+          }
+        });
+      }
+    });
+  }
 
+  ngOnDestroy() {
+    this.roomSub.unsubscribe();
+    this.userSub.unsubscribe();
+    this.viewRoomSub.unsubscribe();
   }
 
   refreshRooms() {

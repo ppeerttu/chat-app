@@ -1,5 +1,62 @@
 @import '../../../../styles.scss';
 
+/** TOP-BAR STYLES **/
+.top-bar {
+  display: none;
+}
+
+.participants-sidenav {
+  background-color: mat-color($chat-app-primary, 700);
+  background-color: #f5f5f5;
+  opacity: 0.9;
+  max-width: 350px;
+}
+
+.my-rooms-sidenav {
+  background-color: mat-color($chat-app-primary, 700);
+  /*background-color: #f5f5f5;*/
+  opacity: 0.9;
+  max-width: 350px;
+  z-index: 101;
+}
+
+
+.close-button {
+  position: absolute;
+  top: 0;
+  color: mat-color($chat-app-accent);
+  margin: 5px;
+}
+
+@media screen and (max-width: 767px) {
+  .top-bar {
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    height: 40px;
+    background-color: mat-color($chat-app-primary, 700);
+    display: -webkit-flex;
+    display: flex;
+
+    flex-direction: row;
+    -webkit-flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    -webkit-align-items: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+
+    button {
+      color: mat-color($chat-app-accent);
+      position: absolute;
+      right: 0;
+    }
+  }
+
+}
+
+/** SIDENAV STYLES **/
+
 
 .sidenav-container {
   height: 100vh;

@@ -2,12 +2,16 @@
 
 #chat-view-container {
   height: 100%;
-  /*background-color: #f5f5f5;*/
+  margin: 0 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+
 }
 
 .my-rooms-container {
   background-color: #f5f5f5;
   padding-right: 0 !important;
+  padding-left: 0 !important;
   opacity: 0.7;
 }
 
@@ -22,4 +26,14 @@
   padding-left: 0 !important;
   padding-right: 0 !important;
   opacity: 0.7;
+}
+
+@media screen and (max-width: 767px) {
+  .participant-container {
+    display: none;
+  }
+
+  .my-rooms-container {
+    display: none;
+  }
 }
