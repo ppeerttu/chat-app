@@ -33,7 +33,6 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
         const rooms = base.map(room => {
           if (room.getId() == roomId) {
             room.addUser(new User(user.userName, user.email, user.id, user.firstName, user.lastName));
-            room.addMessage(new Message(`User ${user.userName} has joined the room`, -1, roomId, Date.now()));
           }
           return room;
         });
@@ -58,6 +57,9 @@ export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction)
       }
       break;
     case ChatActions.SOCKET_DISCONNECTED:
+      if (action.payload === 'io server disconnect') {
+        return INITIAL_STATE;
+      }
       base.map(room => {
         room.deleteAllUsers();
         room.deleteAllMessages();

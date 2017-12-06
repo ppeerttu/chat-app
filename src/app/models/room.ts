@@ -2,14 +2,14 @@
 export class Room {
     protected id: number;
     protected roomName: string;
-    protected password: string;
+    protected secret: boolean;
     protected createdAt: string;
     protected updatedAt: string;
 
-    constructor(roomName: string, id: number, password: string, createdAt: string, updatedAt: string) {
+    constructor(roomName: string, id: number, secret: boolean, createdAt: string, updatedAt: string) {
         this.roomName = roomName;
         this.id = id;
-        this.password = password;
+        this.secret = secret;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -22,8 +22,8 @@ export class Room {
       return this.id;
     }
 
-    getPassword(): string {
-      return this.password;
+    getSecret(): boolean {
+      return this.secret;
     }
 
     getCreatedAt(): string {

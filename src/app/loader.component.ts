@@ -2,6 +2,10 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 
+/**
+ * LoaderComponent
+ * Show the request status indicator at the top of the page when making requests
+ */
 @Component({
   selector: 'loader-component',
   template: `

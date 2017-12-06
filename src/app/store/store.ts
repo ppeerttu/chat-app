@@ -12,6 +12,7 @@ import { chatReducer } from '../reducers/chat';
 import { apiReducer } from '../reducers/api';
 
 export interface AppState {
+  loggedIn: boolean,
   user: User,
   rooms: Room[],
   roomsIn: RoomInfo[],
@@ -20,6 +21,7 @@ export interface AppState {
 };
 
 export const INITIAL_STATE: AppState = {
+  loggedIn: false,
   user: null,
   rooms: [],
   roomsIn: [],

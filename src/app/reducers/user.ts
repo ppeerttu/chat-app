@@ -27,6 +27,7 @@ export function userReducer(state: AppState = INITIAL_STATE, action: ChatAction)
     default: break;
   }
   return Object.assign({}, state, {
-    user: base
+    user: base,
+    loggedIn: true
   });
 }

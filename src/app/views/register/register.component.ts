@@ -27,24 +27,29 @@ export class RegisterComponent {
   user: User;
   usernameFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(3)
+    Validators.minLength(3),
+    Validators.maxLength(15)
   ]);
   firstNameFormControl = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.maxLength(15)
   ]);
   lastNameFormControl = new FormControl('', [
-    Validators.required
+    Validators.required,
+    Validators.maxLength(15)
   ]);
   emailFormControl = new FormControl('', [
     Validators.required,
-    Validators.email
+    Validators.pattern(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/),
+    Validators.maxLength(15)
   ]);
   confirmPasswordFormControl = new FormControl('', [
     Validators.required
   ]);
   passwordFormControl = new FormControl('', [
     Validators.required,
-    Validators.minLength(6)
+    Validators.minLength(6),
+    Validators.maxLength(20)
   ]);
 
   constructor(
@@ -95,13 +100,29 @@ export class RegisterComponent {
   }
 
   register(): void {
-    //this.action.login(this.userName, this.password);
-    if (/*this.passwordsMatch && this.registerForm.valid*/true) {
+    if (this.passwordsMatch && this.registerForm.valid) {
       this.action.register(this.userName, this.firstName, this.lastName, this.email, this.password).then(res => {
         if (res.type === UserActions.REGISTER_SUCCESS) {
           this.openSuccessDialog();
         } else {
-          this.openFailedDialog();
+          let message = 'Unknown error! :(';
+          if (res.res) {
+            let obj = null;
+            try {
+              obj = JSON.parse(res.res);
+              if (obj.error) {
+                message = obj.error;
+                if (obj.error.message) {
+                  message = obj.error.message;
+                }
+              } else if (obj.message) {
+                message = obj.message;
+              }
+            } catch(e) {
+              console.log(e);
+            }
+          }
+          this.openFailedDialog(message);
         }
       });
     }
@@ -124,8 +145,9 @@ export class RegisterComponent {
     });
   }
 
-  openFailedDialog(): void {
+  openFailedDialog(message: string = ''): void {
     let dialogRef = this.successDialog.open(RegisterFailedDialog, {
+      data: { reason: message}
     });
   }
 
