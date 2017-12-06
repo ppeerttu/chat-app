@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 import { UserActions } from '../../actions/user';
 
-import * as $ from 'jquery';
-
 import { User } from '../../models/user';
 import { AppState } from '../../store/store';
 
@@ -29,12 +27,17 @@ export class LoginComponent {
   ) {
     this.userName = '';
     this.password = '';
-    // Subscribe the user in store to check when user is logged in
+  }
+
+  ngOnInit() {
     this.user$.subscribe(user => {
       if (user && user.getId() > 0) {
-        router.navigateByUrl('/chat');
+        this.router.navigateByUrl('/chat');
       }
     });
+    if (window.localStorage) {
+      if (window.localStorage.getItem('token')) this.router.navigateByUrl('/chat');
+    }
   }
 
   login(): void {

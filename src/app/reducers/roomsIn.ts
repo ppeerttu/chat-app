@@ -10,7 +10,7 @@ export function roomsInReducer(state: AppState = INITIAL_STATE, action: ChatActi
     case RoomActions.USERS_ROOMS_SUCCESS:
       if (action.res) {
         const rooms = action.res.map(room => {
-          return new RoomInfo(room.roomName, room.id, room.password, room.createdAt, room.updatedAt);
+          return new RoomInfo(room.roomName, room.id, room.secret, room.createdAt, room.updatedAt);
         });
         base.roomsIn = rooms;
       }

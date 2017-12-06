@@ -13,6 +13,9 @@
         <md-error *ngIf="usernameFormControl.hasError('required')">
           Username is <strong>required</strong>
         </md-error>
+        <md-error *ngIf="usernameFormControl.hasError('maxlength')">
+          Username can't be longer than 15 characters
+        </md-error>
         <md-error *ngIf="usernameFormControl.hasError('minlength')">
           Username should be at least 3 characters
         </md-error>
@@ -22,11 +25,17 @@
         <md-error *ngIf="firstNameFormControl.hasError('required')">
           First name is <strong>required</strong>
         </md-error>
+        <md-error *ngIf="firstNameFormControl.hasError('maxlength')">
+          First name can't be longer than 15 characters
+        </md-error>
       </md-form-field>
       <md-form-field class="register-full-width">
         <input mdInput placeholder="Last name" [formControl]="lastNameFormControl" [(ngModel)]="lastName">
         <md-error *ngIf="lastNameFormControl.hasError('required')">
           Last name is <strong>required</strong>
+        </md-error>
+        <md-error *ngIf="lastNameFormControl.hasError('maxlength')">
+          Last name can't be longer than 15 characters
         </md-error>
       </md-form-field>
       <md-form-field class="register-full-width">
@@ -34,8 +43,11 @@
         <md-error *ngIf="emailFormControl.hasError('required')">
           Email is <strong>required</strong>
         </md-error>
-        <md-error *ngIf="emailFormControl.hasError('email')">
+        <md-error *ngIf="emailFormControl.hasError('pattern')">
           Please provide proper email address
+        </md-error>
+        <md-error *ngIf="emailFormControl.hasError('maxlength')">
+          Email can't be longer than 15 characters
         </md-error>
       </md-form-field>
       <md-form-field class="register-full-width">
@@ -45,6 +57,9 @@
         </md-error>
         <md-error *ngIf="passwordFormControl.hasError('minlength')">
           Password has to be at least <strong>6 characters</strong> long
+        </md-error>
+        <md-error *ngIf="passwordFormControl.hasError('maxlength')">
+          Password can't be longer than 20 characters
         </md-error>
       </md-form-field>
       <md-form-field class="register-full-width">

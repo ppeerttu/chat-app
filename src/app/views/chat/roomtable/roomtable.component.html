@@ -13,7 +13,7 @@
     <!-- Locked Column -->
     <ng-container mdColumnDef="locked">
       <md-header-cell *mdHeaderCellDef> Locked </md-header-cell>
-      <md-cell *mdCellDef="let element"><i class="material-icons">{{element.password == null ? 'lock_open' : 'lock'}}</i></md-cell>
+      <md-cell *mdCellDef="let element"><i class="material-icons">{{element.secret ? 'lock' : 'lock_open'}}</i></md-cell>
     </ng-container>
 
     <!-- Join Column -->

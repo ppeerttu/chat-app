@@ -54,7 +54,9 @@ export class UserActions {
     );
     return this.ngRedux.dispatch(this.thunk(UserActions.TOKEN_REQUEST, apiCall));
   }
+
   register(userName: string, firstName: string, lastName: string, email: string, password: string): any {
+    if (!password) password = null;
     const apiCall = new ApiCall(
       'post',
       'users/register',
@@ -65,6 +67,7 @@ export class UserActions {
   }
 
   update(id: number, userName: string, firstName: string, lastName: string, email: string, password: string): any {
+    if (!password) password = null;
     const apiCall = new ApiCall(
       'put',
       'users/update',

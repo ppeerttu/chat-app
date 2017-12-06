@@ -10,13 +10,13 @@ export function roomReducer(state: AppState = INITIAL_STATE, action: ChatAction)
     case RoomActions.CREATE_ROOM_SUCCESS:
       if (action.res) {
         const {roomName, password, id, createdAt, updatedAt} = action.res;
-        base.push(new Room(roomName, id, password, createdAt, updatedAt));
+        base.push(new Room(roomName, id, !!password, createdAt, updatedAt));
       }
       break;
     case RoomActions.FETCH_ROOMS_SUCCESS:
       if (action.res) {
         base = action.res.map(room => {
-          return new Room(room.roomName, room.id, room.password, room.createdAt, room.updatedAt);
+          return new Room(room.roomName, room.id, room.secret, room.createdAt, room.updatedAt);
         });
       }
       break;

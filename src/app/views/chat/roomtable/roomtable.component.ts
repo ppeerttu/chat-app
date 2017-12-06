@@ -85,7 +85,7 @@ export class RoomTableComponent {
 
   joinRoom(id: number, password: string = null) {
     const room = this.rooms[this.rooms.findIndex(i => i.getId() == id)];
-    if (room.getPassword() === null || password !== null) {
+    if (!room.getSecret() || password !== null) {
       this.roomAction.joinRoom(id, this.user.getId(), password).then(res => {
         if (res.type === RoomActions.JOIN_ROOM_SUCCESS) {
           if (res.res && !isNaN(res.res.roomId)) {
