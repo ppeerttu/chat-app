@@ -37,9 +37,10 @@
 
 .about-container {
   background-color: #F5F5F5;
-  height: calc(100vh - 200px); /* the header takes 100px from the top */
+  /*height: calc(100vh - 200px); /* the header takes 100px from the top */
+  /*margin-top: 100px;*/
   width: 100vw;
-  padding: 10px 100px;
+  padding: 10px 10%;
 }
 
 
