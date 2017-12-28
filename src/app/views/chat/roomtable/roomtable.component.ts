@@ -1,17 +1,15 @@
-
-import { Component, ElementRef, ViewChild, Input, Inject } from '@angular/core';
+import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { select, NgRedux } from '@angular-redux/store';
-import { Router } from '@angular/router';
+import { select } from '@angular-redux/store';
 import { RoomActions, ChatActions } from '../../../actions';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
 
-import { Room, UsersRoom, User, Message } from '../../../models';
+import { Room, UsersRoom, User } from '../../../models';
 
 @Component({
   selector: 'room-table',
@@ -29,34 +27,37 @@ export class RoomTableComponent {
   private rooms: Room[];
   @ViewChild('filter') filter: ElementRef;
 
+  private userSub;
+  private roomsSub;
+  private roomsInSub;
+  private keyFilterSub;
+
   constructor(
     private roomAction: RoomActions,
     public joinRoomDialog: MdDialog,
     public joinRoomFailed: MdDialog,
     public snackBar: MdSnackBar,
     private chatAction: ChatActions,
-  ) {
-    this.user$.subscribe(user => {
-      this.user = user;
-    });
-
-  }
+  ) {}
 
   ngOnInit() {
+    this.userSub = this.user$.subscribe(user => {
+      this.user = user;
+    });
     this.roomDataSource = new RoomDataSource(this.roomDataBase);
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
+    this.keyFilterSub = Observable.fromEvent(this.filter.nativeElement, 'keyup')
       .debounceTime(150)
       .distinctUntilChanged()
       .subscribe(() => {
         if (!this.roomDataSource) { return; }
         this.roomDataSource.filter = this.filter.nativeElement.value;
       });
-    this.rooms$.subscribe(rooms => {
+    this.roomsSub = this.rooms$.subscribe(rooms => {
       this.rooms = rooms;
       if (!this.roomDataSource) { return; }
       this.roomDataSource.filter = this.filter.nativeElement.value;
     });
-    this.roomsIn$.subscribe(roomsIn => {
+    this.roomsInSub = this.roomsIn$.subscribe(roomsIn => {
       if (!this.roomDataSource) { return; }
       this.roomDataSource.filter = this.filter.nativeElement.value;
     });
@@ -154,6 +155,13 @@ export class RoomTableComponent {
       }
     });
   }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+    this.roomsInSub.unsubscribe();
+    this.roomsSub.unsubscribe();
+    this.keyFilterSub.unsubscribe();
+  }
 }
 
 @Component({
@@ -205,9 +213,11 @@ export class RoomDataBase {
   @select() rooms$: Observable<Room[]>;
   @select() roomsIn$: Observable<Room[]>;
   private roomsIn: Room[];
+
   dataChange: BehaviorSubject<Room[]> = new BehaviorSubject<Room[]>([]);
 
   constructor() {
+    // NOTE: These should be unsubscribed somehow
     this.rooms$.subscribe(rooms => {
       this.dataChange.next(rooms);
     });

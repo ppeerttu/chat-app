@@ -1,8 +1,6 @@
 import { Component, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
-import { User } from '../../../models';
 
 
 @Component({
@@ -11,10 +9,11 @@ import { User } from '../../../models';
   styleUrls: ['profilemodal.component.css']
 })
 export class ProfileModalComponent {
+  passwordsMatch: boolean = true;
+  profileForm: FormGroup;
+
   private password: string = null;
   private confirmPassword: string = null;
-  private profileForm: FormGroup;
-  passwordsMatch: boolean = true;
 
   usernameFormControl = new FormControl('', [
     Validators.required,

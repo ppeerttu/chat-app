@@ -4,7 +4,6 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-import { DatePipe } from '@angular/common';
 import {
   MdFormFieldModule,
   MdInputModule,
@@ -23,12 +22,11 @@ import {
   MdProgressBarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EmojiModule } from 'angular2-emoji';
 
 import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { createLogger } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
-import { AlertModule } from 'ng2-bootstrap';
+import { AlertModule } from 'ngx-bootstrap';
 import { AppState, INITIAL_STATE } from './store/store';
 import reducer from './store/store';
 import ApiMiddleware from './middleware/api';
@@ -135,7 +133,6 @@ const appRoutes: Routes = [
     ReactiveFormsModule,
     HttpModule,
     AlertModule.forRoot(),
-    EmojiModule,
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: !production }

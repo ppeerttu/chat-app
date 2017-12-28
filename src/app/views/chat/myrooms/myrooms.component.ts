@@ -5,7 +5,7 @@ import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
 import { RoomActions } from '../../../actions/room';
 
-import { RoomInfo, User, Message } from '../../../models';
+import { RoomInfo } from '../../../models';
 
 @Component({
   selector: 'my-rooms',
@@ -15,16 +15,19 @@ import { RoomInfo, User, Message } from '../../../models';
 export class MyRoomsComponent {
   @select() roomsIn$:Observable<RoomInfo[]>;
   @select() viewRoom$:Observable<number>;
-  private rooms: RoomInfo[] = [];
+  rooms: RoomInfo[] = [];
+  viewRoom: RoomInfo;
+
   private roomActions: RoomActions;
-  private viewRoom: RoomInfo;
+  private roomsInSub;
+  private viewRoomSub;
 
   constructor(roomActions: RoomActions) {
     this.roomActions = roomActions;
-    this.roomsIn$.subscribe(rooms => {
+    this.roomsInSub = this.roomsIn$.subscribe(rooms => {
       this.rooms = rooms;
     });
-    this.viewRoom$.subscribe(id => {
+    this.viewRoomSub = this.viewRoom$.subscribe(id => {
       if (!id) {
         this.viewRoom = null;
       } else {
@@ -52,6 +55,11 @@ export class MyRoomsComponent {
         elem.classList.remove('active');
       }
     }
+  }
+
+  ngOnDestroy() {
+    this.roomsInSub.unsubscribe();
+    this.viewRoomSub.unsubscribe();
   }
 
 }

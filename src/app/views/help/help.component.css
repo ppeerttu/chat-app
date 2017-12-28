@@ -37,9 +37,13 @@
 
 .help-container {
   background-color: #F5F5F5;
-  height: calc(100vh - 200px); /* the header takes 100px from the top */
+  /*height: calc(100vh - 200px); /* the header takes 100px from the top */
   width: 100vw;
   padding: 10px 100px;
+}
+
+.table-container {
+  overflow-x: scroll;
 }
 
 

@@ -7,9 +7,376 @@
   <h1>Help</h1>
 </div>
 <div class="container help-container">
-  <p>
-    Help is coming up.<br /><br />
 
+    <h2>Contents</h2>
+    <ol>
+      <li>
+        Registration and logging in
+        <ol type="a">
+          <li>
+            Registration
+          </li>
+          <li>
+            Logging in
+          </li>
+        </ol>
+      </li>
+      <li>
+        Managing the rooms
+        <ol type="a">
+          <li>
+            Joining a room
+          </li>
+          <li>
+            Leaving a room
+          </li>
+          <li>
+            Creating a room
+          </li>
+        </ol>
+      </li>
+      <li>
+        Sending a message
+        <ol type="a">
+          <li>
+            Selecting a room
+          </li>
+          <li>
+            Sending a message in a room
+          </li>
+        </ol>
+      </li>
+      <li>
+        Managing the user profile
+        <ol type="a">
+          <li>
+            Changing the user information
+          </li>
+          <li>
+            Changing the password
+          </li>
+        </ol>
+      </li>
+      <li>
+        About the software and help
+        <ol type="a">
+          <li>
+            About the software
+          </li>
+          <li>
+            Help
+          </li>
+        </ol>
+      </li>
+      <li>
+        Common error messages
+      </li>
+      <li>
+        Terms
+      </li>
+    </ol>
+
+    <section id="section-1">
+      <h3 align="center">1. Registration and logging in</h3>
+      <h5>a. Registration</h5>
+      Registration into the service is done by filling a registration form.
+      The <a href="/register">form</a> can be foud when clicking the "Register" button at the Login -page.
+      The form has to be filled with valid data. When the form is filled up correctly, you can
+      click "Register". You will be notified whether or not the registration is successful.
+      You can get to the Login page by pressing the "Back to login" button at the login page.
+      More specific information about required user information below. <strong>Please note that
+      no user information is used in anything other than access control</strong>; not a single email
+      will be sent from this software. You can fill in falsy user information if you want to.
+      <br />
+      <br />
+      <div class="table-container">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>
+                Data
+              </th>
+              <th>
+                Required
+              </th>
+              <th>
+                Min length
+              </th>
+              <th>
+                Max length
+              </th>
+              <th>
+                Additional info
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                Username
+              </td>
+              <td>
+                Yes
+              </td>
+              <td>
+                3
+              </td>
+              <td>
+                15
+              </td>
+              <td mdTooltip="Two or more users can't have the same username">
+                <u>Unique</u>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                First name
+              </td>
+              <td>
+                Yes
+              </td>
+              <td>
+                1
+              </td>
+              <td>
+                15
+              </td>
+              <td mdTooltip="Will not be shown to other users">
+                <u>Private</u>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Last name
+              </td>
+              <td>
+                Yes
+              </td>
+              <td>
+                1
+              </td>
+              <td>
+                15
+              </td>
+              <td mdTooltip="Will not be shown to other users">
+                <u>Private</u>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Email
+              </td>
+              <td>
+                Yes
+              </td>
+              <td>
+                -
+              </td>
+              <td>
+                15
+              </td>
+              <td mdTooltip="Should be in form of name@domain.com">
+                <u>Valid email</u>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Password
+              </td>
+              <td>
+                Yes
+              </td>
+              <td>
+                6
+              </td>
+              <td>
+                20
+              </td>
+              <td>
+                Will be confirmed with another form field
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <br />
+      <h5>b. Logging in</h5>
+      Logging into the service can be done at <a href="/login">Login</a> -page. This is the default page of the site.
+      Log in to the service by filling in the username and password of your account. Click then the "Login" button.
+      If the logging in is successful, you will be redirected to the Chat -page. If login is unsuccessful, you will be notified about it.
+    </section><br />
+
+
+    <section id="section-2">
+      <h3 align="center">2. Managing the rooms</h3>
+      <br />
+      <strong>NOTE: </strong> In following sub-sections, you will be assumed to be in the Chat view.
+      <br /><br />
+      <h5>a. Joining a room</h5>
+      You can join a room from the left sidebar. Open the sidebar by clicking the Menu button in the
+      top left corner. Select "Join rooms", which will open a list of rooms. You can join any room
+      by clicking the plus (+) button. If there is only minus (-) button next to some room's name, you are
+      already in that room. If the room you're joining to is private room, it is protected by a
+      password. You will be shown a dialog where you can insert the password. Join the room by
+      clicking "Join" or cancel the action by clicking "Cancel". When you have joined into the room,
+      you can send and receive messages in it. You can join as many rooms as you like.
+      <br /><br />
+      <h5>b. Leaving a room</h5>
+      You can leave a room by opening the sidebar by clicking the Menu button from top left corner of the screen.
+      Select "Join rooms" from the sidebar and a list of rooms will open in the sidebar. Leave any room you're in
+      by clicking the minus (-) button next to the room name. You can join the room again immediately if you want to.
+      <br /><br />
+      <h5>c. Creating a room</h5>
+      You can create a room by opening the sidebar by clicking the Menu button from top left corner of the screen.
+      Select "Create a room" from the sidebar and a form will be opened. Fill the name of the room into the form
+      and fill password for the room if you want the room to be private. After you're set, click "Create" button.
+      A notification will be shown in the bottom of the screen whether or not the room was created successfully.
+      <br />
+    </section><br />
+
+    <section id="section-3">
+      <h3>3. Sending a message</h3>
+      <br />
+      <strong>NOTE: </strong> In following sub-sections, you will be assumed to be in the Chat view.
+      <br /><br />
+      <h5>a. Selecting a room</h5>
+      You can select a room by clicking the room in "My rooms" list. The list is located in the
+      left side of the screen on larger screens, and in the right sidebar on small screens (mobile).
+      <br /><br />
+      <h5>b. Sending a message in a room</h5>
+      You can send a message when you're in a room (section 3.a). Send a message by typing the
+      message in the message form field at the bottom of the screen and pressing Enter or send
+      button next to the message form field.<br />
+    </section><br />
+
+    <section id="section-4">
+      <h3 align="center">4. Managing the user profile</h3>
+      <br />
+      <strong>NOTE: </strong> In following sub-sections, you will be assumed to be in the Chat view.
+      <br /><br />
+      <h5>a. Changing the user information</h5>
+      To change the user information, open the left sidebar by clicking the Menu button from the
+      top left corner of the screen. Select "Settings" from the left sidebar and "Profile" under
+      the settings. A profile modal will be opened for you. You can change any user information
+      as long as you follow the validation rules explained at section 1.a. You can cancel the
+      action by clicking "Cancel".
+      <br /><br />
+      <h5>b. Changing the password</h5>
+      Open the profile modal (see section 4.a). If you want to change only password, do not
+      touch any other form field than "Password" and "Confirm password". Insert the new
+      password into both fields. If you want to, you can also change other user information.
+      Save the information by clicking "Save" or cancel the action by clicking "Cancel".
+      <br />
+    </section><br />
+
+    <section id="section-5">
+      <h3 align="center">5.About the software and help</h3>
+      <h5>a. About the software</h5>
+      You can get information about the software by going to the <a href="/about">About</a> -page.
+      You can get to the About -page from any view in the software:
+      <br />
+      <br />
+      In the ogin- and Register -views, click the "About" -link at the bottom right of the page.
+      <br />
+      <br />
+      In the Chat -view you'll get to the About -page by opening the left sidebar, clicking the
+      "Settings" and selecting "About" from the settings list.
+      <br /><br />
+      <h5>b. Help</h5>
+      Open the "Settings" list (see section 5.a above). Select "Help" from the list which will
+      open the Help page in a new tab.
+      <br />
+    </section><br />
+
+    <section id="section-6">
+      <h3 align="center">6. Common error messages</h3>
+      <br />
+      Common error messages and usual explanations for them are listed below.
+      <br /><br />
+      <ul style="list-style-type:none;">
+        <li>
+          <strong>Login unsuccessful</strong>
+        </li>
+        <li>
+          Logging in was unsuccessful. This happens usually due to wrong user credentials,
+          lost of internet connection or unexpected server error.
+        </li>
+        <li>
+          <strong>Registration failed</strong>
+        </li>
+        <li>
+          Registration was unsuccessful. This happens usually when the username is already taken,
+          the internet connection is lost or unexpected server error.
+        </li>
+        <li>
+          <strong>Room creation failed</strong>
+        </li>
+        <li>
+          Room creation failed. Either the room name was already taken, the internet connection is
+          lost, or an unexpected server error has occurred.
+        </li>
+        <li>
+          <strong>Joining the room failed</strong>
+        </li>
+        <li>
+          Joining the selected room failed. This can be caused by wrong password (private rooms), lost
+          internet connection or unexpected server error.
+        </li>
+        <li>
+          <strong>Updating user data failed</strong>
+        </li>
+        <li>
+          User data was updated unsuccessfully. This can be caused by already taken username (when changing
+          the username), lost internet connection or unexpected server error.
+        </li>
+      </ul>
+
+    </section><br />
+
+    <section id="section-7">
+      <h3 align="center">7. Terms</h3>
+      <br />
+      Common terms related to this service and their explanations are listed below.
+      <br /><br />
+      <ul style="list-style-type:none;">
+        <li>
+          <strong>User</strong> is a private person, who can register to this service and use it
+        </li>
+        <li>
+          <strong>Room</strong> is a virtual space, where users can send messages to each other (see section 2).
+        </li>
+        <li>
+          <strong>Chosen room</strong> is a room that a user has selected in the Chat -view for current chat room
+          (see section 2.a)
+        </li>
+        <li>
+          <strong>My rooms</strong> are the rooms the user is joined in currently
+        </li>
+        <li>
+          <strong>Left sidebar</strong> is a menu that can be opened in the Chat -view from the Menu button in the
+          top left corner of the page
+        </li>
+        <li>
+          <strong>Participants</strong> is a list of users that are in the room currently selected as chosen room
+        </li>
+        <li>
+          <strong>Room info</strong> contains information about chosen room
+        </li>
+        <li>
+          <strong>Modal</strong> is a window that is opened on top of the page
+        </li>
+        <li>
+          <strong>Dialog</strong> is a window that is opened on top of the page and will provide some information
+          or ask for confirmation from the user
+        </li>
+        <li>
+          <strong>Message</strong> is a string sent in a room and other participants in that particular room can see it
+        </li>
+      </ul>
+    </section><br />
+
+
+  <p>
     <strong>Author</strong><br />
     Perttu Kärnä<br />
     perttu.karna@gmail.com

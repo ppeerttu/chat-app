@@ -16,13 +16,14 @@ import { Room, User, Message } from '../../../models';
 export class CreateRoomComponent {
   @select() rooms$: Observable<Room[]>;
   @select() user$: Observable<User>;
+  roomName: string;
+  password: string;
 
   private action: RoomActions;
-  private roomName: string;
-  private password: string;
-  private locked: boolean;
   private rooms: Room[];
   private user: User;
+  private roomsSub;
+  private userSub;
 
   roomNameFormControl = new FormControl('', [
     Validators.minLength(3)
@@ -36,18 +37,16 @@ export class CreateRoomComponent {
     this.action = action;
     this.roomName = '';
     this.password = '';
-    this.locked = false;
     this.rooms = [];
-    this.rooms$.subscribe(rooms => {
+    this.roomsSub = this.rooms$.subscribe(rooms => {
       this.rooms = rooms;
     });
-    this.user$.subscribe(user => {
+    this.userSub = this.user$.subscribe(user => {
       this.user = user;
     });
   }
 
   createRoom(): void {
-    // validate room: proper name, no duplicate names, check if locked -> password
     if (this.roomName.length > 2) {
       let duplicate = false;
       this.rooms.map(room => {
@@ -96,5 +95,10 @@ export class CreateRoomComponent {
     this.snackBar.open(message, action, {
       duration: duration
     });
+  }
+
+  ngOnDestroy() {
+    this.roomsSub.unsubscribe();
+    this.userSub.unsubscribe();
   }
 }

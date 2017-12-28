@@ -1,24 +1,20 @@
 import { Component, Inject } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { select, NgRedux } from '@angular-redux/store';
-import { UserActions } from '../../actions/user';
-
-import { User } from '../../models/user';
-import { AppState } from '../../store/store';
+import { select } from '@angular-redux/store';
+import { UserActions } from '../../actions';
+import { User } from '../../models';
 
 @Component({
     templateUrl: './login.component.html',
     styleUrls: [ 'login.component.scss' ]
 })
-
 export class LoginComponent {
   @select() readonly user$: Observable<User>;
   userName: string;
   password: string;
-  user: User;
+  private userSub;
 
   constructor(
     private router: Router,
@@ -30,7 +26,7 @@ export class LoginComponent {
   }
 
   ngOnInit() {
-    this.user$.subscribe(user => {
+    this.userSub = this.user$.subscribe(user => {
       if (user && user.getId() > 0) {
         this.router.navigateByUrl('/chat');
       }
@@ -53,11 +49,14 @@ export class LoginComponent {
   toRegister(): void {
     this.router.navigateByUrl('/register');
   }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+  }
 }
 
 @Component({
-  templateUrl: 'login-failed-dialog.html',
-  styleUrls: ['login-failed-dialog.html']
+  templateUrl: 'login-failed-dialog.html'
 })
 export class LoginFailedDialog {
 

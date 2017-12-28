@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Observable';
 import { select } from '@angular-redux/store';
 import { UserActions } from '../../actions/user';
 
-import { User } from '../../models/user';
+import { User } from '../../models';
 
 @Component({
     templateUrl: './register.component.html',
@@ -16,7 +16,7 @@ import { User } from '../../models/user';
 export class RegisterComponent {
   @select() readonly user$: Observable<User>;
 
-  private registerForm: FormGroup;
+  registerForm: FormGroup;
   userName: string = '';
   firstName: string = '';
   lastName: string = '';
@@ -154,7 +154,7 @@ export class RegisterComponent {
 }
 
 @Component({
-  selector: 'register-success-dialog  ',
+  selector: 'register-success-dialog',
   templateUrl: 'register-success-dialog.html',
   styleUrls: ['register-success-dialog.css']
 })
@@ -162,7 +162,8 @@ export class RegisterSuccessDialog {
 
   constructor(
     public dialogRef: MdDialogRef<RegisterSuccessDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    @Inject(MD_DIALOG_DATA) public data: any
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -171,7 +172,7 @@ export class RegisterSuccessDialog {
 }
 
 @Component({
-  selector: 'register-failed-dialog  ',
+  selector: 'register-failed-dialog',
   templateUrl: 'register-failed-dialog.html',
   styleUrls: ['register-failed-dialog.css']
 })
@@ -179,7 +180,8 @@ export class RegisterFailedDialog {
 
   constructor(
     public dialogRef: MdDialogRef<RegisterFailedDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    @Inject(MD_DIALOG_DATA) public data: any
+  ) { }
 
   onNoClick(): void {
     this.dialogRef.close();
