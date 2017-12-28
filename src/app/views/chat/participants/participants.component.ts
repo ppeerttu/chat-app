@@ -15,17 +15,19 @@ import { RoomInfo, User, Message } from '../../../models';
 export class ParticipantsComponent {
   @select() roomsIn$:Observable<RoomInfo[]>;
   @select() viewRoom$:Observable<number>;
+  users: User[];
 
   private rooms: RoomInfo[];
   private roomId: number;
-  private users: User[];
+  private roomsInSub;
+  private viewRoomSub;
 
   constructor() {
     this.users = [];
   }
 
   ngOnInit() {
-    this.roomsIn$.subscribe(rooms => {
+    this.roomsInSub = this.roomsIn$.subscribe(rooms => {
       this.rooms = rooms;
       if (this.roomId) {
         this.rooms.map(room => {
@@ -35,7 +37,7 @@ export class ParticipantsComponent {
         });
       }
     });
-    this.viewRoom$.subscribe(roomId => {
+    this.viewRoomSub = this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
       if (!roomId) {
         this.users = [];
@@ -47,5 +49,10 @@ export class ParticipantsComponent {
         });
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.viewRoomSub.unsubscribe();
+    this.roomsInSub.unsubscribe();
   }
 }

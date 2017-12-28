@@ -15,17 +15,19 @@ import { Room, User, Message } from '../../../models';
 export class InputMessageComponent {
   @select() user$: Observable<User>;
   @select() viewRoom$: Observable<number>;
+  message: string;
+  roomId: number;
 
   private user: User;
-  private roomId: number;
-  private message: string;
+  private userSub;
+  private viewRoomsSub;
 
   constructor(private chatAction: ChatActions) {
     this.message = '';
-    this.user$.subscribe(user => {
+    this.userSub = this.user$.subscribe(user => {
       this.user = user;
     });
-    this.viewRoom$.subscribe(roomId => {
+    this.viewRoomsSub = this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
     });
   }
@@ -35,6 +37,11 @@ export class InputMessageComponent {
       this.chatAction.sendMessage(this.roomId, this.user.getId(), this.user.getUserName(), this.message);
       this.message = '';
     }
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+    this.viewRoomsSub.unsubscribe();
   }
 
 }

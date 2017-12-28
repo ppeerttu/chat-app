@@ -16,12 +16,15 @@ export class MessageContainerComponent {
   @select() roomsIn$: Observable<RoomInfo[]>;
   @select() viewRoom$: Observable<number>;
   @select() user$: Observable<User>;
+  messages: Message[];
 
   private rooms: RoomInfo[];
-  private messages: Message[];
   private roomId: number;
   private users: Object;
   private user: User;
+  private roomsInSub;
+  private viewRoomSub;
+  private userSub;
 
   constructor() {
     this.messages = [];
@@ -31,10 +34,10 @@ export class MessageContainerComponent {
   }
 
   ngOnInit() {
-    this.user$.subscribe(user => {
+    this.userSub = this.user$.subscribe(user => {
       this.user = user;
     });
-    this.roomsIn$.subscribe(rooms => {
+    this.roomsInSub = this.roomsIn$.subscribe(rooms => {
       this.rooms = rooms;
       this.rooms.map(room => {
         if (this.roomId === room.getId()) {
@@ -46,13 +49,13 @@ export class MessageContainerComponent {
       });
       const msgContainer = document.querySelector('.message-container');
       if (msgContainer) {
-        // BECAUSE IF DONE IMMEDIATELY, NOT WORKING AS EXPECTED (because of angular bindings)
+        // IF DONE IMMEDIATELY, NOT WORKING AS EXPECTED (because of angular bindings)
         setTimeout(() => {
           msgContainer.scrollTop = msgContainer.scrollHeight;
         }, 10);
       }
     });
-    this.viewRoom$.subscribe(roomId => {
+    this.viewRoomSub = this.viewRoom$.subscribe(roomId => {
       this.roomId = roomId;
       if (!roomId) {
         this.users = {};
@@ -69,5 +72,11 @@ export class MessageContainerComponent {
       }
 
     });
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
+    this.viewRoomSub.unsubscribe();
+    this.roomsInSub.unsubscribe();
   }
 }

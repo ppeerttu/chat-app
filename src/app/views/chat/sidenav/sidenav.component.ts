@@ -1,8 +1,6 @@
-
-import { Component, Input, ViewContainerRef } from '@angular/core';
+import { Component, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { select, NgRedux } from '@angular-redux/store';
-import { Router } from '@angular/router';
+import { select } from '@angular-redux/store';
 import { MdSnackBar, MdDialog } from '@angular/material';
 import {
   UserActions,
@@ -10,12 +8,7 @@ import {
   ChatActions
 } from '../../../actions';
 
-import {
-  Room,
-  RoomInfo,
-  User,
-  Message
-} from '../../../models';
+import { RoomInfo, User } from '../../../models';
 
 @Component({
   selector: 'sidenav',
@@ -25,8 +18,8 @@ import {
 export class SidenavComponent {
   @select() user$: Observable<User>;
   @select() roomsIn$: Observable<RoomInfo[]>;
-  @select() viewRoom$: Observable<number>;
-  private viewRoom: RoomInfo = null;
+  @select() viewRoom$: Observable<Number>;
+  viewRoom: RoomInfo;
   private rooms: RoomInfo[] = null;
   private user: User;
   private viewRoomSub;
@@ -34,15 +27,11 @@ export class SidenavComponent {
   private userSub;
 
   constructor(
-    private router: Router,
-    private userAction: UserActions,
     private roomAction: RoomActions,
-    private chatAction: ChatActions,
     private snackBar: MdSnackBar,
     public roomModal: MdDialog,
     private viewContainerRef: ViewContainerRef
   ) {
-    this.userAction = userAction;
     this.userSub = this.user$.subscribe(user => {
       this.user = user;
     });

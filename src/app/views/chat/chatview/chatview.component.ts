@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 
 @Component({
@@ -6,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './chatview.component.html',
   styleUrls: [ 'chatview.component.scss' ]
 })
-export class ChatViewComponent {
-
-}
+export class ChatViewComponent {}

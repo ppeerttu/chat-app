@@ -1,4 +1,3 @@
-
 import { Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
@@ -17,6 +16,7 @@ import { User } from '../../../models';
 export class SettingsComponent {
   @select() user$: Observable<User>;
   private user: User = null;
+  private userSub;
 
   constructor(
     private userAction: UserActions,
@@ -26,7 +26,7 @@ export class SettingsComponent {
     public snackBar: MdSnackBar,
     public userProfileFailed: MdDialog
   ) {
-    this.user$.subscribe(user => {
+    this.userSub = this.user$.subscribe(user => {
       this.user = user;
     });
   }
@@ -72,6 +72,10 @@ export class SettingsComponent {
     this.snackBar.open(message, action, {
       duration: 4000
     });
+  }
+
+  ngOnDestroy() {
+    this.userSub.unsubscribe();
   }
 
 }
