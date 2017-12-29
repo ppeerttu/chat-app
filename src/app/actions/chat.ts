@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { NgRedux, select } from '@angular-redux/store';
 import { Observable } from 'rxjs/Observable';
-import { AppState } from '../store/store';
-import { User } from '../models/user';
+import { User, AppState } from '../models';
 import * as io from 'socket.io-client';
-import { API_URL } from '../../main';
+import { environment } from '../../environments/environment';
+const API_URL = environment.apiUrl;
 
 
 @Injectable()

@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 
@@ -37,8 +37,8 @@ export class ProfileModalComponent {
 
 
   constructor(
-    public dialogRef: MdDialogRef<ProfileModalComponent>,
-    @Inject(MD_DIALOG_DATA) public data: any,
+    public dialogRef: MatDialogRef<ProfileModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder
     ) {
     this.profileForm = fb.group({

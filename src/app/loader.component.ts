@@ -10,7 +10,7 @@ import { select, NgRedux } from '@angular-redux/store';
   selector: 'loader-component',
   template: `
   <div class="loader-container">
-    <md-progress-bar *ngIf="show" mode="indeterminate" color="accent"></md-progress-bar>
+    <mat-progress-bar *ngIf="show" mode="indeterminate" color="accent"></mat-progress-bar>
   </div>
   `,
   styles: [

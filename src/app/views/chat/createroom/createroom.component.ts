@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
-import { MdSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { select, NgRedux } from '@angular-redux/store';
 import { Router } from '@angular/router';
@@ -32,7 +32,7 @@ export class CreateRoomComponent {
 
   constructor(
     action: RoomActions,
-    public snackBar: MdSnackBar
+    public snackBar: MatSnackBar
 ) {
     this.action = action;
     this.roomName = '';

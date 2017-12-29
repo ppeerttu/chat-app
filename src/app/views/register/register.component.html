@@ -8,71 +8,71 @@
   <div class="form-container">
     <h1>Register to ChatApp</h1>
     <form class="register-form" name="registerForm">
-      <md-form-field class="register-full-width">
-        <input mdInput placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="userName">
-        <md-error *ngIf="usernameFormControl.hasError('required')">
+      <mat-form-field class="register-full-width">
+        <input matInput placeholder="Username" [formControl]="usernameFormControl" [(ngModel)]="userName">
+        <mat-error *ngIf="usernameFormControl.hasError('required')">
           Username is <strong>required</strong>
-        </md-error>
-        <md-error *ngIf="usernameFormControl.hasError('maxlength')">
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('maxlength')">
           Username can't be longer than 15 characters
-        </md-error>
-        <md-error *ngIf="usernameFormControl.hasError('minlength')">
+        </mat-error>
+        <mat-error *ngIf="usernameFormControl.hasError('minlength')">
           Username should be at least 3 characters
-        </md-error>
-      </md-form-field>
-      <md-form-field class="register-full-width">
-        <input mdInput placeholder="First name" [formControl]="firstNameFormControl" [(ngModel)]="firstName">
-        <md-error *ngIf="firstNameFormControl.hasError('required')">
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="register-full-width">
+        <input matInput placeholder="First name" [formControl]="firstNameFormControl" [(ngModel)]="firstName">
+        <mat-error *ngIf="firstNameFormControl.hasError('required')">
           First name is <strong>required</strong>
-        </md-error>
-        <md-error *ngIf="firstNameFormControl.hasError('maxlength')">
+        </mat-error>
+        <mat-error *ngIf="firstNameFormControl.hasError('maxlength')">
           First name can't be longer than 15 characters
-        </md-error>
-      </md-form-field>
-      <md-form-field class="register-full-width">
-        <input mdInput placeholder="Last name" [formControl]="lastNameFormControl" [(ngModel)]="lastName">
-        <md-error *ngIf="lastNameFormControl.hasError('required')">
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="register-full-width">
+        <input matInput placeholder="Last name" [formControl]="lastNameFormControl" [(ngModel)]="lastName">
+        <mat-error *ngIf="lastNameFormControl.hasError('required')">
           Last name is <strong>required</strong>
-        </md-error>
-        <md-error *ngIf="lastNameFormControl.hasError('maxlength')">
+        </mat-error>
+        <mat-error *ngIf="lastNameFormControl.hasError('maxlength')">
           Last name can't be longer than 15 characters
-        </md-error>
-      </md-form-field>
-      <md-form-field class="register-full-width">
-        <input mdInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email">
-        <md-error *ngIf="emailFormControl.hasError('required')">
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="register-full-width">
+        <input matInput placeholder="Email" [formControl]="emailFormControl" [(ngModel)]="email">
+        <mat-error *ngIf="emailFormControl.hasError('required')">
           Email is <strong>required</strong>
-        </md-error>
-        <md-error *ngIf="emailFormControl.hasError('pattern')">
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('pattern')">
           Please provide proper email address
-        </md-error>
-        <md-error *ngIf="emailFormControl.hasError('maxlength')">
+        </mat-error>
+        <mat-error *ngIf="emailFormControl.hasError('maxlength')">
           Email can't be longer than 15 characters
-        </md-error>
-      </md-form-field>
-      <md-form-field class="register-full-width">
-        <input id="password" (keyup)="passKeyUp()" (focusout)="passKeyUp()" type="password" mdInput name="password" placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
-        <md-error *ngIf="passwordFormControl.hasError('required')">
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="register-full-width">
+        <input id="password" (keyup)="passKeyUp()" (focusout)="passKeyUp()" type="password" matInput name="password" placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
+        <mat-error *ngIf="passwordFormControl.hasError('required')">
           Password is <strong>required</strong>
-        </md-error>
-        <md-error *ngIf="passwordFormControl.hasError('minlength')">
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('minlength')">
           Password has to be at least <strong>6 characters</strong> long
-        </md-error>
-        <md-error *ngIf="passwordFormControl.hasError('maxlength')">
+        </mat-error>
+        <mat-error *ngIf="passwordFormControl.hasError('maxlength')">
           Password can't be longer than 20 characters
-        </md-error>
-      </md-form-field>
-      <md-form-field class="register-full-width">
-        <input (keyup)="passKeyUp()" (focusout)="passKeyUp()" id="confirm" type="password" mdInput name="confirmPassword" placeholder="Confirm password" [formControl]="confirmPasswordFormControl" [(ngModel)]="confirmPassword">
-        <md-error *ngIf="confirmPasswordFormControl.hasError('required')">
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field class="register-full-width">
+        <input (keyup)="passKeyUp()" (focusout)="passKeyUp()" id="confirm" type="password" matInput name="confirmPassword" placeholder="Confirm password" [formControl]="confirmPasswordFormControl" [(ngModel)]="confirmPassword">
+        <mat-error *ngIf="confirmPasswordFormControl.hasError('required')">
           Confirm password is <strong>required</strong>
-        </md-error>
-        <md-error *ngIf="!passwordsMatch">
+        </mat-error>
+        <mat-error *ngIf="!passwordsMatch">
           Passwords do not match!
-        </md-error>
-      </md-form-field>
-      <button md-raised-button color="primary" (click)="register()" [disabled]="!registerForm.valid || !passwordsMatch">Register</button>
-      <button md-raised-button class="back-button" (click)="backToLogin()">Back to login</button>
+        </mat-error>
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="register()" [disabled]="!registerForm.valid || !passwordsMatch">Register</button>
+      <button mat-raised-button class="back-button" (click)="backToLogin()">Back to login</button>
     </form>
   </div>
   <footer class="footer">

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import { AppState } from '../store/store';
-import { ApiCall } from '../models/apicall';
+import { AppState, ApiCall } from '../models';
 
 @Injectable()
 export class RoomActions {

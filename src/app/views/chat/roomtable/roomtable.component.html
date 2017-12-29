@@ -1,33 +1,33 @@
 <div class="rooms-container">
-  <md-form-field class="input-full-width">
-    <input mdInput #filter placeholder="Filter rooms">
-  </md-form-field>
-  <md-table #table [dataSource]="roomDataSource">
+  <mat-form-field class="input-full-width">
+    <input matInput #filter placeholder="Filter rooms">
+  </mat-form-field>
+  <mat-table #table [dataSource]="roomDataSource">
 
     <!-- Name Column -->
-    <ng-container mdColumnDef="name">
-      <md-header-cell *mdHeaderCellDef> Name </md-header-cell>
-      <md-cell *mdCellDef="let element"> {{element.getRoomName()}} </md-cell>
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.getRoomName()}} </mat-cell>
     </ng-container>
 
     <!-- Locked Column -->
-    <ng-container mdColumnDef="locked">
-      <md-header-cell *mdHeaderCellDef> Private </md-header-cell>
-      <md-cell *mdCellDef="let element"><i class="material-icons">{{element.secret ? 'lock' : 'lock_open'}}</i></md-cell>
+    <ng-container matColumnDef="locked">
+      <mat-header-cell *matHeaderCellDef> Private </mat-header-cell>
+      <mat-cell *matCellDef="let element"><i class="material-icons">{{element.secret ? 'lock' : 'lock_open'}}</i></mat-cell>
     </ng-container>
 
     <!-- Join Column -->
-    <ng-container mdColumnDef="join">
-      <md-header-cell *mdHeaderCellDef>  </md-header-cell>
-      <md-cell *mdCellDef="let element">
-        <button md-icon-button [color]="getColor(element.inRoom)" (click)="element.inRoom ? leaveRoom(element.id) : joinRoom(element.id)">
+    <ng-container matColumnDef="join">
+      <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-icon-button [color]="getColor(element.inRoom)" (click)="element.inRoom ? leaveRoom(element.id) : joinRoom(element.id)">
           <i class="material-icons">{{element.inRoom ? 'remove' : 'add'}}</i>
         </button>
-      </md-cell>
+      </mat-cell>
     </ng-container>
 
-    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
-    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
-  </md-table>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  </mat-table>
 
 </div>

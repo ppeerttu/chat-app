@@ -1,25 +1,22 @@
-import { production } from '../main';
+import { environment } from '../environments/environment';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 import {
-  MdFormFieldModule,
-  MdInputModule,
-  MdButtonModule,
-  MdSidenavModule,
-  MdGridListModule,
-  MdTableModule,
-  MdDialogModule,
+  MatButtonModule,
+  MatSidenavModule,
+  MatGridListModule,
+  MatTableModule,
+  MatDialogModule,
   MatFormFieldModule,
+  MatListModule,
   MatInputModule,
   MatIconModule,
-  MdIconModule,
-  MdExpansionModule,
-  MdSnackBarModule,
-  MdTooltipModule,
-  MdProgressBarModule
+  MatExpansionModule,
+  MatSnackBarModule,
+  MatTooltipModule,
+  MatProgressBarModule
 } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -27,7 +24,7 @@ import { NgReduxModule, NgRedux } from '@angular-redux/store';
 import { createLogger } from 'redux-logger';
 import ReduxThunk from 'redux-thunk';
 import { AlertModule } from 'ngx-bootstrap';
-import { AppState, INITIAL_STATE } from './store/store';
+import { AppState, INITIAL_STATE } from './models';
 import reducer from './store/store';
 import ApiMiddleware from './middleware/api';
 import { AppComponent } from './app.component';
@@ -131,28 +128,25 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
     AlertModule.forRoot(),
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: !production }
+      { enableTracing: !environment.production }
     ),
     BrowserAnimationsModule,
-    MdFormFieldModule,
-    MdInputModule,
-    MdButtonModule,
-    MdSidenavModule,
-    MdGridListModule,
-    MdTableModule,
-    MdDialogModule,
     MatFormFieldModule,
     MatInputModule,
+    MatListModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatGridListModule,
+    MatTableModule,
+    MatDialogModule,
     MatIconModule,
-    MdIconModule,
-    MdExpansionModule,
-    MdSnackBarModule,
-    MdTooltipModule,
-    MdProgressBarModule
+    MatExpansionModule,
+    MatSnackBarModule,
+    MatTooltipModule,
+    MatProgressBarModule
   ],
   entryComponents: [
     JoinLockedRoomDialog,
@@ -174,7 +168,7 @@ const appRoutes: Routes = [
 })
 export class AppModule {
   constructor(ngRedux: NgRedux<AppState>) {
-    if (production) {
+    if (environment.production) {
       ngRedux.configureStore(reducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware]);
     } else {
       ngRedux.configureStore(reducer, INITIAL_STATE, [ ReduxThunk, ApiMiddleware, createLogger()]);

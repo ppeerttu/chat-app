@@ -1,7 +1,5 @@
-import { ChatAction } from '../actions/action';
-import { Room, User, Message} from '../models';
-import { UserActions } from '../actions/user';
-import { AppState, INITIAL_STATE } from '../store/store';
+import { ChatAction, UserActions } from '../actions';
+import { User, AppState, INITIAL_STATE} from '../models';
 
 export function userReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
   let base: User = state.user;

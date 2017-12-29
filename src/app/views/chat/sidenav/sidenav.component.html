@@ -1,63 +1,63 @@
-<md-sidenav-container class="sidenav-container">
-  <md-sidenav #sidenav class="chat-sidenav" mode="over">
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav class="chat-sidenav" mode="over">
 
     <!-- greeting and close-sidenav button -->
-    <md-grid-list cols="4" class="sidenav-header">
-      <md-grid-tile colspan="3">
+    <mat-grid-list cols="4" class="sidenav-header">
+      <mat-grid-tile colspan="3">
         <h1>ChatApp</h1>
-      </md-grid-tile>
-      <md-grid-tile colspan="1">
-        <button type="button" md-icon-button class="brgr-btn" (click)="sidenav.close()">
+      </mat-grid-tile>
+      <mat-grid-tile colspan="1">
+        <button type="button" mat-icon-button class="brgr-btn" (click)="sidenav.close()">
           <i class="material-icons">menu</i>
         </button>
-      </md-grid-tile>
-    </md-grid-list>
+      </mat-grid-tile>
+    </mat-grid-list>
 
 
-    <md-accordion>
+    <mat-accordion>
 
       <!-- room table -->
-      <md-expansion-panel class="sidenav-items">
-        <md-expansion-panel-header>
-          <md-panel-title>
+      <mat-expansion-panel class="sidenav-items">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
             Join rooms
-          </md-panel-title>
-        </md-expansion-panel-header>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
         <div class="rooms-container">
           <room-table></room-table>
         </div>
-        <button mdTooltip="Refresh rooms" md-mini-fab color="primary" class="refresh-rooms" (click)="refreshRooms()">
+        <button matTooltip="Refresh rooms" mat-mini-fab color="primary" class="refresh-rooms" (click)="refreshRooms()">
           <i class="material-icons">refresh</i>
         </button>
-        <button mdTooltip="Expand table" md-mini-fab color="accent" class="expand-room-table" (click)="openRoomModal()">
+        <button matTooltip="Expand table" mat-mini-fab color="accent" class="expand-room-table" (click)="openRoomModal()">
           <i class="material-icons">add</i>
         </button>
-      </md-expansion-panel>
+      </mat-expansion-panel>
 
       <!-- expansion panel for creating a room -->
-      <md-expansion-panel class="sidenav-items">
-        <md-expansion-panel-header>
-          <md-panel-title>
+      <mat-expansion-panel class="sidenav-items">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
             Create a room
-          </md-panel-title>
-        </md-expansion-panel-header>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
         <create-room class="create-room"></create-room>
-      </md-expansion-panel>
+      </mat-expansion-panel>
 
-      <md-expansion-panel class="sidenav-items">
-        <md-expansion-panel-header>
-          <md-panel-title>
+      <mat-expansion-panel class="sidenav-items">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
             Settings
-          </md-panel-title>
-        </md-expansion-panel-header>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
         <settings></settings>
-      </md-expansion-panel>
+      </mat-expansion-panel>
 
-    </md-accordion>
-  </md-sidenav>
+    </mat-accordion>
+  </mat-sidenav>
 
   <!-- sidenav open button (outside sidenav) -->
-  <button type="button" id="open-button" md-icon-button (click)="sidenav.open()">
+  <button type="button" id="open-button" mat-icon-button (click)="sidenav.open()">
     <i class="material-icons">menu</i>
   </button>
 
@@ -69,17 +69,17 @@
     <div *ngIf="viewRoom">
       {{viewRoom.getRoomName()}}
     </div>
-  <button type="button" md-icon-button (click)="partSidenav.open()">
+  <button type="button" mat-icon-button (click)="partSidenav.open()">
     <i class="material-icons">supervisor_account</i>
   </button>
   </div>
-  <md-sidenav #partSidenav class="participants-sidenav" position="end">
+  <mat-sidenav #partSidenav class="participants-sidenav" position="end">
     <my-rooms></my-rooms>
     <participant-container></participant-container>
 
-    <button type="button" class="close-button" md-button-mini (click)="partSidenav.close()">
+    <button type="button" class="close-button" mat-button-mini (click)="partSidenav.close()">
       <i class="material-icons">close</i>
     </button>
-  </md-sidenav>
+  </mat-sidenav>
 
-</md-sidenav-container>
+</mat-sidenav-container>
