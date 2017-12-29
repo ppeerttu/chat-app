@@ -1,6 +1,6 @@
 import { User } from './user';
 import { Room } from './room';
-import { RoomInfo } from './roomInfo';
+import { RoomInfo } from './roominfo';
 
 export interface AppState {
   loggedIn: boolean,
