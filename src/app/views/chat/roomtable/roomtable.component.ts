@@ -1,5 +1,5 @@
 import { Component, ElementRef, ViewChild, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdSnackBar } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA, MatSnackBar } from '@angular/material';
 import { Observable } from 'rxjs/Observable';
 import { DataSource } from '@angular/cdk/collections';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
@@ -8,6 +8,10 @@ import { RoomActions, ChatActions } from '../../../actions';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/observable/merge';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/debounceTime';
 
 import { Room, UsersRoom, User } from '../../../models';
 
@@ -34,9 +38,9 @@ export class RoomTableComponent {
 
   constructor(
     private roomAction: RoomActions,
-    public joinRoomDialog: MdDialog,
-    public joinRoomFailed: MdDialog,
-    public snackBar: MdSnackBar,
+    public joinRoomDialog: MatDialog,
+    public joinRoomFailed: MatDialog,
+    public snackBar: MatSnackBar,
     private chatAction: ChatActions,
   ) {}
 
@@ -165,13 +169,12 @@ export class RoomTableComponent {
 }
 
 @Component({
-  templateUrl: 'leave-room-failed-dialog.html',
-  styleUrls: ['leave-room-failed-dialog.css']
+  templateUrl: 'leave-room-failed-dialog.html'
 })
 export class LeaveRoomFailedDialog {
   constructor(
-    public dialogRef: MdDialogRef<LeaveRoomFailedDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<LeaveRoomFailedDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -186,8 +189,8 @@ export class LeaveRoomFailedDialog {
 export class JoinLockedRoomDialog {
 
   constructor(
-    public dialogRef: MdDialogRef<JoinLockedRoomDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<JoinLockedRoomDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();
@@ -196,13 +199,12 @@ export class JoinLockedRoomDialog {
 }
 
 @Component({
-  templateUrl: 'room-join-failed-dialog.html',
-  styleUrls: ['room-join-failed-dialog.html']
+  templateUrl: 'room-join-failed-dialog.html'
 })
 export class RoomJoinFailedDialog {
   constructor(
-    public dialogRef: MdDialogRef<RoomJoinFailedDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<RoomJoinFailedDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

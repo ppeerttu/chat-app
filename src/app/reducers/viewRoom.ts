@@ -1,6 +1,5 @@
-import { AppState, INITIAL_STATE } from '../store/store';
-import { ChatAction } from '../actions/action';
-import { RoomActions } from '../actions/room';
+import { ChatAction, RoomActions } from '../actions';
+import { AppState, INITIAL_STATE } from '../models';
 
 export function viewRoomReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
   let viewRoom = state.viewRoom;

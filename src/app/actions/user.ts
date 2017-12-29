@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { NgRedux } from '@angular-redux/store';
-import { AppState } from '../store/store';
-import { ApiCall } from '../models/apicall';
+import { ApiCall, AppState } from '../models';
 
 @Injectable()
 export class UserActions {

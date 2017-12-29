@@ -1,13 +1,13 @@
 <form class="create-room-form">
-  <md-form-field class="create-room-full-width">
-    <input mdInput placeholder="Room name" [formControl]="roomNameFormControl" [(ngModel)]="roomName">
-    <md-error *ngIf="roomNameFormControl.hasError('minlength')">
+  <mat-form-field class="create-room-full-width">
+    <input matInput placeholder="Room name" [formControl]="roomNameFormControl" [(ngModel)]="roomName">
+    <mat-error *ngIf="roomNameFormControl.hasError('minlength')">
       Room name should be at least 3 characters
-    </md-error>
-  </md-form-field>
-  <md-form-field class="create-room-full-width">
-    <input type="password" mdInput placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
-    <md-hint align="start">Set password if you want private room</md-hint>
-  </md-form-field>
-  <button md-raised-button color="primary" (click)="createRoom()">Create</button>
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field class="create-room-full-width">
+    <input type="password" matInput placeholder="Password" [formControl]="passwordFormControl" [(ngModel)]="password">
+    <mat-hint align="start">Set password if you want private room</mat-hint>
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="createRoom()">Create</button>
 </form>

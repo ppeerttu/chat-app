@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { select } from '@angular-redux/store';
@@ -19,7 +19,7 @@ export class LoginComponent {
   constructor(
     private router: Router,
     private action: UserActions,
-    public dialog: MdDialog
+    public dialog: MatDialog
   ) {
     this.userName = '';
     this.password = '';
@@ -39,8 +39,13 @@ export class LoginComponent {
   login(): void {
     this.action.login(this.userName, this.password).then(res => {
       if (res.type === UserActions.LOGIN_FAILED) {
+        let message = 'Wrong login credentials.';
+        if (res.error) {
+          if (res.error.message) message = res.error.message;
+          else message = res.error;
+        }
         let dialogRef = this.dialog.open(LoginFailedDialog, {
-
+          data: { reason: message }
         });
       }
     });
@@ -61,8 +66,8 @@ export class LoginComponent {
 export class LoginFailedDialog {
 
   constructor(
-    public dialogRef: MdDialogRef<LoginFailedDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<LoginFailedDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

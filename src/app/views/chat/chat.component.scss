@@ -1,5 +1,11 @@
 @import '../../../styles.scss';
 
+.container-fluid {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  z-index: 900;
+}
+
 .img-container {
   position: fixed;
   left: 0;
@@ -8,23 +14,16 @@
   height: 100vh;
   background: linear-gradient(to bottom,
     transparentize(mat-color($chat-app-accent), 0.6), transparentize(mat-color($chat-app-primary), 0.6)),
-    url("../../assets/back-ground-small.jpeg") no-repeat center center;
+    url("../../../assets/back-ground-small.jpeg") no-repeat center center;
   background-size: cover;
   filter: blur(5px);
   z-index: 0;
 }
 
-.container-fluid {
-  padding-left: 0px !important;
-  padding-right: 0px !important;
-  z-index: 900;
-}
-
-
 @media screen and (min-height: 1200px) {
   .img-container {
     background: linear-gradient(to bottom,
       transparent, transparent),
-      url("../../assets/back-ground-large.jpeg") no-repeat center center;
+      url("../../../assets/back-ground-large.jpeg") no-repeat center center;
   }
 }

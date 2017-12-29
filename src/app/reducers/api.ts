@@ -1,6 +1,5 @@
-import { AppState, INITIAL_STATE } from '../store/store';
-import { ChatAction } from '../actions/action';
-import { RoomActions } from '../actions/room';
+import { AppState, INITIAL_STATE } from '../models';
+import { ChatAction, RoomActions } from '../actions';
 
 const types = {
   REQUEST: 'REQUEST',

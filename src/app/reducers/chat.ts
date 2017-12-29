@@ -1,7 +1,11 @@
-import { ChatAction } from '../actions/action';
-import { AppState, INITIAL_STATE } from '../store/store';
-import { RoomInfo, Message, User } from '../models';
-import { ChatActions } from '../actions/chat';
+import {
+  RoomInfo,
+  Message,
+  User,
+  AppState,
+  INITIAL_STATE
+} from '../models';
+import { ChatActions, ChatAction } from '../actions';
 
 export function chatReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
   // Copy the objects without reference

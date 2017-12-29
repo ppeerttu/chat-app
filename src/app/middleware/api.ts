@@ -99,7 +99,7 @@ export default () => next => action => {
     }).catch(err => {
       console.error(err);
       return next(actionWith(filterToken({
-        error: 'Not able to connect to the service',
+        error: 'Not able to connect to the service.',
         type: errorType
       })));
     })

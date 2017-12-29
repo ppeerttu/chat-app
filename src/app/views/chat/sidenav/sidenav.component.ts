@@ -1,7 +1,7 @@
 import { Component, ViewContainerRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { select } from '@angular-redux/store';
-import { MdSnackBar, MdDialog } from '@angular/material';
+import { MatSnackBar, MatDialog } from '@angular/material';
 import {
   UserActions,
   RoomActions,
@@ -28,8 +28,8 @@ export class SidenavComponent {
 
   constructor(
     private roomAction: RoomActions,
-    private snackBar: MdSnackBar,
-    public roomModal: MdDialog,
+    private snackBar: MatSnackBar,
+    public roomModal: MatDialog,
     private viewContainerRef: ViewContainerRef
   ) {
     this.userSub = this.user$.subscribe(user => {

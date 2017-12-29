@@ -7,14 +7,14 @@
   <div class="form-container">
     <h1>ChatApp</h1>
     <form class="login-form">
-      <md-form-field class="login-full-width">
-        <input mdInput placeholder="Username" name="userName" [(ngModel)]="userName">
-      </md-form-field>
-      <md-form-field class="login-full-width">
-        <input type="password" mdInput placeholder="Password" name="password" [(ngModel)]="password">
-      </md-form-field>
-      <button md-raised-button color="primary" (click)="login()">Login</button>
-      <button md-raised-button class="register-button" (click)="toRegister()">Register</button>
+      <mat-form-field class="login-full-width">
+        <input matInput placeholder="Username" name="userName" [(ngModel)]="userName">
+      </mat-form-field>
+      <mat-form-field class="login-full-width">
+        <input type="password" matInput placeholder="Password" name="password" [(ngModel)]="password">
+      </mat-form-field>
+      <button mat-raised-button color="primary" (click)="login()">Login</button>
+      <button mat-raised-button class="register-button" (click)="toRegister()">Register</button>
     </form>
 
 

@@ -1,6 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { FormControl, Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { MdDialog, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -56,8 +56,8 @@ export class RegisterComponent {
     private router: Router,
     private action: UserActions,
     private fb: FormBuilder,
-    public successDialog: MdDialog,
-    public failedDialog: MdDialog
+    public successDialog: MatDialog,
+    public failedDialog: MatDialog
   ) {
     // Subscribe the user in store to check if the user is logged in
     this.user$.subscribe(user => {
@@ -161,8 +161,8 @@ export class RegisterComponent {
 export class RegisterSuccessDialog {
 
   constructor(
-    public dialogRef: MdDialogRef<RegisterSuccessDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<RegisterSuccessDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   onNoClick(): void {
@@ -179,8 +179,8 @@ export class RegisterSuccessDialog {
 export class RegisterFailedDialog {
 
   constructor(
-    public dialogRef: MdDialogRef<RegisterFailedDialog>,
-    @Inject(MD_DIALOG_DATA) public data: any
+    public dialogRef: MatDialogRef<RegisterFailedDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) { }
 
   onNoClick(): void {

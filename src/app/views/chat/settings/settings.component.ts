@@ -1,7 +1,7 @@
 import { Component, Inject } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Router } from '@angular/router';
-import { MdDialog, MdSnackBar, MdDialogRef, MD_DIALOG_DATA } from '@angular/material';
+import { MatDialog, MatSnackBar, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { UserActions, ChatActions } from '../../../actions';
 import { ProfileModalComponent } from '../profilemodal/profilemodal.component';
 import { select } from '@angular-redux/store';
@@ -22,9 +22,9 @@ export class SettingsComponent {
     private userAction: UserActions,
     private chatAction: ChatActions,
     private router: Router,
-    public profileModal: MdDialog,
-    public snackBar: MdSnackBar,
-    public userProfileFailed: MdDialog
+    public profileModal: MatDialog,
+    public snackBar: MatSnackBar,
+    public userProfileFailed: MatDialog
   ) {
     this.userSub = this.user$.subscribe(user => {
       this.user = user;
@@ -86,8 +86,8 @@ export class SettingsComponent {
 })
 export class UserProfileUpdateFailed {
   constructor(
-    public dialogRef: MdDialogRef<UserProfileUpdateFailed>,
-    @Inject(MD_DIALOG_DATA) public data: any) { }
+    public dialogRef: MatDialogRef<UserProfileUpdateFailed>,
+    @Inject(MAT_DIALOG_DATA) public data: any) { }
 
   onNoClick(): void {
     this.dialogRef.close();

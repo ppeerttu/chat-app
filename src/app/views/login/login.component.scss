@@ -37,21 +37,6 @@
   }
 }
 
-.img-container {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(to bottom,
-    transparentize(mat-color($chat-app-accent), 0.6), transparentize(mat-color($chat-app-primary), 0.6)),
-    url("../../assets/back-ground-small.jpeg") no-repeat center center;
-  background-size: cover;
-  z-index: 0;
-  filter:  blur(5px);
-  animation: blur-effect;
-  animation-duration: 6s;
-}
 
 .form-container {
   align-self: center;
@@ -75,10 +60,24 @@
   margin-right: 10px;
 }
 
+.img-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(to bottom,
+    transparentize(mat-color($chat-app-accent), 0.6), transparentize(mat-color($chat-app-primary), 0.6)),
+    url("../../../assets/back-ground-small.jpeg") no-repeat center center;
+  background-size: cover;
+  filter: blur(5px);
+  z-index: 0;
+}
+
 @media screen and (min-height: 1200px) {
   .img-container {
     background: linear-gradient(to bottom,
       transparent, transparent),
-      url("../../assets/back-ground-large.jpeg") no-repeat center center;
+      url("../../../assets/back-ground-large.jpeg") no-repeat center center;
   }
 }

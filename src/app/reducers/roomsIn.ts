@@ -1,8 +1,10 @@
-import { AppState, INITIAL_STATE } from '../store/store';
-import { ChatAction } from '../actions/action';
-import { RoomInfo, Room, User, Message} from '../models';
-import { chatReducer } from './chat';
-import { RoomActions } from '../actions/room';
+import { ChatAction, RoomActions } from '../actions';
+import {
+  RoomInfo,
+  Room,
+  AppState,
+  INITIAL_STATE
+} from '../models';
 
 export function roomsInReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
   let base = Object.assign({}, state);

@@ -5,6 +5,7 @@ import { UsersRoom } from './usersroom';
 import { RoomInfo } from './roominfo';
 import { User } from './user';
 import { SocketCall, SocketData } from './socketcall';
+import { AppState, INITIAL_STATE } from './store';
 
 export {
   ApiCall,
@@ -14,5 +15,7 @@ export {
   User,
   RoomInfo,
   SocketCall,
-  SocketData
+  SocketData,
+  AppState,
+  INITIAL_STATE
 };

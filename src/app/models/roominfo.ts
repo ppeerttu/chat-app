@@ -1,4 +1,5 @@
-import { User, Message } from '.';
+import { User } from './user';
+import { Message } from './message';
 import { Room } from './room';
 
 export class RoomInfo extends Room {
