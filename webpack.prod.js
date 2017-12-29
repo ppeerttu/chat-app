@@ -26,7 +26,7 @@ const entryPoints = ["inline","polyfills","sw-register","styles","vendor","main"
 const minimizeCss = true;
 const baseHref = "";
 const deployUrl = "";
-const projectRoot = "/Users/Perttu/Documents/SoftwareProjects/chat-app/chat-frontend";
+const projectRoot = __dirname;
 const postcssPlugins = function () {
         // safe settings based on: https://github.com/ben-eb/cssnano/issues/358#issuecomment-283696193
         const importantCommentRe = /@preserve|@licen[cs]e|[@#]\s*source(?:Mapping)?URL|^!/i;
@@ -459,7 +459,7 @@ module.exports = {
       "exclude": /(\\|\/)node_modules(\\|\/)/,
       "failOnError": false,
       "onDetected": false,
-      "cwd": "/Users/Perttu/Documents/SoftwareProjects/chat-app/chat-frontend"
+      "cwd": __dirname
     }),
     new HtmlWebpackPlugin({
       "template": "./src/index.html",
@@ -530,7 +530,7 @@ module.exports = {
         "license.txt"
       ],
       "perChunkOutput": false,
-      "outputTemplate": "/Users/Perttu/Documents/SoftwareProjects/chat-app/chat-frontend/node_modules/license-webpack-plugin/output.template.ejs",
+      "outputTemplate": __dirname + "/node_modules/license-webpack-plugin/output.template.ejs",
       "outputFilename": "3rdpartylicenses.txt",
       "suppressErrors": true,
       "includePackagesWithoutLicense": false,
