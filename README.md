@@ -7,6 +7,7 @@ Author Perttu Kärnä
 
 Core technologies used:
 
+* [nodejs](https://nodejs.org/en/) and NPM
 * [Angular (v5)](https://github.com/angular/angular-cli) (project originally generated with angular-cli)
 * [Redux](https://github.com/angular-redux/store) for state management
 * [Angular Materials](https://material.angular.io) for UI components
