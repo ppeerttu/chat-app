@@ -76,31 +76,31 @@ export default () => next => action => {
   const [requestType, successType, errorType] = types;
   // Forwards requestType action down the middleware stack
   next(actionWith({type: requestType, data: data}));
-  return request(method, path, data).then(
-    res => {
-      let type;
-      if (res.status >= 400) {
-        type = errorType;
-        return res.text().then(textData => {
-          return next(actionWith(filterToken({
-            res: textData,
-            type: type
-          })));
-        });
-      } else {
-        type = successType;
-        return res.json().then(jsonData => {
-          return next(actionWith(filterToken({
-            res: jsonData,
-            type: type
-          })));
-        });
-      }
-    }).catch(err => {
-      console.error(err);
-      return next(actionWith(filterToken({
-        error: 'Not able to connect to the service.',
-        type: errorType
-      })));
-    })
+  return request(method, path, data)
+    .then(res => {
+        let type;
+        if (res.status >= 400) {
+          type = errorType;
+          return res.text().then(textData => {
+            return next(actionWith(filterToken({
+              res: textData,
+              type: type
+            })));
+          });
+        } else {
+          type = successType;
+          return res.json().then(jsonData => {
+            return next(actionWith(filterToken({
+              res: jsonData,
+              type: type
+            })));
+          });
+        }
+      }).catch(err => {
+        console.error(err);
+        return next(actionWith(filterToken({
+          error: 'Not able to connect to the service.',
+          type: errorType
+        })));
+      })
 };

@@ -8,12 +8,6 @@ const types = {
 };
 
 export function apiReducer(state: AppState = INITIAL_STATE, action: ChatAction): AppState {
-
-  if (action.type.includes(types.REQUEST)) {
-    return Object.assign({}, state, {
-      waiting: true
-    });
-  }
   if (action.type.includes(types.SUCCESS)) {
     return Object.assign({}, state, {
       waiting: false
@@ -22,6 +16,11 @@ export function apiReducer(state: AppState = INITIAL_STATE, action: ChatAction):
   if (action.type.includes(types.FAILED)) {
     return Object.assign({}, state, {
       waiting: false
+    });
+  }
+  if (action.type.includes(types.REQUEST)) {
+    return Object.assign({}, state, {
+      waiting: true
     });
   }
 

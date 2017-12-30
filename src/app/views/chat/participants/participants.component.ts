@@ -16,9 +16,9 @@ export class ParticipantsComponent {
   @select() roomsIn$:Observable<RoomInfo[]>;
   @select() viewRoom$:Observable<number>;
   users: User[];
+  roomId: number;
 
   private rooms: RoomInfo[];
-  private roomId: number;
   private roomsInSub;
   private viewRoomSub;
 
