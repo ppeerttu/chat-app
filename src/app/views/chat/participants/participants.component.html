@@ -2,6 +2,9 @@
   <div class="header-container">
     <h4>Participants</h4>
   </div>
+  <p id="no-room" *ngIf="!roomId">
+    No room selected! Select a room from My rooms to view participants.
+  </p>
   <div *ngFor="let user of users" class="user-element">
     <i class="material-icons">account_box</i>
     <p>

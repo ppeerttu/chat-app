@@ -1,6 +1,6 @@
 # chat-frontend
 
-Front end for [Slack](https://slack.com)-ish chat application.
+Front end for a hobby chat application.
 Author Perttu Kärnä
 
 ## Tech stack
@@ -48,9 +48,12 @@ To wrap these two into together, we use objects called [Observables](https://xgr
 
 ### To run the development server
 
+See commands above for each step.
+
 1. Install dependencies
 2. Configure API url at src/environments (default http://localhost:3000)
 3. Run the development server
+    * The front end should be available at http://localhost:4200
 4. Stop the server by **Ctrl + C**
 
 ## Thanks to

@@ -41,7 +41,7 @@ export class ChatComponent {
           return this.chatAction.openSocket().then(() => {
             if (this.user === null || this.user === undefined) {
               // Get user data and refresh token
-              this.userAction.refreshToken()
+              return this.userAction.refreshToken()
               .then(action => {
                 if (
                   action.type === UserActions.TOKEN_REQUEST_FAILED
@@ -90,6 +90,7 @@ export class ChatComponent {
             if (window.localStorage) {
               window.localStorage.removeItem('token');
             }
+            this.router.navigateByUrl('/login');
           });
         }
 
